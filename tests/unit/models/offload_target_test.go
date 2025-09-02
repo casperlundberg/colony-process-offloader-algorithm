@@ -1,12 +1,14 @@
 package models
 
 import (
+	"strings"
 	"testing"
 	"time"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
+
+	"github.com/casperlundberg/colony-process-offloader-algorithm/pkg/models"
 )
 
 // OffloadTarget test requirements:
@@ -23,43 +25,43 @@ type OffloadTargetTestSuite struct {
 func (suite *OffloadTargetTestSuite) TestHeterogeneousInfrastructure() {
 	testCases := []struct {
 		name         string
-		targetType   TargetType
+		targetType   models.TargetType
 		capabilities []string
 		expectValid  bool
 	}{
 		{
 			name:         "edge_server",
-			targetType:   EDGE,
+			targetType:   models.EDGE,
 			capabilities: []string{"low_latency", "compute_optimized"},
 			expectValid:  true,
 		},
 		{
 			name:         "private_cloud",
-			targetType:   PRIVATE_CLOUD,
+			targetType:   models.PRIVATE_CLOUD,
 			capabilities: []string{"high_capacity", "secure", "cost_optimized"},
 			expectValid:  true,
 		},
 		{
 			name:         "public_cloud",
-			targetType:   PUBLIC_CLOUD,
+			targetType:   models.PUBLIC_CLOUD,
 			capabilities: []string{"scalable", "gpu_accelerated", "ml_optimized"},
 			expectValid:  true,
 		},
 		{
 			name:         "local_executor",
-			targetType:   LOCAL,
+			targetType:   models.LOCAL,
 			capabilities: []string{"always_available", "no_network_cost"},
 			expectValid:  true,
 		},
 		{
 			name:         "hybrid_cloud",
-			targetType:   HYBRID_CLOUD,
+			targetType:   models.HYBRID_CLOUD,
 			capabilities: []string{"burst_capacity", "data_locality"},
 			expectValid:  true,
 		},
 		{
 			name:         "fog_computing",
-			targetType:   FOG,
+			targetType:   models.FOG,
 			capabilities: []string{"ultra_low_latency", "iot_optimized"},
 			expectValid:  true,
 		},
@@ -73,7 +75,7 @@ func (suite *OffloadTargetTestSuite) TestHeterogeneousInfrastructure() {
 
 	for _, tc := range testCases {
 		suite.Run(tc.name, func() {
-			target := OffloadTarget{
+			target := models.OffloadTarget{
 				ID:               tc.name,
 				Type:             tc.targetType,
 				Capabilities:     tc.capabilities,
@@ -100,9 +102,9 @@ func (suite *OffloadTargetTestSuite) TestHeterogeneousInfrastructure() {
 
 // Test capability matching
 func (suite *OffloadTargetTestSuite) TestCapabilityMatching() {
-	target := OffloadTarget{
+	target := models.OffloadTarget{
 		ID:           "test-target",
-		Type:         EDGE,
+		Type:         models.EDGE,
 		Capabilities: []string{"compute_optimized", "low_latency", "gpu_accelerated"},
 		TotalCapacity: 8.0,
 		NetworkLatency: 5 * time.Millisecond,
@@ -134,15 +136,15 @@ func (suite *OffloadTargetTestSuite) TestCapabilityMatching() {
 func (suite *OffloadTargetTestSuite) TestCapacityMetricsNonNegative() {
 	testCases := []struct {
 		name          string
-		target        OffloadTarget
+		target        models.OffloadTarget
 		expectValid   bool
 		expectMessage string
 	}{
 		{
 			name: "all_capacities_valid",
-			target: OffloadTarget{
+			target: models.OffloadTarget{
 				ID:                "valid-capacity",
-				Type:              EDGE,
+				Type:              models.EDGE,
 				TotalCapacity:     16.0,
 				AvailableCapacity: 12.0,
 				MemoryTotal:       32 * 1024 * 1024 * 1024,
@@ -155,9 +157,9 @@ func (suite *OffloadTargetTestSuite) TestCapacityMetricsNonNegative() {
 		},
 		{
 			name: "zero_capacities_valid",
-			target: OffloadTarget{
+			target: models.OffloadTarget{
 				ID:                "zero-capacity",
-				Type:              EDGE,
+				Type:              models.EDGE,
 				TotalCapacity:     0,
 				AvailableCapacity: 0,
 				MemoryTotal:       0,
@@ -170,9 +172,9 @@ func (suite *OffloadTargetTestSuite) TestCapacityMetricsNonNegative() {
 		},
 		{
 			name: "negative_total_capacity",
-			target: OffloadTarget{
+			target: models.OffloadTarget{
 				ID:                "negative-total",
-				Type:              EDGE,
+				Type:              models.EDGE,
 				TotalCapacity:     -8.0, // Invalid
 				AvailableCapacity: 4.0,
 				NetworkLatency:    10 * time.Millisecond,
@@ -183,9 +185,9 @@ func (suite *OffloadTargetTestSuite) TestCapacityMetricsNonNegative() {
 		},
 		{
 			name: "negative_available_capacity",
-			target: OffloadTarget{
+			target: models.OffloadTarget{
 				ID:                "negative-available",
-				Type:              EDGE,
+				Type:              models.EDGE,
 				TotalCapacity:     8.0,
 				AvailableCapacity: -4.0, // Invalid
 				NetworkLatency:    10 * time.Millisecond,
@@ -196,9 +198,9 @@ func (suite *OffloadTargetTestSuite) TestCapacityMetricsNonNegative() {
 		},
 		{
 			name: "negative_memory_total",
-			target: OffloadTarget{
+			target: models.OffloadTarget{
 				ID:           "negative-memory-total",
-				Type:         EDGE,
+				Type:         models.EDGE,
 				TotalCapacity: 8.0,
 				MemoryTotal:  -1024, // Invalid
 				NetworkLatency: 10 * time.Millisecond,
@@ -209,9 +211,9 @@ func (suite *OffloadTargetTestSuite) TestCapacityMetricsNonNegative() {
 		},
 		{
 			name: "negative_memory_available",
-			target: OffloadTarget{
+			target: models.OffloadTarget{
 				ID:              "negative-memory-available",
-				Type:            EDGE,
+				Type:            models.EDGE,
 				TotalCapacity:   8.0,
 				MemoryTotal:     1024,
 				MemoryAvailable: -512, // Invalid
@@ -223,9 +225,9 @@ func (suite *OffloadTargetTestSuite) TestCapacityMetricsNonNegative() {
 		},
 		{
 			name: "negative_network_bandwidth",
-			target: OffloadTarget{
+			target: models.OffloadTarget{
 				ID:               "negative-bandwidth",
-				Type:             EDGE,
+				Type:             models.EDGE,
 				TotalCapacity:    8.0,
 				NetworkBandwidth: -1000, // Invalid
 				NetworkLatency:   10 * time.Millisecond,
@@ -236,9 +238,9 @@ func (suite *OffloadTargetTestSuite) TestCapacityMetricsNonNegative() {
 		},
 		{
 			name: "available_greater_than_total_warning",
-			target: OffloadTarget{
+			target: models.OffloadTarget{
 				ID:                "available-exceeds-total",
-				Type:              EDGE,
+				Type:              models.EDGE,
 				TotalCapacity:     8.0,
 				AvailableCapacity: 12.0, // Warning: available > total
 				NetworkLatency:    10 * time.Millisecond,
@@ -258,7 +260,12 @@ func (suite *OffloadTargetTestSuite) TestCapacityMetricsNonNegative() {
 				// Check for warnings
 				if tc.target.AvailableCapacity > tc.target.TotalCapacity {
 					warnings := tc.target.GetWarnings()
-					assert.Contains(suite.T(), warnings, "available capacity exceeds total")
+					for _, warning := range warnings {
+					if strings.Contains(warning, "available capacity exceeds total") {
+						return // Found the expected warning
+					}
+				}
+				suite.T().Errorf("Expected warning about available capacity exceeding total, got: %v", warnings)
 				}
 			} else {
 				assert.Error(suite.T(), err, "Invalid target should return error")
@@ -274,15 +281,15 @@ func (suite *OffloadTargetTestSuite) TestCapacityMetricsNonNegative() {
 func (suite *OffloadTargetTestSuite) TestScoreRanges() {
 	testCases := []struct {
 		name          string
-		target        OffloadTarget
+		target        models.OffloadTarget
 		expectValid   bool
 		expectMessage string
 	}{
 		{
 			name: "valid_scores",
-			target: OffloadTarget{
+			target: models.OffloadTarget{
 				ID:                "valid-scores",
-				Type:              EDGE,
+				Type:              models.EDGE,
 				TotalCapacity:     8.0,
 				NetworkStability:  0.95,
 				Reliability:       0.99,
@@ -294,9 +301,9 @@ func (suite *OffloadTargetTestSuite) TestScoreRanges() {
 		},
 		{
 			name: "boundary_scores_valid",
-			target: OffloadTarget{
+			target: models.OffloadTarget{
 				ID:                "boundary-scores",
-				Type:              EDGE,
+				Type:              models.EDGE,
 				TotalCapacity:     8.0,
 				NetworkStability:  0.0, // Valid: exactly 0.0
 				Reliability:       1.0, // Valid: exactly 1.0
@@ -308,9 +315,9 @@ func (suite *OffloadTargetTestSuite) TestScoreRanges() {
 		},
 		{
 			name: "network_stability_too_high",
-			target: OffloadTarget{
+			target: models.OffloadTarget{
 				ID:               "stability-high",
-				Type:             EDGE,
+				Type:             models.EDGE,
 				TotalCapacity:    8.0,
 				NetworkStability: 1.1, // Invalid: > 1.0
 				NetworkLatency:   10 * time.Millisecond,
@@ -321,9 +328,9 @@ func (suite *OffloadTargetTestSuite) TestScoreRanges() {
 		},
 		{
 			name: "network_stability_negative",
-			target: OffloadTarget{
+			target: models.OffloadTarget{
 				ID:               "stability-negative",
-				Type:             EDGE,
+				Type:             models.EDGE,
 				TotalCapacity:    8.0,
 				NetworkStability: -0.1, // Invalid: < 0.0
 				NetworkLatency:   10 * time.Millisecond,
@@ -334,9 +341,9 @@ func (suite *OffloadTargetTestSuite) TestScoreRanges() {
 		},
 		{
 			name: "reliability_too_high",
-			target: OffloadTarget{
+			target: models.OffloadTarget{
 				ID:            "reliability-high",
-				Type:          EDGE,
+				Type:          models.EDGE,
 				TotalCapacity: 8.0,
 				Reliability:   1.5, // Invalid: > 1.0
 				NetworkLatency: 10 * time.Millisecond,
@@ -347,9 +354,9 @@ func (suite *OffloadTargetTestSuite) TestScoreRanges() {
 		},
 		{
 			name: "historical_success_negative",
-			target: OffloadTarget{
+			target: models.OffloadTarget{
 				ID:                "history-negative",
-				Type:              EDGE,
+				Type:              models.EDGE,
 				TotalCapacity:     8.0,
 				HistoricalSuccess: -0.05, // Invalid: < 0.0
 				NetworkLatency:    10 * time.Millisecond,
@@ -449,9 +456,9 @@ func (suite *OffloadTargetTestSuite) TestLatencyRequirements() {
 
 	for _, tc := range testCases {
 		suite.Run(tc.name, func() {
-			target := OffloadTarget{
+			target := models.OffloadTarget{
 				ID:             tc.name,
-				Type:           EDGE,
+				Type:           models.EDGE,
 				TotalCapacity:  8.0,
 				NetworkLatency: tc.networkLatency,
 				LastSeen:       tc.lastSeen,
@@ -473,9 +480,9 @@ func (suite *OffloadTargetTestSuite) TestLatencyRequirements() {
 
 // Test network characteristics validation
 func (suite *OffloadTargetTestSuite) TestNetworkCharacteristics() {
-	target := OffloadTarget{
+	target := models.OffloadTarget{
 		ID:               "network-test",
-		Type:             EDGE,
+		Type:             models.EDGE,
 		TotalCapacity:    8.0,
 		NetworkLatency:   25 * time.Millisecond,
 		NetworkBandwidth: 100 * 1024 * 1024, // 100 MB/s
@@ -502,7 +509,14 @@ func (suite *OffloadTargetTestSuite) TestNetworkCharacteristics() {
 	
 	warnings := target.GetWarnings()
 	// Should warn about inconsistent network characteristics
-	assert.Contains(suite.T(), warnings, "network characteristics inconsistent")
+	found := false
+	for _, warning := range warnings {
+		if strings.Contains(warning, "network characteristics inconsistent") {
+			found = true
+			break
+		}
+	}
+	assert.True(suite.T(), found, "Expected warning about inconsistent network characteristics, got: %v", warnings)
 }
 
 // Test economic factors validation
@@ -562,9 +576,9 @@ func (suite *OffloadTargetTestSuite) TestEconomicFactors() {
 
 	for _, tc := range testCases {
 		suite.Run(tc.name, func() {
-			target := OffloadTarget{
+			target := models.OffloadTarget{
 				ID:             tc.name,
-				Type:           EDGE,
+				Type:           models.EDGE,
 				TotalCapacity:  8.0,
 				ComputeCost:    tc.computeCost,
 				EnergyCost:     tc.energyCost,
@@ -580,7 +594,14 @@ func (suite *OffloadTargetTestSuite) TestEconomicFactors() {
 				
 				if tc.expectWarning != "" {
 					warnings := target.GetWarnings()
-					assert.Contains(suite.T(), warnings, tc.expectWarning)
+					found := false
+				for _, warning := range warnings {
+					if strings.Contains(warning, tc.expectWarning) {
+						found = true
+						break
+					}
+				}
+				assert.True(suite.T(), found, "Expected warning containing '%s', got: %v", tc.expectWarning, warnings)
 				}
 			} else {
 				assert.Error(suite.T(), err, "Invalid costs should return error")
@@ -591,9 +612,9 @@ func (suite *OffloadTargetTestSuite) TestEconomicFactors() {
 
 // Test policy compliance attributes
 func (suite *OffloadTargetTestSuite) TestPolicyComplianceAttributes() {
-	target := OffloadTarget{
+	target := models.OffloadTarget{
 		ID:               "policy-test",
-		Type:             PRIVATE_CLOUD,
+		Type:             models.PRIVATE_CLOUD,
 		TotalCapacity:    16.0,
 		SecurityLevel:    4,
 		DataJurisdiction: "domestic",
@@ -642,9 +663,9 @@ func (suite *OffloadTargetTestSuite) TestPolicyComplianceAttributes() {
 
 // Test runtime state consistency
 func (suite *OffloadTargetTestSuite) TestRuntimeStateConsistency() {
-	target := OffloadTarget{
+	target := models.OffloadTarget{
 		ID:                "state-test",
-		Type:              EDGE,
+		Type:              models.EDGE,
 		TotalCapacity:     8.0,
 		AvailableCapacity: 6.0,
 		CurrentLoad:       0.25, // Should be 1 - (6.0/8.0) = 0.25
@@ -682,9 +703,9 @@ func (suite *OffloadTargetTestSuite) TestTargetAvailabilityAndHealth() {
 	now := time.Now()
 	
 	// Healthy, available target
-	healthyTarget := OffloadTarget{
+	healthyTarget := models.OffloadTarget{
 		ID:                "healthy",
-		Type:              EDGE,
+		Type:              models.EDGE,
 		TotalCapacity:     8.0,
 		AvailableCapacity: 6.0,
 		NetworkLatency:    10 * time.Millisecond,

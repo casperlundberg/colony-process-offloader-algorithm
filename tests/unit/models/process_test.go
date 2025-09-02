@@ -5,8 +5,9 @@ import (
 	"time"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
+
+	"github.com/casperlundberg/colony-process-offloader-algorithm/pkg/models"
 )
 
 // Process test requirements:
@@ -22,7 +23,7 @@ type ProcessTestSuite struct {
 // Test that process supports both simple and DAG-based workloads
 func (suite *ProcessTestSuite) TestProcessWorkloadTypes() {
 	// Test simple process without DAG
-	simpleProcess := Process{
+	simpleProcess := models.Process{
 		ID:                "simple-1",
 		Type:              "compute",
 		Priority:          5,
@@ -39,9 +40,9 @@ func (suite *ProcessTestSuite) TestProcessWorkloadTypes() {
 	assert.Nil(suite.T(), simpleProcess.DAG)
 
 	// Test DAG-based process
-	dag := &DAG{
+	dag := &models.DAG{
 		ID: "dag-1",
-		Stages: []Stage{
+		Stages: []models.Stage{
 			{
 				ID:           "stage-1",
 				Name:         "data-ingestion",
@@ -66,7 +67,7 @@ func (suite *ProcessTestSuite) TestProcessWorkloadTypes() {
 		},
 	}
 
-	dagProcess := Process{
+	dagProcess := models.Process{
 		ID:                "dag-process-1",
 		Type:              "pipeline",
 		Priority:          7,
@@ -84,7 +85,7 @@ func (suite *ProcessTestSuite) TestProcessWorkloadTypes() {
 	assert.Len(suite.T(), dagProcess.DAG.Stages, 3)
 
 	// Test process with inconsistent DAG flag
-	inconsistentProcess := Process{
+	inconsistentProcess := models.Process{
 		ID:                "inconsistent-1",
 		Priority:          5,
 		EstimatedDuration: 30 * time.Second,
@@ -97,7 +98,7 @@ func (suite *ProcessTestSuite) TestProcessWorkloadTypes() {
 	assert.Contains(suite.T(), err.Error(), "DAG")
 
 	// Test process with DAG but flag is false
-	inconsistentProcess2 := Process{
+	inconsistentProcess2 := models.Process{
 		ID:                "inconsistent-2",
 		Priority:          5,
 		EstimatedDuration: 30 * time.Second,
@@ -113,13 +114,13 @@ func (suite *ProcessTestSuite) TestProcessWorkloadTypes() {
 func (suite *ProcessTestSuite) TestSizeFieldsNonNegative() {
 	testCases := []struct {
 		name          string
-		process       Process
+		process       models.Process
 		expectValid   bool
 		expectMessage string
 	}{
 		{
 			name: "all_sizes_valid",
-			process: Process{
+			process: models.Process{
 				ID:                "valid-sizes",
 				Priority:          5,
 				InputSize:         1024 * 1024,     // 1MB
@@ -132,7 +133,7 @@ func (suite *ProcessTestSuite) TestSizeFieldsNonNegative() {
 		},
 		{
 			name: "zero_sizes_valid",
-			process: Process{
+			process: models.Process{
 				ID:                "zero-sizes",
 				Priority:          5,
 				InputSize:         0, // Valid: can have no input
@@ -145,7 +146,7 @@ func (suite *ProcessTestSuite) TestSizeFieldsNonNegative() {
 		},
 		{
 			name: "negative_input_size",
-			process: Process{
+			process: models.Process{
 				ID:                "negative-input",
 				Priority:          5,
 				InputSize:         -1024, // Invalid
@@ -157,7 +158,7 @@ func (suite *ProcessTestSuite) TestSizeFieldsNonNegative() {
 		},
 		{
 			name: "negative_output_size",
-			process: Process{
+			process: models.Process{
 				ID:                "negative-output",
 				Priority:          5,
 				InputSize:         1024,
@@ -169,7 +170,7 @@ func (suite *ProcessTestSuite) TestSizeFieldsNonNegative() {
 		},
 		{
 			name: "negative_memory_requirement",
-			process: Process{
+			process: models.Process{
 				ID:                "negative-memory",
 				Priority:          5,
 				MemoryRequirement: -1024, // Invalid
@@ -180,7 +181,7 @@ func (suite *ProcessTestSuite) TestSizeFieldsNonNegative() {
 		},
 		{
 			name: "negative_disk_requirement",
-			process: Process{
+			process: models.Process{
 				ID:                "negative-disk",
 				Priority:          5,
 				DiskRequirement:   -1024, // Invalid
@@ -191,7 +192,7 @@ func (suite *ProcessTestSuite) TestSizeFieldsNonNegative() {
 		},
 		{
 			name: "multiple_negative_sizes",
-			process: Process{
+			process: models.Process{
 				ID:                "multiple-negative",
 				Priority:          5,
 				InputSize:         -1024,
@@ -245,7 +246,7 @@ func (suite *ProcessTestSuite) TestPriorityRange() {
 
 	for _, tc := range testCases {
 		suite.Run(tc.name, func() {
-			process := Process{
+			process := models.Process{
 				ID:                "test-priority",
 				Priority:          tc.priority,
 				EstimatedDuration: 30 * time.Second, // Required field
@@ -289,7 +290,7 @@ func (suite *ProcessTestSuite) TestEstimatedDurationRequirement() {
 
 	for _, tc := range testCases {
 		suite.Run(tc.name, func() {
-			process := Process{
+			process := models.Process{
 				ID:                "test-duration",
 				Priority:          5, // Valid priority
 				EstimatedDuration: tc.estimatedDuration,
@@ -334,7 +335,7 @@ func (suite *ProcessTestSuite) TestResourceRequirements() {
 
 	for _, tc := range testCases {
 		suite.Run(tc.name, func() {
-			process := Process{
+			process := models.Process{
 				ID:                "test-cpu",
 				Priority:          5,
 				CPURequirement:    tc.cpuRequirement,
@@ -377,7 +378,7 @@ func (suite *ProcessTestSuite) TestSecurityFields() {
 
 	for _, tc := range testCases {
 		suite.Run(tc.name, func() {
-			process := Process{
+			process := models.Process{
 				ID:                "test-security",
 				Priority:          5,
 				DataSensitivity:   tc.dataSensitivity,
@@ -438,7 +439,7 @@ func (suite *ProcessTestSuite) TestDeadlineConstraints() {
 
 	for _, tc := range testCases {
 		suite.Run(tc.name, func() {
-			process := Process{
+			process := models.Process{
 				ID:                "test-deadline",
 				Priority:          5,
 				EstimatedDuration: tc.estimatedDuration,
@@ -464,54 +465,54 @@ func (suite *ProcessTestSuite) TestDeadlineConstraints() {
 
 // Test process state transitions
 func (suite *ProcessTestSuite) TestProcessStateTransitions() {
-	process := Process{
+	process := models.Process{
 		ID:                "state-test",
 		Priority:          5,
 		EstimatedDuration: 30 * time.Second,
-		Status:            QUEUED,
+		Status:            models.QUEUED,
 	}
 
 	// Valid transitions from QUEUED
-	assert.True(suite.T(), process.CanTransitionTo(ASSIGNED))
-	assert.True(suite.T(), process.CanTransitionTo(CANCELLED))
-	assert.False(suite.T(), process.CanTransitionTo(COMPLETED))
+	assert.True(suite.T(), process.CanTransitionTo(models.ASSIGNED))
+	assert.True(suite.T(), process.CanTransitionTo(models.CANCELLED))
+	assert.False(suite.T(), process.CanTransitionTo(models.COMPLETED))
 
 	// Move to ASSIGNED
-	err := process.TransitionTo(ASSIGNED)
+	err := process.TransitionTo(models.ASSIGNED)
 	assert.NoError(suite.T(), err)
-	assert.Equal(suite.T(), ASSIGNED, process.Status)
+	assert.Equal(suite.T(), models.ASSIGNED, process.Status)
 
 	// Valid transitions from ASSIGNED
-	assert.True(suite.T(), process.CanTransitionTo(EXECUTING))
-	assert.True(suite.T(), process.CanTransitionTo(FAILED))
-	assert.False(suite.T(), process.CanTransitionTo(QUEUED))
+	assert.True(suite.T(), process.CanTransitionTo(models.EXECUTING))
+	assert.True(suite.T(), process.CanTransitionTo(models.FAILED))
+	assert.False(suite.T(), process.CanTransitionTo(models.QUEUED))
 
 	// Move to EXECUTING
-	err = process.TransitionTo(EXECUTING)
+	err = process.TransitionTo(models.EXECUTING)
 	assert.NoError(suite.T(), err)
-	assert.Equal(suite.T(), EXECUTING, process.Status)
+	assert.Equal(suite.T(), models.EXECUTING, process.Status)
 	assert.NotZero(suite.T(), process.StartTime)
 
 	// Valid transitions from EXECUTING
-	assert.True(suite.T(), process.CanTransitionTo(COMPLETED))
-	assert.True(suite.T(), process.CanTransitionTo(FAILED))
-	assert.False(suite.T(), process.CanTransitionTo(QUEUED))
+	assert.True(suite.T(), process.CanTransitionTo(models.COMPLETED))
+	assert.True(suite.T(), process.CanTransitionTo(models.FAILED))
+	assert.False(suite.T(), process.CanTransitionTo(models.QUEUED))
 
 	// Complete the process
-	err = process.TransitionTo(COMPLETED)
+	err = process.TransitionTo(models.COMPLETED)
 	assert.NoError(suite.T(), err)
-	assert.Equal(suite.T(), COMPLETED, process.Status)
+	assert.Equal(suite.T(), models.COMPLETED, process.Status)
 
 	// No transitions from terminal state
-	assert.False(suite.T(), process.CanTransitionTo(QUEUED))
-	assert.False(suite.T(), process.CanTransitionTo(ASSIGNED))
-	assert.False(suite.T(), process.CanTransitionTo(EXECUTING))
+	assert.False(suite.T(), process.CanTransitionTo(models.QUEUED))
+	assert.False(suite.T(), process.CanTransitionTo(models.ASSIGNED))
+	assert.False(suite.T(), process.CanTransitionTo(models.EXECUTING))
 }
 
 // Test dependency validation
 func (suite *ProcessTestSuite) TestDependencyValidation() {
 	// Process with no dependencies
-	process1 := Process{
+	process1 := models.Process{
 		ID:                "process-1",
 		Priority:          5,
 		EstimatedDuration: 30 * time.Second,
@@ -522,7 +523,7 @@ func (suite *ProcessTestSuite) TestDependencyValidation() {
 	assert.NoError(suite.T(), err)
 
 	// Process with valid dependencies
-	process2 := Process{
+	process2 := models.Process{
 		ID:                "process-2",
 		Priority:          5,
 		EstimatedDuration: 30 * time.Second,
@@ -533,7 +534,7 @@ func (suite *ProcessTestSuite) TestDependencyValidation() {
 	assert.NoError(suite.T(), err)
 
 	// Process with self-dependency (invalid)
-	process3 := Process{
+	process3 := models.Process{
 		ID:                "process-3",
 		Priority:          5,
 		EstimatedDuration: 30 * time.Second,
@@ -545,7 +546,7 @@ func (suite *ProcessTestSuite) TestDependencyValidation() {
 	assert.Contains(suite.T(), err.Error(), "self-dependency")
 
 	// Process with duplicate dependencies
-	process4 := Process{
+	process4 := models.Process{
 		ID:                "process-4",
 		Priority:          5,
 		EstimatedDuration: 30 * time.Second,
@@ -560,7 +561,7 @@ func (suite *ProcessTestSuite) TestDependencyValidation() {
 // Test special process flags
 func (suite *ProcessTestSuite) TestSpecialProcessFlags() {
 	// Real-time process
-	rtProcess := Process{
+	rtProcess := models.Process{
 		ID:                "rt-process",
 		Priority:          9, // High priority typical for real-time
 		EstimatedDuration: 100 * time.Millisecond,
@@ -579,7 +580,7 @@ func (suite *ProcessTestSuite) TestSpecialProcessFlags() {
 	}
 
 	// Safety-critical process
-	safetyCriticalProcess := Process{
+	safetyCriticalProcess := models.Process{
 		ID:                "safety-critical",
 		Priority:          10, // Maximum priority
 		EstimatedDuration: 50 * time.Millisecond,

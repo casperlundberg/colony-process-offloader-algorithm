@@ -1,4 +1,4 @@
-module github.com/caslun/colony-process-offloader-algorithm
+module github.com/casperlundberg/colony-process-offloader-algorithm
 
 go 1.22.2
 

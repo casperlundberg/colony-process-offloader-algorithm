@@ -7,6 +7,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
+
+	"github.com/casperlundberg/colony-process-offloader-algorithm/pkg/models"
 )
 
 // SystemState test requirements:
@@ -22,13 +24,13 @@ type SystemStateTestSuite struct {
 func (suite *SystemStateTestSuite) TestUtilizationMetricsNormalization() {
 	testCases := []struct {
 		name          string
-		inputState    SystemState
+		inputState    models.SystemState
 		expectValid   bool
 		expectMessage string
 	}{
 		{
 			name: "valid_normal_load",
-			inputState: SystemState{
+			inputState: models.SystemState{
 				ComputeUsage:  0.5,
 				MemoryUsage:   0.6,
 				DiskUsage:     0.3,
@@ -41,7 +43,7 @@ func (suite *SystemStateTestSuite) TestUtilizationMetricsNormalization() {
 		},
 		{
 			name: "valid_high_load",
-			inputState: SystemState{
+			inputState: models.SystemState{
 				ComputeUsage:  0.95,
 				MemoryUsage:   0.99,
 				DiskUsage:     0.85,
@@ -54,7 +56,7 @@ func (suite *SystemStateTestSuite) TestUtilizationMetricsNormalization() {
 		},
 		{
 			name: "valid_idle_system",
-			inputState: SystemState{
+			inputState: models.SystemState{
 				ComputeUsage:  0.0,
 				MemoryUsage:   0.1,
 				DiskUsage:     0.05,
@@ -67,7 +69,7 @@ func (suite *SystemStateTestSuite) TestUtilizationMetricsNormalization() {
 		},
 		{
 			name: "invalid_compute_usage_too_high",
-			inputState: SystemState{
+			inputState: models.SystemState{
 				ComputeUsage:  1.1, // Invalid: > 1.0
 				MemoryUsage:   0.5,
 				DiskUsage:     0.3,
@@ -79,7 +81,7 @@ func (suite *SystemStateTestSuite) TestUtilizationMetricsNormalization() {
 		},
 		{
 			name: "invalid_negative_memory_usage",
-			inputState: SystemState{
+			inputState: models.SystemState{
 				ComputeUsage:  0.5,
 				MemoryUsage:   -0.1, // Invalid: < 0.0
 				DiskUsage:     0.3,
@@ -91,7 +93,7 @@ func (suite *SystemStateTestSuite) TestUtilizationMetricsNormalization() {
 		},
 		{
 			name: "invalid_multiple_out_of_range",
-			inputState: SystemState{
+			inputState: models.SystemState{
 				ComputeUsage:  1.5,  // Invalid
 				MemoryUsage:   -0.2, // Invalid
 				DiskUsage:     2.0,  // Invalid
@@ -103,7 +105,7 @@ func (suite *SystemStateTestSuite) TestUtilizationMetricsNormalization() {
 		},
 		{
 			name: "edge_case_exactly_one",
-			inputState: SystemState{
+			inputState: models.SystemState{
 				ComputeUsage:  1.0, // Valid: exactly 1.0
 				MemoryUsage:   1.0,
 				DiskUsage:     1.0,
@@ -114,7 +116,7 @@ func (suite *SystemStateTestSuite) TestUtilizationMetricsNormalization() {
 		},
 		{
 			name: "edge_case_exactly_zero",
-			inputState: SystemState{
+			inputState: models.SystemState{
 				ComputeUsage:  0.0, // Valid: exactly 0.0
 				MemoryUsage:   0.0,
 				DiskUsage:     0.0,
@@ -144,7 +146,7 @@ func (suite *SystemStateTestSuite) TestUtilizationMetricsNormalization() {
 // Test state capture performance requirement (must complete within 100ms)
 func (suite *SystemStateTestSuite) TestStateCapturePerformance() {
 	// Create a state collector (mocked for testing)
-	collector := NewSystemStateCollector()
+	collector := models.NewSystemStateCollector()
 
 	// Run multiple capture iterations to ensure consistency
 	iterations := 100
@@ -179,7 +181,7 @@ func (suite *SystemStateTestSuite) TestStateCapturePerformance() {
 
 // Test that SystemState is completely observable
 func (suite *SystemStateTestSuite) TestStateObservability() {
-	state := SystemState{
+	state := models.SystemState{
 		QueueDepth:        25,
 		QueueThreshold:    20,
 		QueueWaitTime:     5 * time.Second,
@@ -200,11 +202,11 @@ func (suite *SystemStateTestSuite) TestStateObservability() {
 	assert.Equal(suite.T(), 20, state.QueueThreshold)
 	assert.Equal(suite.T(), 5*time.Second, state.QueueWaitTime)
 	assert.Equal(suite.T(), 10.5, state.QueueThroughput)
-	assert.Equal(suite.T(), 0.75, state.ComputeUsage)
-	assert.Equal(suite.T(), 0.60, state.MemoryUsage)
-	assert.Equal(suite.T(), 0.40, state.DiskUsage)
-	assert.Equal(suite.T(), 0.30, state.NetworkUsage)
-	assert.Equal(suite.T(), 0.50, state.MasterUsage)
+	assert.Equal(suite.T(), models.Utilization(0.75), state.ComputeUsage)
+	assert.Equal(suite.T(), models.Utilization(0.60), state.MemoryUsage)
+	assert.Equal(suite.T(), models.Utilization(0.40), state.DiskUsage)
+	assert.Equal(suite.T(), models.Utilization(0.30), state.NetworkUsage)
+	assert.Equal(suite.T(), models.Utilization(0.50), state.MasterUsage)
 	assert.Equal(suite.T(), 150, state.ActiveConnections)
 	assert.NotZero(suite.T(), state.Timestamp)
 	assert.Equal(suite.T(), 14, state.TimeSlot)
@@ -214,15 +216,30 @@ func (suite *SystemStateTestSuite) TestStateObservability() {
 	serialized := state.Serialize()
 	assert.NotEmpty(suite.T(), serialized)
 
-	deserialized, err := DeserializeSystemState(serialized)
+	deserialized, err := models.DeserializeSystemState(serialized)
 	assert.NoError(suite.T(), err)
-	assert.Equal(suite.T(), state, deserialized)
+	
+	// Compare all fields except timestamp (due to serialization precision)
+	assert.Equal(suite.T(), state.QueueDepth, deserialized.QueueDepth)
+	assert.Equal(suite.T(), state.QueueThreshold, deserialized.QueueThreshold)
+	assert.Equal(suite.T(), state.QueueWaitTime, deserialized.QueueWaitTime)
+	assert.Equal(suite.T(), state.QueueThroughput, deserialized.QueueThroughput)
+	assert.Equal(suite.T(), state.ComputeUsage, deserialized.ComputeUsage)
+	assert.Equal(suite.T(), state.MemoryUsage, deserialized.MemoryUsage)
+	assert.Equal(suite.T(), state.DiskUsage, deserialized.DiskUsage)
+	assert.Equal(suite.T(), state.NetworkUsage, deserialized.NetworkUsage)
+	assert.Equal(suite.T(), state.MasterUsage, deserialized.MasterUsage)
+	assert.Equal(suite.T(), state.ActiveConnections, deserialized.ActiveConnections)
+	assert.Equal(suite.T(), state.TimeSlot, deserialized.TimeSlot)
+	assert.Equal(suite.T(), state.DayOfWeek, deserialized.DayOfWeek)
+	// Timestamp should be close (within 1 second)
+	assert.WithinDuration(suite.T(), state.Timestamp, deserialized.Timestamp, time.Second)
 }
 
 // Test that SystemState is deterministic
 func (suite *SystemStateTestSuite) TestStateDeterminism() {
 	// Given same inputs, state should be identical
-	input := SystemStateInput{
+	input := models.SystemStateInput{
 		CPUCores:          8,
 		CPUUsedCores:      6,
 		TotalMemory:       16 * 1024 * 1024 * 1024, // 16 GB
@@ -236,9 +253,9 @@ func (suite *SystemStateTestSuite) TestStateDeterminism() {
 	}
 
 	// Create multiple states from same input
-	states := []SystemState{}
+	states := []models.SystemState{}
 	for i := 0; i < 10; i++ {
-		state := CreateSystemStateFromInput(input)
+		state := models.CreateSystemStateFromInput(input)
 		states = append(states, state)
 	}
 
@@ -262,12 +279,12 @@ func (suite *SystemStateTestSuite) TestStateDeterminism() {
 func (suite *SystemStateTestSuite) TestQueueMetricsEdgeCases() {
 	testCases := []struct {
 		name        string
-		state       SystemState
+		state       models.SystemState
 		expectValid bool
 	}{
 		{
 			name: "empty_queue",
-			state: SystemState{
+			state: models.SystemState{
 				QueueDepth:      0,
 				QueueThreshold:  20,
 				QueueWaitTime:   0,
@@ -277,7 +294,7 @@ func (suite *SystemStateTestSuite) TestQueueMetricsEdgeCases() {
 		},
 		{
 			name: "queue_at_threshold",
-			state: SystemState{
+			state: models.SystemState{
 				QueueDepth:      20,
 				QueueThreshold:  20,
 				QueueWaitTime:   10 * time.Second,
@@ -287,7 +304,7 @@ func (suite *SystemStateTestSuite) TestQueueMetricsEdgeCases() {
 		},
 		{
 			name: "queue_over_threshold",
-			state: SystemState{
+			state: models.SystemState{
 				QueueDepth:      50,
 				QueueThreshold:  20,
 				QueueWaitTime:   30 * time.Second,
@@ -297,7 +314,7 @@ func (suite *SystemStateTestSuite) TestQueueMetricsEdgeCases() {
 		},
 		{
 			name: "negative_queue_depth_invalid",
-			state: SystemState{
+			state: models.SystemState{
 				QueueDepth:      -1,
 				QueueThreshold:  20,
 				QueueWaitTime:   5 * time.Second,
@@ -307,7 +324,7 @@ func (suite *SystemStateTestSuite) TestQueueMetricsEdgeCases() {
 		},
 		{
 			name: "negative_throughput_invalid",
-			state: SystemState{
+			state: models.SystemState{
 				QueueDepth:      10,
 				QueueThreshold:  20,
 				QueueWaitTime:   5 * time.Second,
@@ -339,7 +356,7 @@ func (suite *SystemStateTestSuite) TestQueueMetricsEdgeCases() {
 // Test temporal context fields
 func (suite *SystemStateTestSuite) TestTemporalContext() {
 	now := time.Now()
-	state := SystemState{
+	state := models.SystemState{
 		Timestamp: now,
 		TimeSlot:  now.Hour(),
 		DayOfWeek: int(now.Weekday()),
@@ -390,10 +407,10 @@ func (suite *SystemStateTestSuite) TestTemporalContext() {
 // Test system state snapshot consistency
 func (suite *SystemStateTestSuite) TestSnapshotConsistency() {
 	// Create a rapidly changing system state
-	collector := NewSystemStateCollector()
+	collector := models.NewSystemStateCollector()
 	
 	// Take multiple snapshots in quick succession
-	snapshots := []SystemState{}
+	snapshots := []models.SystemState{}
 	for i := 0; i < 10; i++ {
 		snapshot, err := collector.CaptureState()
 		require.NoError(suite.T(), err)
@@ -409,8 +426,8 @@ func (suite *SystemStateTestSuite) TestSnapshotConsistency() {
 
 	// Verify metrics are realistic (no wild jumps)
 	for i := 1; i < len(snapshots); i++ {
-		cpuDelta := absFloat64(snapshots[i].ComputeUsage - snapshots[i-1].ComputeUsage)
-		memDelta := absFloat64(snapshots[i].MemoryUsage - snapshots[i-1].MemoryUsage)
+		cpuDelta := absFloat64(float64(snapshots[i].ComputeUsage) - float64(snapshots[i-1].ComputeUsage))
+		memDelta := absFloat64(float64(snapshots[i].MemoryUsage) - float64(snapshots[i-1].MemoryUsage))
 		
 		// CPU and memory shouldn't change by more than 50% in 10ms
 		assert.LessOrEqual(suite.T(), cpuDelta, 0.5,
