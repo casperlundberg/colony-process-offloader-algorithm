@@ -2,7 +2,7 @@
 
 **A Scenario-Agnostic, Self-Optimizing System for ColonyOS Process Placement**
 
-This repository implements the complete configurable CAPE (Colony Adaptive Process Engine) algorithm as specified in `FURTHER_CONTROL_THEORY.md`. The system provides intelligent process placement decisions across heterogeneous infrastructure with adaptive multi-objective optimization.
+This repository implements the complete configurable CAPE (Continuous Adaptive Predictive Elasticity) algorithm as specified in `FURTHER_CONTROL_THEORY.md`. The system provides intelligent process placement decisions across heterogeneous infrastructure with adaptive multi-objective optimization.
 
 ## Core Features
 
