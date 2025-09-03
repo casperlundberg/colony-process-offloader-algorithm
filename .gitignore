@@ -35,3 +35,7 @@ Thumbs.db
 # Build outputs
 /bin/
 /dist/
+
+# Claude Code configuration
+CLAUDE.md
+.claude

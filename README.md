@@ -4,7 +4,7 @@
 
 This repository implements the complete configurable CAPE (Colony Adaptive Process Engine) algorithm as specified in `FURTHER_CONTROL_THEORY.md`. The system provides intelligent process placement decisions across heterogeneous infrastructure with adaptive multi-objective optimization.
 
-## 🎯 **Core Features**
+## Core Features
 
 - **Scenario-Agnostic**: Adapts behavior based on deployment type (edge/cloud/HPC/hybrid/fog)
 - **Self-Optimizing**: Uses classical optimization algorithms to learn and improve over time
@@ -13,7 +13,7 @@ This repository implements the complete configurable CAPE (Colony Adaptive Proce
 - **Policy-Integrated**: Enforces hard/soft constraints with comprehensive audit trails
 - **Multi-Objective**: Balances latency, cost, throughput, energy efficiency, and data movement
 
-## 🏗️ **System Architecture**
+## System Architecture
 
 ### **Core Algorithm Components**
 Located in `pkg/learning/`:
@@ -45,7 +45,7 @@ Located in `pkg/policy/`:
 
 - **Policy Enforcement** [`policy_engine.go`] - Hard/soft constraint evaluation with audit trails
 
-## 🚀 **Quick Start**
+##  **Quick Start**
 
 ### **Build & Run**
 ```bash
@@ -74,7 +74,7 @@ outcome := simulateOutcome(decision, process)
 cape.ReportOutcome(decision.DecisionID, outcome)
 ```
 
-## 📊 **Deployment Configurations**
+##  **Deployment Configurations**
 
 The system supports five deployment scenarios with automatic optimization:
 
@@ -113,7 +113,7 @@ config := models.NewDefaultDeploymentConfig(models.DeploymentTypeFog)
 // Optimizes for: Latency (50%), Energy (30%), Data Movement (10%), Cost (10%)
 ```
 
-## 🧠 **Algorithm Integration**
+##  **Algorithm Integration**
 
 The system implements the complete algorithm from `FURTHER_CONTROL_THEORY.md`:
 
@@ -140,7 +140,7 @@ DECISION_PROCESS:
     8. Discover patterns with DTW analysis
 ```
 
-## 📈 **Performance Characteristics**
+##  **Performance Characteristics**
 
 - **Decision Latency**: ~20μs average (target: <500ms)
 - **Memory Usage**: <10MB steady state
@@ -148,7 +148,7 @@ DECISION_PROCESS:
 - **Learning Speed**: Converges in 20-50 decisions
 - **Accuracy**: Adaptive based on deployment scenario
 
-## 🔧 **Configuration**
+##  **Configuration**
 
 ### **Custom Optimization Goals**
 ```go
@@ -175,7 +175,7 @@ config.Constraints = []models.DeploymentConstraint{
 }
 ```
 
-## 🧪 **Testing**
+##  **Testing**
 
 ```bash
 # Run unit tests
@@ -188,7 +188,7 @@ go test ./pkg/... -v
 ./main
 ```
 
-## 📖 **Algorithm References**
+##  **Algorithm References**
 
 The implementation is based on classical optimization and control theory algorithms:
 
@@ -200,14 +200,14 @@ The implementation is based on classical optimization and control theory algorit
 6. **Thompson Sampling** - Thompson, W.R. (1933)
 7. **Q-Learning** - Watkins, C.J.C.H (1989)
 
-## 📋 **Requirements**
+##  **Requirements**
 
 - **Go**: 1.22.2 or later
 - **Dependencies**: See `go.mod`
 - **Target**: ColonyOS integration
 - **License**: [As specified in repository]
 
-## 🎯 **Integration with ColonyOS**
+##  **Integration with ColonyOS**
 
 The system is designed for seamless integration with ColonyOS:
 
@@ -228,6 +228,6 @@ cape.ReportOutcome(decision.DecisionID, outcome)
 
 ---
 
-**Status**: ✅ Production Ready  
+**Status**:  Production Ready  
 **Architecture**: Complete implementation of FURTHER_CONTROL_THEORY.md  
 **Deployment**: Ready for ColonyOS integration

@@ -27,13 +27,13 @@ func main() {
 		
 		err := runConfigurationTest(config, 10)
 		if err != nil {
-			fmt.Printf("   ❌ Configuration test failed: %v\n", err)
+			fmt.Printf("    Configuration test failed: %v\n", err)
 		} else {
-			fmt.Printf("   ✅ Configuration test completed successfully\n")
+			fmt.Printf("    Configuration test completed successfully\n")
 		}
 	}
 
-	fmt.Println("\n🎯 All deployment configurations tested!")
+	fmt.Println("\n All deployment configurations tested!")
 	fmt.Println("The configurable CAPE algorithm successfully adapts to different scenarios")
 }
 

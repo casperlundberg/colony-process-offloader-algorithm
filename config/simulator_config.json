@@ -1,0 +1,130 @@
+{
+  "simulation_config": {
+    "workload_arrival_rate": 0.5,
+    "workload_duration": {
+      "min": "30s",
+      "max": "300s"
+    },
+    "resource_fluctuation": true,
+    "network_latency_noise": true,
+    "executor_failures": false,
+    "data_locality_pattern": "clustered",
+    "seasonal_patterns": true,
+    "cache_effects": true,
+    "warmup_overhead": true,
+    "queueing_effects": true
+  },
+  "workload_types": [
+    {
+      "name": "web-request",
+      "weight": 0.4,
+      "cpu_intensity": 0.2,
+      "memory_intensity": 0.1,
+      "io_intensity": 0.3,
+      "duration": {
+        "min": "100ms",
+        "max": "2s"
+      },
+      "data_size": {
+        "min_mb": 0.1,
+        "max_mb": 5.0
+      },
+      "latency_sensitive": true,
+      "parallelizable": true,
+      "cache_affinitive": true
+    },
+    {
+      "name": "batch-processing",
+      "weight": 0.3,
+      "cpu_intensity": 0.8,
+      "memory_intensity": 0.6,
+      "io_intensity": 0.5,
+      "duration": {
+        "min": "30s",
+        "max": "300s"
+      },
+      "data_size": {
+        "min_mb": 50.0,
+        "max_mb": 500.0
+      },
+      "latency_sensitive": false,
+      "parallelizable": true,
+      "cache_affinitive": false
+    },
+    {
+      "name": "ml-inference",
+      "weight": 0.2,
+      "cpu_intensity": 0.9,
+      "memory_intensity": 0.8,
+      "io_intensity": 0.4,
+      "duration": {
+        "min": "5s",
+        "max": "60s"
+      },
+      "data_size": {
+        "min_mb": 10.0,
+        "max_mb": 100.0
+      },
+      "latency_sensitive": true,
+      "parallelizable": false,
+      "cache_affinitive": true
+    },
+    {
+      "name": "data-analytics",
+      "weight": 0.1,
+      "cpu_intensity": 0.7,
+      "memory_intensity": 0.9,
+      "io_intensity": 0.8,
+      "duration": {
+        "min": "60s",
+        "max": "600s"
+      },
+      "data_size": {
+        "min_mb": 100.0,
+        "max_mb": 1000.0
+      },
+      "latency_sensitive": false,
+      "parallelizable": true,
+      "cache_affinitive": false
+    }
+  ],
+  "scenarios": {
+    "light_load": {
+      "workload_arrival_rate": 0.1,
+      "description": "Light load scenario for testing basic functionality"
+    },
+    "normal_load": {
+      "workload_arrival_rate": 0.5,
+      "description": "Normal production load"
+    },
+    "peak_load": {
+      "workload_arrival_rate": 2.0,
+      "description": "Peak load scenario for stress testing"
+    },
+    "burst_load": {
+      "workload_arrival_rate": 5.0,
+      "description": "Burst load scenario with intermittent spikes"
+    }
+  },
+  "evaluation_metrics": {
+    "primary_metrics": [
+      "throughput_per_second",
+      "average_latency",
+      "success_rate",
+      "resource_utilization"
+    ],
+    "cape_metrics": [
+      "decision_accuracy",
+      "adaptation_speed",
+      "data_locality_score",
+      "cost_efficiency",
+      "energy_efficiency"
+    ],
+    "system_metrics": [
+      "queue_depth",
+      "executor_health",
+      "thermal_throttling_events",
+      "cache_hit_rates"
+    ]
+  }
+}

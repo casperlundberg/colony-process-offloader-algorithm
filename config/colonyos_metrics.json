@@ -1,0 +1,247 @@
+{
+  "timestamp": "2024-09-03T14:30:00Z",
+  "colony_statistics": {
+    "colonies": 1,
+    "executors": 12,
+    "processes": {
+      "waiting": 8,
+      "running": 5,
+      "successful": 1247,
+      "failed": 23
+    },
+    "workflows": {
+      "waiting": 2,
+      "running": 1,
+      "successful": 156,
+      "failed": 4
+    }
+  },
+  "prometheus_metrics": {
+    "colonies_server_colonies": 1.0,
+    "colonies_server_executors": 12.0,
+    "colonies_server_processes_waiting": 8.0,
+    "colonies_server_processes_running": 5.0,
+    "colonies_server_processes_successful": 1247.0,
+    "colonies_server_processes_failed": 23.0,
+    "colonies_server_workflows_waiting": 2.0,
+    "colonies_server_workflows_running": 1.0,
+    "colonies_server_workflows_successful": 156.0,
+    "colonies_server_workflows_failed": 4.0
+  },
+  "system_health": {
+    "server_uptime_seconds": 892456,
+    "memory_usage_bytes": 2147483648,
+    "cpu_usage_percent": 34.5,
+    "active_connections": 23,
+    "avg_process_queue_time_ms": 1250,
+    "avg_process_execution_time_ms": 4500,
+    "last_health_check": "2024-09-03T14:29:45Z"
+  },
+  "resource_utilization": {
+    "total_capacity": {
+      "cpu_millicores": 48000,
+      "memory_bytes": 206158430208,
+      "storage_bytes": 2199023255552,
+      "gpu_count": 8
+    },
+    "allocated_capacity": {
+      "cpu_millicores": 32500,
+      "memory_bytes": 137438953472,
+      "storage_bytes": 1099511627776,
+      "gpu_count": 5
+    },
+    "available_capacity": {
+      "cpu_millicores": 15500,
+      "memory_bytes": 68719476736,
+      "storage_bytes": 1099511627776,
+      "gpu_count": 3
+    }
+  },
+  "executor_summary": [
+    {
+      "id": "executor-edge-stockholm-01",
+      "name": "edge-executor-stockholm-01", 
+      "type": "edge",
+      "colonyname": "hybrid-computing-colony",
+      "state": 1,
+      "commissiontime": "2024-09-01T08:00:00Z",
+      "lastheardfromtime": "2024-09-03T14:29:30Z",
+      "location": {
+        "longitude": 18.0686,
+        "latitude": 59.3293,
+        "description": "Stockholm Edge Node"
+      },
+      "capabilities": {
+        "hardware": {
+          "nodes": 1,
+          "cpu": "4000m",
+          "memory": "16Gi",
+          "storage": "500Gi",
+          "gpus": []
+        },
+        "software": {
+          "name": "colonyos/edge:v2.1.0",
+          "type": "container",
+          "version": "v2.1.0"
+        }
+      },
+      "current_load": {
+        "running_processes": 2,
+        "cpu_usage_percent": 45.2,
+        "memory_usage_percent": 38.7,
+        "storage_usage_percent": 12.1
+      }
+    },
+    {
+      "id": "executor-cloud-aws-us-east-1-01",
+      "name": "cloud-executor-aws-01",
+      "type": "cloud", 
+      "colonyname": "hybrid-computing-colony",
+      "state": 1,
+      "commissiontime": "2024-09-01T08:15:00Z",
+      "lastheardfromtime": "2024-09-03T14:29:25Z",
+      "location": {
+        "longitude": -77.0369,
+        "latitude": 38.9072,
+        "description": "AWS us-east-1"
+      },
+      "capabilities": {
+        "hardware": {
+          "nodes": 4,
+          "cpu": "16000m",
+          "memory": "64Gi",
+          "storage": "1000Gi",
+          "gpus": []
+        },
+        "software": {
+          "name": "colonyos/cloud:v2.1.0",
+          "type": "k8s",
+          "version": "v2.1.0"
+        }
+      },
+      "current_load": {
+        "running_processes": 3,
+        "cpu_usage_percent": 28.9,
+        "memory_usage_percent": 52.1,
+        "storage_usage_percent": 8.3
+      }
+    },
+    {
+      "id": "executor-hpc-iceland-01", 
+      "name": "hpc-executor-iceland-01",
+      "type": "hpc",
+      "colonyname": "hybrid-computing-colony",
+      "state": 1,
+      "commissiontime": "2024-09-01T08:30:00Z",
+      "lastheardfromtime": "2024-09-03T14:29:15Z",
+      "location": {
+        "longitude": -21.8174,
+        "latitude": 64.1466,
+        "description": "Iceland HPC Facility"
+      },
+      "capabilities": {
+        "hardware": {
+          "nodes": 16,
+          "cpu": "64000m",
+          "memory": "512Gi", 
+          "storage": "10000Gi",
+          "gpus": [
+            {
+              "name": "nvidia_a100",
+              "count": 8,
+              "memory": "40Gi"
+            }
+          ]
+        },
+        "software": {
+          "name": "colonyos/hpc:v2.1.0",
+          "type": "slurm",
+          "version": "v2.1.0"
+        }
+      },
+      "current_load": {
+        "running_processes": 0,
+        "cpu_usage_percent": 5.1,
+        "memory_usage_percent": 15.3,
+        "storage_usage_percent": 45.7
+      }
+    }
+  ],
+  "recent_processes": [
+    {
+      "id": "proc-2024-09-03-14-25-001",
+      "state": 2,
+      "assignedexecutorid": "executor-edge-stockholm-01",
+      "submissiontime": "2024-09-03T14:25:12Z",
+      "starttime": "2024-09-03T14:25:15Z",
+      "endtime": "2024-09-03T14:25:28Z",
+      "functionspec": {
+        "funcname": "image-resize",
+        "args": ["input.jpg", "1920x1080"],
+        "priority": 5,
+        "maxwaittime": 300,
+        "maxexectime": 60,
+        "conditions": {
+          "colonyname": "hybrid-computing-colony",
+          "executortype": "edge"
+        }
+      },
+      "execution_metrics": {
+        "wait_time_ms": 3000,
+        "execution_time_ms": 13000,
+        "cpu_usage_percent": 78.2,
+        "memory_usage_bytes": 1073741824,
+        "network_bytes_in": 5242880,
+        "network_bytes_out": 2097152
+      }
+    },
+    {
+      "id": "proc-2024-09-03-14-28-002",
+      "state": 1,
+      "assignedexecutorid": "executor-cloud-aws-us-east-1-01",
+      "submissiontime": "2024-09-03T14:28:45Z", 
+      "starttime": "2024-09-03T14:28:47Z",
+      "functionspec": {
+        "funcname": "ml-training",
+        "args": ["model=resnet50", "epochs=10"],
+        "kwargs": {
+          "learning_rate": 0.001,
+          "batch_size": 32
+        },
+        "priority": 8,
+        "maxwaittime": 600,
+        "maxexectime": 3600,
+        "conditions": {
+          "colonyname": "hybrid-computing-colony",
+          "executortype": "cloud",
+          "cpu": "4000m",
+          "memory": "8Gi"
+        }
+      },
+      "execution_metrics": {
+        "wait_time_ms": 2000,
+        "execution_time_ms": 0,
+        "cpu_usage_percent": 95.1,
+        "memory_usage_bytes": 6442450944,
+        "network_bytes_in": 104857600,
+        "network_bytes_out": 52428800
+      }
+    }
+  ],
+  "performance_trends": {
+    "avg_process_success_rate_24h": 0.982,
+    "avg_queue_depth_24h": 6.8,
+    "peak_concurrent_processes_24h": 12,
+    "avg_resource_utilization_24h": {
+      "cpu_percent": 42.3,
+      "memory_percent": 58.7,
+      "storage_percent": 23.1,
+      "gpu_percent": 67.9
+    },
+    "cost_metrics_24h": {
+      "total_compute_cost_usd": 45.67,
+      "total_data_transfer_cost_usd": 12.34,
+      "cost_per_process_usd": 0.045
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "cape_config": {
+    "deployment_type": "hybrid",
+    "description": "CAPE deployment configuration for hybrid cloud-edge scenario",
+    "optimization_goals": [
+      {
+        "metric": "latency",
+        "weight": 0.35,
+        "minimize": true,
+        "description": "Process execution latency"
+      },
+      {
+        "metric": "compute_cost", 
+        "weight": 0.25,
+        "minimize": true,
+        "description": "Computational resource cost"
+      },
+      {
+        "metric": "data_movement",
+        "weight": 0.25,
+        "minimize": true,
+        "description": "Data transfer and locality cost"
+      },
+      {
+        "metric": "throughput",
+        "weight": 0.15,
+        "minimize": false,
+        "description": "System throughput maximization"
+      }
+    ],
+    "constraints": [
+      {
+        "type": "sla_deadline",
+        "value": "5000ms",
+        "is_hard": true,
+        "description": "Maximum acceptable process completion time"
+      },
+      {
+        "type": "budget_hourly",
+        "value": "$50.00",
+        "is_hard": false,
+        "description": "Preferred hourly budget limit"
+      },
+      {
+        "type": "data_sovereignty",
+        "value": "eu_only",
+        "is_hard": true,
+        "description": "Data must remain within EU jurisdiction"
+      }
+    ],
+    "learning_parameters": {
+      "data_gravity_factor": 0.7,
+      "exploration_factor": 0.2,
+      "learning_rate": 0.001,
+      "adaptation_interval_minutes": 60,
+      "min_decisions_before_adaptation": 10,
+      "strategy_enabled": true
+    },
+    "algorithm_parameters": {
+      "arima_order": [3, 1, 2],
+      "ewma_alpha": 0.167,
+      "cusum_drift_param": 0.5,
+      "cusum_detection_threshold": 5.0,
+      "sgd_learning_rate": 0.001,
+      "thompson_sampling_enabled": true,
+      "q_learning_enabled": true,
+      "q_learning_discount": 0.9
+    }
+  },
+  "orchestrator_config": {
+    "executor_name": "cape-orchestrator-001",
+    "executor_type": "cape-optimizer",
+    "location": {
+      "longitude": 18.0686,
+      "latitude": 59.3293,
+      "description": "Stockholm CAPE Control Center"
+    },
+    "capabilities": {
+      "hardware": {
+        "nodes": 1,
+        "cpu": "2000m",
+        "memory": "4Gi",
+        "storage": "100Gi",
+        "gpus": []
+      },
+      "software": {
+        "name": "colonyos/cape:latest",
+        "type": "container",
+        "version": "v1.0.0"
+      }
+    },
+    "behavior": {
+      "assign_interval_seconds": 5,
+      "metrics_update_interval_seconds": 30,
+      "decision_timeout_seconds": 10,
+      "max_concurrent_processes": 5,
+      "require_function_registration": false
+    },
+    "supported_functions": [
+      "echo",
+      "compute",
+      "ml-inference", 
+      "data-process",
+      "optimize-placement"
+    ]
+  },
+  "colonyos_connection": {
+    "server_url": "https://colony.example.com",
+    "colony_name": "hybrid-computing-colony",
+    "use_tls": true,
+    "skip_tls_verify": false,
+    "connection_timeout_seconds": 30,
+    "retry_interval_seconds": 5,
+    "max_retry_attempts": 3
+  },
+  "monitoring": {
+    "enable_prometheus_metrics": true,
+    "prometheus_port": 8080,
+    "metrics_prefix": "cape_orchestrator",
+    "log_level": "info",
+    "enable_decision_audit": true,
+    "audit_log_path": "./logs/cape_decisions.jsonl"
+  }
+}
