@@ -1,0 +1,205 @@
+{
+  "_comment": "CAPE Executor Catalog - Real ColonyOS executors with practical deployment characteristics",
+  "_structure": {
+    "executors": "Pure ColonyOS executor specs from API",
+    "config": "Practical deployment characteristics that humans can actually configure and measure"
+  },
+  
+  "executors": [
+    {
+      "id": "exec-ml-iceland-01",
+      "executorname": "ml-executor-iceland-01",
+      "executortype": "ml",
+      "location": {
+        "long": -21.9426,
+        "lat": 64.1466,
+        "desc": "Iceland Datacenter"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "AMD EPYC 7763",
+          "cpu": "8000m",
+          "mem": "64Gi",
+          "storage": "2Ti",
+          "gpu": {
+            "name": "nvidia_rtx_4090",
+            "count": 4
+          }
+        },
+        "software": {
+          "name": "colonyos/ml:v3.2.0",
+          "type": "container",
+          "version": "v3.2.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2025-09-02T08:00:00Z",
+      "last_heard_from": "2025-09-03T15:20:00Z"
+    },
+    {
+      "id": "exec-ml-aws-east-01", 
+      "executorname": "ml-executor-aws-east-01",
+      "executortype": "ml",
+      "location": {
+        "long": -77.0369,
+        "lat": 38.9072,
+        "desc": "AWS us-east-1"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "AMD EPYC 7763",
+          "cpu": "8000m",
+          "mem": "64Gi",
+          "storage": "2Ti",
+          "gpu": {
+            "name": "nvidia_rtx_4090",
+            "count": 4
+          }
+        },
+        "software": {
+          "name": "colonyos/ml:v3.2.0",
+          "type": "container",
+          "version": "v3.2.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2025-09-01T14:30:00Z",
+      "last_heard_from": "2025-09-03T15:19:45Z"
+    },
+    {
+      "id": "exec-edge-stockholm-01",
+      "executorname": "edge-executor-stockholm-01",
+      "executortype": "edge", 
+      "location": {
+        "long": 18.0686,
+        "lat": 59.3293,
+        "desc": "Stockholm Edge Node"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "Intel Core i7-12700K",
+          "cpu": "3000m",
+          "mem": "16Gi",
+          "storage": "500Gi"
+        },
+        "software": {
+          "name": "colonyos/edge:v2.0.0",
+          "type": "container",
+          "version": "v2.0.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2025-09-03T10:15:00Z",
+      "last_heard_from": "2025-09-03T15:20:30Z"
+    },
+    {
+      "id": "exec-cloud-aws-east-01",
+      "executorname": "cloud-executor-aws-east-01",
+      "executortype": "cloud",
+      "location": {
+        "long": -77.0369,
+        "lat": 38.9072,
+        "desc": "AWS us-east-1"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "AWS c6i.4xlarge",
+          "cpu": "8000m",
+          "mem": "32Gi",
+          "storage": "500Gi"
+        },
+        "software": {
+          "name": "colonyos/cloud:v2.1.0",
+          "type": "k8s",
+          "version": "v2.1.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2025-09-01T09:00:00Z",
+      "last_heard_from": "2025-09-03T15:19:55Z"
+    }
+  ],
+
+  "config": {
+    "_comment": "Practical deployment characteristics that humans can configure and measure",
+    
+    "exec-ml-iceland-01": {
+      "type": "gpu-enabled",
+      "location_type": "edge-datacenter",
+      "startup_time_sec": 480,
+      "tasks_per_sec": 25.0,
+      "power_consumption_w": 850,
+      "cost_per_hour": 3.20,
+      "cost_per_gb_egress": 0.0,
+      "max_instances": 3,
+      "min_lease_time_min": 60,
+      "supports_spot": false
+    },
+    
+    "exec-ml-aws-east-01": {
+      "type": "gpu-enabled", 
+      "location_type": "cloud-aws-east",
+      "startup_time_sec": 240,
+      "tasks_per_sec": 25.0,
+      "power_consumption_w": 850,
+      "cost_per_hour": 4.80,
+      "cost_per_gb_egress": 0.09,
+      "max_instances": 8,
+      "min_lease_time_min": 5,
+      "supports_spot": true
+    },
+    
+    "exec-edge-stockholm-01": {
+      "type": "balanced",
+      "location_type": "edge-zone-1",
+      "startup_time_sec": 45,
+      "tasks_per_sec": 12.0,
+      "power_consumption_w": 180,
+      "cost_per_hour": 0.0,
+      "cost_per_gb_egress": 0.0,
+      "max_instances": 15,
+      "min_lease_time_min": 1,
+      "supports_spot": false
+    },
+    
+    "exec-cloud-aws-east-01": {
+      "type": "cpu-optimized",
+      "location_type": "cloud-aws-east", 
+      "startup_time_sec": 180,
+      "tasks_per_sec": 35.0,
+      "power_consumption_w": 400,
+      "cost_per_hour": 1.20,
+      "cost_per_gb_egress": 0.09,
+      "max_instances": 50,
+      "min_lease_time_min": 5,
+      "supports_spot": true
+    }
+  },
+
+  "thresholds": {
+    "_comment": "Configurable thresholds for task analysis",
+    "cpu_intensive_seconds": 300,
+    "memory_intensive_gb": 8,
+    "io_intensive_gb": 10,
+    "priority_threshold": 7
+  },
+
+  "data_transfer_costs": {
+    "_comment": "Network transfer costs between locations - measurable and configurable",
+    "iceland_to_aws_east": {
+      "cost_per_gb": 0.12,
+      "transfer_time_sec_per_gb": 3.5
+    },
+    "stockholm_to_aws_east": {
+      "cost_per_gb": 0.08,
+      "transfer_time_sec_per_gb": 2.1
+    },
+    "aws_internal": {
+      "cost_per_gb": 0.01,
+      "transfer_time_sec_per_gb": 0.5
+    }
+  },
+
+  "version": "3.0.0",
+  "updated_at": "2025-09-03T15:30:00Z"
+}

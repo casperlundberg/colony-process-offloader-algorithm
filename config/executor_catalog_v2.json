@@ -1,0 +1,362 @@
+{
+  "_comment": "CAPE Executor Catalog - Real ColonyOS executors with CAPE optimization config",
+  "_architecture": {
+    "executors": "List of actual ColonyOS executors (from API) - what exists in reality",
+    "config": "CAPE-specific optimization weights mapped to executor IDs - how CAPE should use them"
+  },
+  
+  "executors": [
+    {
+      "_comment": "Pure ColonyOS executor spec - identical to what ColonyOS API returns",
+      "id": "exec-ml-iceland-01",
+      "executorname": "ml-executor-iceland-01",
+      "executortype": "ml",
+      "location": {
+        "long": -21.9426,
+        "lat": 64.1466,
+        "desc": "Iceland Datacenter"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "AMD EPYC 7763",
+          "cpu": "8000m",
+          "mem": "64Gi",
+          "storage": "2Ti",
+          "gpu": {
+            "name": "nvidia_rtx_4090",
+            "count": 4
+          }
+        },
+        "software": {
+          "name": "colonyos/ml:v3.2.0",
+          "type": "container",
+          "version": "v3.2.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2025-09-02T08:00:00Z",
+      "last_heard_from": "2025-09-03T15:20:00Z"
+    },
+    {
+      "_comment": "Same compute power as Iceland, different location = different optimization profile",
+      "id": "exec-ml-aws-east-01",
+      "executorname": "ml-executor-aws-east-01",
+      "executortype": "ml",
+      "location": {
+        "long": -77.0369,
+        "lat": 38.9072,
+        "desc": "AWS us-east-1"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "AMD EPYC 7763",
+          "cpu": "8000m",
+          "mem": "64Gi", 
+          "storage": "2Ti",
+          "gpu": {
+            "name": "nvidia_rtx_4090",
+            "count": 4
+          }
+        },
+        "software": {
+          "name": "colonyos/ml:v3.2.0",
+          "type": "container", 
+          "version": "v3.2.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2025-09-01T14:30:00Z",
+      "last_heard_from": "2025-09-03T15:19:45Z"
+    },
+    {
+      "_comment": "Edge executor for low-latency processing",
+      "id": "exec-edge-stockholm-01",
+      "executorname": "edge-executor-stockholm-01",
+      "executortype": "edge",
+      "location": {
+        "long": 18.0686,
+        "lat": 59.3293,
+        "desc": "Stockholm Edge Node"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "Intel Core i7-12700K", 
+          "cpu": "3000m",
+          "mem": "16Gi",
+          "storage": "500Gi"
+        },
+        "software": {
+          "name": "colonyos/edge:v2.0.0",
+          "type": "container",
+          "version": "v2.0.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2025-09-03T10:15:00Z",
+      "last_heard_from": "2025-09-03T15:20:30Z"
+    },
+    {
+      "_comment": "Same edge specs as Stockholm but in NYC - different data/network costs",
+      "id": "exec-edge-nyc-01",
+      "executorname": "edge-executor-nyc-01", 
+      "executortype": "edge",
+      "location": {
+        "long": -74.0060,
+        "lat": 40.7128,
+        "desc": "New York Edge Node"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "Intel Core i7-12700K",
+          "cpu": "3000m", 
+          "mem": "16Gi",
+          "storage": "500Gi"
+        },
+        "software": {
+          "name": "colonyos/edge:v2.0.0",
+          "type": "container",
+          "version": "v2.0.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2025-09-02T16:45:00Z", 
+      "last_heard_from": "2025-09-03T15:18:22Z"
+    },
+    {
+      "_comment": "Cloud executor for cost-optimized batch processing",
+      "id": "exec-cloud-aws-east-01",
+      "executorname": "cloud-executor-aws-east-01",
+      "executortype": "cloud",
+      "location": {
+        "long": -77.0369,
+        "lat": 38.9072,
+        "desc": "AWS us-east-1"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "AWS c6i.4xlarge",
+          "cpu": "8000m",
+          "mem": "32Gi",
+          "storage": "500Gi"
+        },
+        "software": {
+          "name": "colonyos/cloud:v2.1.0",
+          "type": "k8s",
+          "version": "v2.1.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2025-09-01T09:00:00Z",
+      "last_heard_from": "2025-09-03T15:19:55Z"
+    },
+    {
+      "_comment": "Same cloud specs but in different region - different data locality costs",
+      "id": "exec-cloud-aws-west-01",
+      "executorname": "cloud-executor-aws-west-01",
+      "executortype": "cloud", 
+      "location": {
+        "long": -122.3328,
+        "lat": 47.6061,
+        "desc": "AWS us-west-2"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "AWS c6i.4xlarge",
+          "cpu": "8000m",
+          "mem": "32Gi",
+          "storage": "500Gi"
+        },
+        "software": {
+          "name": "colonyos/cloud:v2.1.0",
+          "type": "k8s", 
+          "version": "v2.1.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2025-08-30T12:30:00Z",
+      "last_heard_from": "2025-09-03T15:20:10Z"
+    }
+  ],
+
+  "config": {
+    "_comment": "CAPE optimization weights mapped to specific executor IDs",
+    
+    "exec-ml-iceland-01": {
+      "deployment_cost": 200.0,
+      "operational_cost_per_hour": 3.2,
+      "optimization_weights": {
+        "latency_weight": 0.3,
+        "cost_weight": 0.2,
+        "throughput_weight": 0.4,
+        "energy_weight": 0.3,
+        "data_gravity_weight": 0.9,
+        "network_weight": 0.2
+      },
+      "data_characteristics": {
+        "local_datasets": ["research-data-iceland", "ml-models-cache", "training-datasets"],
+        "data_transfer_cost_per_gb": 0.0,
+        "network_bandwidth_gbps": 10.0,
+        "typical_latency_ms": 5.0,
+        "energy_cost_per_kwh": 0.05
+      },
+      "scaling_limits": {
+        "min_instances": 0,
+        "max_instances": 3,
+        "deployment_time_minutes": 8,
+        "shutdown_time_seconds": 180
+      }
+    },
+
+    "exec-ml-aws-east-01": {
+      "deployment_cost": 180.0,
+      "operational_cost_per_hour": 4.8,
+      "optimization_weights": {
+        "latency_weight": 0.2,
+        "cost_weight": 0.4,
+        "throughput_weight": 0.3,
+        "energy_weight": 0.1,
+        "data_gravity_weight": 0.6,
+        "network_weight": 0.4
+      },
+      "data_characteristics": {
+        "local_datasets": ["cloud-datasets", "s3-buckets", "enterprise-data"],
+        "data_transfer_cost_per_gb": 0.09,
+        "network_bandwidth_gbps": 25.0,
+        "typical_latency_ms": 45.0,
+        "energy_cost_per_kwh": 0.12
+      },
+      "scaling_limits": {
+        "min_instances": 0,
+        "max_instances": 8,
+        "deployment_time_minutes": 4,
+        "shutdown_time_seconds": 120
+      }
+    },
+
+    "exec-edge-stockholm-01": {
+      "deployment_cost": 40.0,
+      "operational_cost_per_hour": 0.8,
+      "optimization_weights": {
+        "latency_weight": 0.8,
+        "cost_weight": 0.1,
+        "throughput_weight": 0.1,
+        "energy_weight": 0.2,
+        "data_gravity_weight": 0.4,
+        "network_weight": 0.7
+      },
+      "data_characteristics": {
+        "local_datasets": ["sensor-data-nordic", "iot-streams", "real-time-events"],
+        "data_transfer_cost_per_gb": 0.15,
+        "network_bandwidth_gbps": 1.0,
+        "typical_latency_ms": 8.0,
+        "energy_cost_per_kwh": 0.06
+      },
+      "scaling_limits": {
+        "min_instances": 1,
+        "max_instances": 15,
+        "deployment_time_minutes": 2,
+        "shutdown_time_seconds": 30
+      }
+    },
+
+    "exec-edge-nyc-01": {
+      "deployment_cost": 45.0,
+      "operational_cost_per_hour": 1.1,
+      "optimization_weights": {
+        "latency_weight": 0.8,
+        "cost_weight": 0.2,
+        "throughput_weight": 0.1,
+        "energy_weight": 0.1,
+        "data_gravity_weight": 0.5,
+        "network_weight": 0.6
+      },
+      "data_characteristics": {
+        "local_datasets": ["financial-streams", "mobile-data", "social-feeds"],
+        "data_transfer_cost_per_gb": 0.12,
+        "network_bandwidth_gbps": 2.0,
+        "typical_latency_ms": 6.0,
+        "energy_cost_per_kwh": 0.18
+      },
+      "scaling_limits": {
+        "min_instances": 1,
+        "max_instances": 20,
+        "deployment_time_minutes": 2,
+        "shutdown_time_seconds": 30
+      }
+    },
+
+    "exec-cloud-aws-east-01": {
+      "deployment_cost": 25.0,
+      "operational_cost_per_hour": 0.4,
+      "optimization_weights": {
+        "latency_weight": 0.1,
+        "cost_weight": 0.7,
+        "throughput_weight": 0.2,
+        "energy_weight": 0.1,
+        "data_gravity_weight": 0.5,
+        "network_weight": 0.3
+      },
+      "data_characteristics": {
+        "local_datasets": ["batch-data", "archives", "logs", "backups"],
+        "data_transfer_cost_per_gb": 0.09,
+        "network_bandwidth_gbps": 10.0,
+        "typical_latency_ms": 80.0,
+        "energy_cost_per_kwh": 0.10
+      },
+      "scaling_limits": {
+        "min_instances": 0,
+        "max_instances": 50,
+        "deployment_time_minutes": 3,
+        "shutdown_time_seconds": 90
+      }
+    },
+
+    "exec-cloud-aws-west-01": {
+      "deployment_cost": 25.0,
+      "operational_cost_per_hour": 0.4,
+      "optimization_weights": {
+        "latency_weight": 0.1,
+        "cost_weight": 0.6,
+        "throughput_weight": 0.3,
+        "energy_weight": 0.1,
+        "data_gravity_weight": 0.3,
+        "network_weight": 0.4
+      },
+      "data_characteristics": {
+        "local_datasets": ["west-coast-data", "media-files", "gaming-data"],
+        "data_transfer_cost_per_gb": 0.11,
+        "network_bandwidth_gbps": 8.0,
+        "typical_latency_ms": 120.0,
+        "energy_cost_per_kwh": 0.14
+      },
+      "scaling_limits": {
+        "min_instances": 0,
+        "max_instances": 30,
+        "deployment_time_minutes": 4,
+        "shutdown_time_seconds": 90
+      }
+    }
+  },
+
+  "data_movement_matrix": {
+    "_comment": "Cost/time/energy for moving data between executor locations",
+    "iceland_to_aws_east": {
+      "cost_per_gb": 0.15,
+      "transfer_time_seconds_per_gb": 2.5,
+      "energy_cost_factor": 1.4
+    },
+    "aws_east_to_aws_west": {
+      "cost_per_gb": 0.02,
+      "transfer_time_seconds_per_gb": 0.8,
+      "energy_cost_factor": 1.1
+    },
+    "stockholm_to_nyc": {
+      "cost_per_gb": 0.18,
+      "transfer_time_seconds_per_gb": 3.2,
+      "energy_cost_factor": 1.6
+    }
+  },
+
+  "version": "2.0.0",
+  "updated_at": "2025-09-03T15:25:00Z"
+}
