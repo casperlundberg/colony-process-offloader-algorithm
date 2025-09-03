@@ -1,0 +1,2306 @@
+  Compute Workload Simulation for CAPE Algorithm
+==================================================
+
+ Initializing CAPE Orchestrator...
+ Initializing Compute Workload Simulator...
+
+ Simulation Configuration
+===========================
+Workload Arrival Rate: 0.50 processes/second
+Duration Range: 30s - 5m0s
+Resource Fluctuation: true
+Seasonal Patterns: true
+Data Locality Pattern: clustered
+
+Workload Types:
+  • web-request (weight=0.4): CPU=20.0%, Mem=10.0%, IO=30.0%
+    Duration: 100ms-2s, Data: 0.1-5.0MB, Latency-sensitive: true
+  • batch-processing (weight=0.3): CPU=80.0%, Mem=60.0%, IO=50.0%
+    Duration: 30s-5m0s, Data: 50.0-500.0MB, Latency-sensitive: false
+  • ml-inference (weight=0.2): CPU=90.0%, Mem=80.0%, IO=40.0%
+    Duration: 5s-1m0s, Data: 10.0-100.0MB, Latency-sensitive: true
+  • data-analytics (weight=0.1): CPU=70.0%, Mem=90.0%, IO=80.0%
+    Duration: 1m0s-10m0s, Data: 100.0-1000.0MB, Latency-sensitive: false
+
+ Starting CAPE Orchestrator...
+2025/09/03 15:21:52 Starting Zero-Hardcode CAPE Orchestrator for colony: hybrid-computing-colony
+2025/09/03 15:21:52 Executor: cape-orchestrator-001 (cape-optimizer)
+2025/09/03 15:21:52 Deployment: hybrid with data gravity factor 0.70
+2025/09/03 15:21:52 Behavior: assign_interval=5s, metrics_interval=30s, max_concurrent=5
+2025/09/03 15:21:52 Zero-Hardcode CAPE Orchestrator started successfully
+ Starting Compute Workload Simulation...
+2025/09/03 15:21:52 Starting Compute Workload Simulator
+2025/09/03 15:21:52 Workload arrival rate: 0.50 processes/second
+2025/09/03 15:21:52 Simulation duration: 5m0s
+
+ Simulation running... Press Ctrl+C to stop
+════════════════════════════════════════════════
+2025/09/03 15:21:52  Starting scenario: Warmup Phase (Initial system warmup)
+
+ Simulation Monitoring Started
+=================================
+2025/09/03 15:21:54 Workload workload-0 completed on executor-cloud-aws-us-east-1-01 (took 199ms)
+2025/09/03 15:21:57 Workload workload-1 completed on executor-edge-stockholm-01 (took 1s)
+2025/09/03 15:21:58 Workload workload-2 completed on executor-edge-stockholm-01 (took 700ms)
+2025/09/03 15:22:01 Workload workload-3 completed on executor-cloud-aws-us-east-1-01 (took 1.1s)
+2025/09/03 15:22:02 
+Simulation Stats (Uptime: 10s)
+2025/09/03 15:22:02 =================================
+2025/09/03 15:22:02 Workloads: 4 total, 0 active, 4 completed, 0 failed
+2025/09/03 15:22:02 Success Rate: 100.0%
+2025/09/03 15:22:02 Throughput: 0.40 workloads/second
+2025/09/03 15:22:02 
+Executor States:
+2025/09/03 15:22:02   executor-edge-stockholm-01: CPU=0.0%, Mem=0.0%, Net=4.3%, Temp=54.3°C, Healthy=true
+2025/09/03 15:22:02   executor-cloud-aws-us-east-1-01: CPU=0.0%, Mem=0.0%, Net=0.0%, Temp=44.5°C, Healthy=true
+2025/09/03 15:22:02   executor-hpc-iceland-01: CPU=0.0%, Mem=0.0%, Net=0.0%, Temp=47.7°C, Healthy=true
+
+ 15:22:07 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 15s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 7
+   Completed: 4, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 80.0%, Memory: 1.3%, Network: 13.0%
+     Temperature: 76.0°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 0.0%
+     Temperature: 48.6°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 20.0%, Memory: 0.0%, Network: 0.0%
+     Temperature: 43.7°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:22:07 Workload workload-6 completed on executor-hpc-iceland-01 (took 1.601s)
+2025/09/03 15:22:12 
+Simulation Stats (Uptime: 20s)
+2025/09/03 15:22:12 =================================
+2025/09/03 15:22:12 Workloads: 9 total, 4 active, 5 completed, 0 failed
+2025/09/03 15:22:12 Success Rate: 55.6%
+2025/09/03 15:22:12 Throughput: 0.25 workloads/second
+2025/09/03 15:22:12 
+Executor States:
+2025/09/03 15:22:12   executor-cloud-aws-us-east-1-01: CPU=0.0%, Mem=0.0%, Net=0.0%, Temp=49.9°C, Healthy=true
+2025/09/03 15:22:12   executor-hpc-iceland-01: CPU=0.0%, Mem=0.0%, Net=2.2%, Temp=57.5°C, Healthy=true
+2025/09/03 15:22:12   executor-edge-stockholm-01: CPU=74.4%, Mem=1.5%, Net=14.5%, Temp=83.1°C, Healthy=true
+2025/09/03 15:22:12 Generated 10 workloads...
+2025/09/03 15:22:12 Workload workload-9 completed on executor-hpc-iceland-01 (took 500ms)
+2025/09/03 15:22:15 Workload workload-10 completed on executor-cloud-aws-us-east-1-01 (took 1.299s)
+2025/09/03 15:22:17 Workload workload-11 completed on executor-edge-stockholm-01 (took 1.4s)
+2025/09/03 15:22:18 Workload workload-12 completed on executor-edge-stockholm-01 (took 300ms)
+
+ 15:22:22 - Simulation Status
+════════════════════════════════
+2025/09/03 15:22:22  Completed scenario: Warmup Phase
+ CAPE Orchestrator:
+2025/09/03 15:22:22  Starting scenario: Normal Load (Steady state operation)
+   Uptime: 30s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 14
+   Completed: 9, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 25.6%, Memory: 1.7%, Network: 15.7%
+     Temperature: 82.5°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 80.0%, Memory: 0.6%, Network: 1.7%
+     Temperature: 74.1°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 0.0%
+     Temperature: 43.2°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:22:22 
+Simulation Stats (Uptime: 30s)
+2025/09/03 15:22:22 =================================
+2025/09/03 15:22:22 Workloads: 15 total, 6 active, 9 completed, 0 failed
+2025/09/03 15:22:22 Success Rate: 60.0%
+2025/09/03 15:22:22 Throughput: 0.30 workloads/second
+2025/09/03 15:22:22 
+Executor States:
+2025/09/03 15:22:22   executor-edge-stockholm-01: CPU=67.2%, Mem=1.7%, Net=15.4%, Temp=82.2°C, Healthy=true
+2025/09/03 15:22:22   executor-cloud-aws-us-east-1-01: CPU=94.0%, Mem=1.0%, Net=3.4%, Temp=79.0°C, Healthy=true
+2025/09/03 15:22:22   executor-hpc-iceland-01: CPU=0.0%, Mem=0.0%, Net=0.0%, Temp=49.7°C, Healthy=true
+2025/09/03 15:22:23 Workload workload-14 completed on executor-cloud-aws-us-east-1-01 (took 1.4s)
+2025/09/03 15:22:24 Workload workload-15 completed on executor-hpc-iceland-01 (took 700ms)
+2025/09/03 15:22:27 Workload workload-5 completed on executor-edge-stockholm-01 (took 23.3s)
+2025/09/03 15:22:27 Workload workload-16 completed on executor-cloud-aws-us-east-1-01 (took 1.501s)
+2025/09/03 15:22:29 Workload workload-4 completed on executor-edge-stockholm-01 (took 27.099s)
+2025/09/03 15:22:31 Workload workload-18 completed on executor-cloud-aws-us-east-1-01 (took 1.5s)
+2025/09/03 15:22:32 
+Simulation Stats (Uptime: 40s)
+2025/09/03 15:22:32 =================================
+2025/09/03 15:22:32 Workloads: 19 total, 4 active, 15 completed, 0 failed
+2025/09/03 15:22:32 Success Rate: 78.9%
+2025/09/03 15:22:32 Throughput: 0.37 workloads/second
+2025/09/03 15:22:32 
+Executor States:
+2025/09/03 15:22:32   executor-edge-stockholm-01: CPU=0.0%, Mem=0.0%, Net=15.4%, Temp=80.3°C, Healthy=true
+2025/09/03 15:22:32   executor-cloud-aws-us-east-1-01: CPU=33.6%, Mem=0.9%, Net=5.8%, Temp=84.6°C, Healthy=true
+2025/09/03 15:22:32   executor-hpc-iceland-01: CPU=0.0%, Mem=0.0%, Net=0.0%, Temp=49.9°C, Healthy=true
+2025/09/03 15:22:32 Generated 20 workloads...
+
+ 15:22:37 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 45s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 22
+   Completed: 15, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-cloud-aws-us-east-1-01:
+     CPU: 75.2%, Memory: 1.0%, Network: 3.4%
+     Temperature: 86.7°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 72.0%, Memory: 0.2%, Network: 1.7%
+     Temperature: 85.8°C, Active Workloads: 0
+    executor-edge-stockholm-01:
+     CPU: 74.4%, Memory: 1.6%, Network: 3.1%
+     Temperature: 80.7°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:22:42 
+Simulation Stats (Uptime: 50s)
+2025/09/03 15:22:42 =================================
+2025/09/03 15:22:42 Workloads: 24 total, 9 active, 15 completed, 0 failed
+2025/09/03 15:22:42 Success Rate: 62.5%
+2025/09/03 15:22:42 Throughput: 0.30 workloads/second
+2025/09/03 15:22:42 
+Executor States:
+2025/09/03 15:22:42   executor-edge-stockholm-01: CPU=74.4%, Mem=1.6%, Net=3.1%, Temp=83.2°C, Healthy=true
+2025/09/03 15:22:42   executor-cloud-aws-us-east-1-01: CPU=85.0%, Mem=1.2%, Net=5.2%, Temp=74.6°C, Healthy=true
+2025/09/03 15:22:42   executor-hpc-iceland-01: CPU=100.0%, Mem=1.6%, Net=3.8%, Temp=77.8°C, Healthy=true
+2025/09/03 15:22:45 Workload workload-25 completed on executor-edge-stockholm-01 (took 1.6s)
+2025/09/03 15:22:49 Workload workload-27 completed on executor-cloud-aws-us-east-1-01 (took 1s)
+
+ 15:22:52 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+2025/09/03 15:22:52 Generated 30 workloads...
+   Uptime: 1m0s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 29
+   Completed: 17, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 68.0%, Memory: 3.6%, Network: 7.1%
+     Temperature: 77.0°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 65.0%, Memory: 1.2%, Network: 5.2%
+     Temperature: 74.5°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 68.0%, Memory: 2.2%, Network: 5.4%
+     Temperature: 83.6°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:22:52 
+Simulation Stats (Uptime: 1m0s)
+2025/09/03 15:22:52 =================================
+2025/09/03 15:22:52 Workloads: 30 total, 13 active, 17 completed, 0 failed
+2025/09/03 15:22:52 Success Rate: 56.7%
+2025/09/03 15:22:52 Throughput: 0.28 workloads/second
+2025/09/03 15:22:52 
+Executor States:
+2025/09/03 15:22:52   executor-edge-stockholm-01: CPU=54.0%, Mem=11.9%, Net=13.0%, Temp=65.4°C, Healthy=true
+2025/09/03 15:22:52   executor-cloud-aws-us-east-1-01: CPU=68.0%, Mem=1.2%, Net=5.2%, Temp=83.4°C, Healthy=true
+2025/09/03 15:22:52   executor-hpc-iceland-01: CPU=68.0%, Mem=2.2%, Net=5.4%, Temp=82.2°C, Healthy=true
+2025/09/03 15:22:53 Workload workload-8 completed on executor-edge-stockholm-01 (took 43.3s)
+2025/09/03 15:22:54 Workload workload-17 completed on executor-hpc-iceland-01 (took 26.799s)
+2025/09/03 15:22:57 Workload workload-31 completed on executor-hpc-iceland-01 (took 901ms)
+2025/09/03 15:23:00 Workload workload-33 completed on executor-edge-stockholm-01 (took 400ms)
+2025/09/03 15:23:00 Workload workload-21 completed on executor-cloud-aws-us-east-1-01 (took 24.6s)
+2025/09/03 15:23:02 
+Simulation Stats (Uptime: 1m10s)
+2025/09/03 15:23:02 =================================
+2025/09/03 15:23:02 Workloads: 34 total, 12 active, 22 completed, 0 failed
+2025/09/03 15:23:02 Success Rate: 64.7%
+2025/09/03 15:23:02 Throughput: 0.31 workloads/second
+2025/09/03 15:23:02 
+Executor States:
+2025/09/03 15:23:02   executor-cloud-aws-us-east-1-01: CPU=0.0%, Mem=2.3%, Net=10.3%, Temp=72.8°C, Healthy=true
+2025/09/03 15:23:02   executor-hpc-iceland-01: CPU=75.2%, Mem=2.0%, Net=3.7%, Temp=84.3°C, Healthy=true
+2025/09/03 15:23:02   executor-edge-stockholm-01: CPU=43.0%, Mem=11.7%, Net=12.1%, Temp=73.3°C, Healthy=true
+2025/09/03 15:23:04 Workload workload-35 completed on executor-cloud-aws-us-east-1-01 (took 300ms)
+
+ 15:23:07 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 1m15s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 37
+   Completed: 23, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 54.0%, Memory: 11.9%, Network: 12.8%
+     Temperature: 63.0°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 58.0%, Memory: 6.0%, Network: 15.5%
+     Temperature: 78.0°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 75.2%, Memory: 2.0%, Network: 3.7%
+     Temperature: 82.7°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:23:09 Workload workload-32 completed on executor-cloud-aws-us-east-1-01 (took 11.799s)
+2025/09/03 15:23:10 Workload workload-38 completed on executor-edge-stockholm-01 (took 100ms)
+2025/09/03 15:23:12 
+Simulation Stats (Uptime: 1m20s)
+2025/09/03 15:23:12 =================================
+2025/09/03 15:23:12 Workloads: 39 total, 14 active, 25 completed, 0 failed
+2025/09/03 15:23:12 Success Rate: 64.1%
+2025/09/03 15:23:12 Throughput: 0.31 workloads/second
+2025/09/03 15:23:12 
+Executor States:
+2025/09/03 15:23:12   executor-edge-stockholm-01: CPU=25.0%, Mem=12.3%, Net=16.3%, Temp=66.3°C, Healthy=true
+2025/09/03 15:23:12   executor-cloud-aws-us-east-1-01: CPU=0.0%, Mem=0.0%, Net=15.5%, Temp=78.8°C, Healthy=true
+2025/09/03 15:23:12   executor-hpc-iceland-01: CPU=75.2%, Mem=2.0%, Net=3.7%, Temp=85.4°C, Healthy=true
+2025/09/03 15:23:12 Generated 40 workloads...
+2025/09/03 15:23:14 Workload workload-23 completed on executor-edge-stockholm-01 (took 34.099s)
+
+ 15:23:22 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 1m30s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 44
+   Completed: 26, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-cloud-aws-us-east-1-01:
+     CPU: 79.0%, Memory: 7.3%, Network: 10.9%
+     Temperature: 73.0°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 77.0%, Memory: 3.2%, Network: 6.0%
+     Temperature: 79.2°C, Active Workloads: 0
+    executor-edge-stockholm-01:
+     CPU: 47.0%, Memory: 13.1%, Network: 16.0%
+     Temperature: 59.5°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:23:22 
+Simulation Stats (Uptime: 1m30s)
+2025/09/03 15:23:22 =================================
+2025/09/03 15:23:22 Workloads: 45 total, 19 active, 26 completed, 0 failed
+2025/09/03 15:23:22 Success Rate: 57.8%
+2025/09/03 15:23:22 Throughput: 0.29 workloads/second
+2025/09/03 15:23:22 
+Executor States:
+2025/09/03 15:23:22   executor-cloud-aws-us-east-1-01: CPU=63.2%, Mem=7.3%, Net=10.9%, Temp=80.4°C, Healthy=true
+2025/09/03 15:23:22   executor-hpc-iceland-01: CPU=68.0%, Mem=3.4%, Net=6.9%, Temp=74.3°C, Healthy=true
+2025/09/03 15:23:22   executor-edge-stockholm-01: CPU=31.0%, Mem=14.9%, Net=19.4%, Temp=59.0°C, Healthy=false
+2025/09/03 15:23:22  Completed scenario: Normal Load
+2025/09/03 15:23:22  Starting scenario: Peak Load (High load scenario)
+2025/09/03 15:23:25 Workload workload-13 completed on executor-cloud-aws-us-east-1-01 (took 1m5.399s)
+2025/09/03 15:23:26 Workload workload-46 completed on executor-edge-stockholm-01 (took 200ms)
+2025/09/03 15:23:27 Workload workload-36 completed on executor-edge-stockholm-01 (took 21.8s)
+2025/09/03 15:23:29 Workload workload-47 completed on executor-hpc-iceland-01 (took 1.3s)
+2025/09/03 15:23:32 
+Simulation Stats (Uptime: 1m40s)
+2025/09/03 15:23:32 =================================
+2025/09/03 15:23:32 Workloads: 49 total, 19 active, 30 completed, 0 failed
+2025/09/03 15:23:32 Success Rate: 61.2%
+2025/09/03 15:23:32 Throughput: 0.30 workloads/second
+2025/09/03 15:23:32 
+Executor States:
+2025/09/03 15:23:32   executor-edge-stockholm-01: CPU=0.0%, Mem=8.9%, Net=19.8%, Temp=55.3°C, Healthy=false
+2025/09/03 15:23:32   executor-cloud-aws-us-east-1-01: CPU=69.6%, Mem=6.8%, Net=9.1%, Temp=83.7°C, Healthy=true
+2025/09/03 15:23:32   executor-hpc-iceland-01: CPU=48.0%, Mem=3.4%, Net=6.9%, Temp=73.3°C, Healthy=true
+2025/09/03 15:23:32 Generated 50 workloads...
+2025/09/03 15:23:35 Workload workload-7 completed on executor-cloud-aws-us-east-1-01 (took 1m26.899s)
+
+ 15:23:37 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 1m45s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 52
+   Completed: 31, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 15.0%, Memory: 17.7%, Network: 24.5%
+     Temperature: 55.4°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 9.1%
+     Temperature: 84.5°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 68.0%, Memory: 3.4%, Network: 6.9%
+     Temperature: 75.2°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:23:40 Workload workload-53 completed on executor-cloud-aws-us-east-1-01 (took 199ms)
+2025/09/03 15:23:42 
+Simulation Stats (Uptime: 1m50s)
+2025/09/03 15:23:42 =================================
+2025/09/03 15:23:42 Workloads: 54 total, 22 active, 32 completed, 0 failed
+2025/09/03 15:23:42 Success Rate: 59.3%
+2025/09/03 15:23:42 Throughput: 0.29 workloads/second
+2025/09/03 15:23:42 
+Executor States:
+2025/09/03 15:23:42   executor-edge-stockholm-01: CPU=7.0%, Mem=18.0%, Net=25.1%, Temp=49.6°C, Healthy=false
+2025/09/03 15:23:42   executor-cloud-aws-us-east-1-01: CPU=67.0%, Mem=7.0%, Net=8.6%, Temp=75.2°C, Healthy=true
+2025/09/03 15:23:42   executor-hpc-iceland-01: CPU=68.0%, Mem=3.4%, Net=6.9%, Temp=68.8°C, Healthy=true
+2025/09/03 15:23:43 Workload workload-54 completed on executor-edge-stockholm-01 (took 1.1s)
+2025/09/03 15:23:43 Workload workload-34 completed on executor-edge-stockholm-01 (took 41.3s)
+2025/09/03 15:23:45 Workload workload-55 completed on executor-edge-stockholm-01 (took 1.3s)
+2025/09/03 15:23:45 Workload workload-48 completed on executor-edge-stockholm-01 (took 15.6s)
+2025/09/03 15:23:47 Workload workload-40 completed on executor-hpc-iceland-01 (took 32.899s)
+2025/09/03 15:23:49 Workload workload-57 completed on executor-cloud-aws-us-east-1-01 (took 1.299s)
+2025/09/03 15:23:51 Workload workload-58 completed on executor-cloud-aws-us-east-1-01 (took 1.3s)
+
+ 15:23:52 - Simulation Status
+2025/09/03 15:23:52 Generated 60 workloads...
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 2m0s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 59
+   Completed: 39, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 17.0%, Memory: 18.6%, Network: 20.0%
+     Temperature: 51.9°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 29.6%, Memory: 6.9%, Network: 8.6%
+     Temperature: 83.1°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 69.0%, Memory: 4.0%, Network: 7.1%
+     Temperature: 73.8°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:23:52 
+Simulation Stats (Uptime: 2m0s)
+2025/09/03 15:23:52 =================================
+2025/09/03 15:23:52 Workloads: 60 total, 21 active, 39 completed, 0 failed
+2025/09/03 15:23:52 Success Rate: 65.0%
+2025/09/03 15:23:52 Throughput: 0.32 workloads/second
+2025/09/03 15:23:52 
+Executor States:
+2025/09/03 15:23:52   executor-hpc-iceland-01: CPU=69.0%, Mem=4.0%, Net=7.1%, Temp=73.7°C, Healthy=true
+2025/09/03 15:23:52   executor-edge-stockholm-01: CPU=17.0%, Mem=18.6%, Net=20.0%, Temp=49.5°C, Healthy=false
+2025/09/03 15:23:52   executor-cloud-aws-us-east-1-01: CPU=79.0%, Mem=8.5%, Net=10.4%, Temp=75.8°C, Healthy=true
+2025/09/03 15:23:55 Workload workload-45 completed on executor-edge-stockholm-01 (took 31.601s)
+2025/09/03 15:24:02 
+Simulation Stats (Uptime: 2m10s)
+2025/09/03 15:24:02 =================================
+2025/09/03 15:24:02 Workloads: 64 total, 24 active, 40 completed, 0 failed
+2025/09/03 15:24:02 Success Rate: 62.5%
+2025/09/03 15:24:02 Throughput: 0.31 workloads/second
+2025/09/03 15:24:02 
+Executor States:
+2025/09/03 15:24:02   executor-edge-stockholm-01: CPU=26.0%, Mem=18.5%, Net=19.5%, Temp=56.3°C, Healthy=false
+2025/09/03 15:24:02   executor-cloud-aws-us-east-1-01: CPU=72.0%, Mem=13.5%, Net=14.9%, Temp=78.5°C, Healthy=true
+2025/09/03 15:24:02   executor-hpc-iceland-01: CPU=81.0%, Mem=5.2%, Net=9.0%, Temp=67.7°C, Healthy=true
+2025/09/03 15:24:02 Workload workload-64 completed on executor-edge-stockholm-01 (took 600ms)
+2025/09/03 15:24:03 Workload workload-43 completed on executor-hpc-iceland-01 (took 43.6s)
+
+ 15:24:07 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 2m15s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 67
+   Completed: 42, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 4.0%, Memory: 18.5%, Network: 20.8%
+     Temperature: 54.2°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 56.0%, Memory: 14.6%, Network: 18.7%
+     Temperature: 68.3°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 2.3%, Network: 9.0%
+     Temperature: 71.9°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:24:07  Completed scenario: Peak Load
+2025/09/03 15:24:07  Starting scenario: Recovery (Post-peak recovery)
+2025/09/03 15:24:11 Workload workload-68 completed on executor-edge-stockholm-01 (took 1.299s)
+2025/09/03 15:24:12 
+Simulation Stats (Uptime: 2m20s)
+2025/09/03 15:24:12 =================================
+2025/09/03 15:24:12 Workloads: 69 total, 26 active, 43 completed, 0 failed
+2025/09/03 15:24:12 Success Rate: 62.3%
+2025/09/03 15:24:12 Throughput: 0.31 workloads/second
+2025/09/03 15:24:12 
+Executor States:
+2025/09/03 15:24:12   executor-edge-stockholm-01: CPU=6.0%, Mem=18.4%, Net=19.5%, Temp=51.1°C, Healthy=false
+2025/09/03 15:24:12   executor-cloud-aws-us-east-1-01: CPU=47.0%, Mem=14.9%, Net=20.1%, Temp=61.7°C, Healthy=true
+2025/09/03 15:24:12   executor-hpc-iceland-01: CPU=63.0%, Mem=9.5%, Net=11.1%, Temp=66.3°C, Healthy=true
+2025/09/03 15:24:12 Generated 70 workloads...
+2025/09/03 15:24:13 Workload workload-69 completed on executor-edge-stockholm-01 (took 1.3s)
+2025/09/03 15:24:17 Workload workload-71 completed on executor-cloud-aws-us-east-1-01 (took 1s)
+2025/09/03 15:24:19 Workload workload-70 completed on executor-edge-stockholm-01 (took 5.1s)
+
+ 15:24:22 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 2m30s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 74
+   Completed: 46, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 0.0%, Memory: 16.5%, Network: 24.6%
+     Temperature: 48.8°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 18.0%, Memory: 19.6%, Network: 24.8%
+     Temperature: 59.1°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 63.0%, Memory: 9.5%, Network: 11.1%
+     Temperature: 74.2°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:24:22 
+Simulation Stats (Uptime: 2m30s)
+2025/09/03 15:24:22 =================================
+2025/09/03 15:24:22 Workloads: 75 total, 29 active, 46 completed, 0 failed
+2025/09/03 15:24:22 Success Rate: 61.3%
+2025/09/03 15:24:22 Throughput: 0.31 workloads/second
+2025/09/03 15:24:22 
+Executor States:
+2025/09/03 15:24:22   executor-edge-stockholm-01: CPU=0.0%, Mem=16.5%, Net=24.6%, Temp=48.8°C, Healthy=false
+2025/09/03 15:24:22   executor-cloud-aws-us-east-1-01: CPU=18.0%, Mem=19.6%, Net=24.8%, Temp=59.1°C, Healthy=false
+2025/09/03 15:24:22   executor-hpc-iceland-01: CPU=63.0%, Mem=9.5%, Net=11.1%, Temp=74.2°C, Healthy=true
+2025/09/03 15:24:22 Workload workload-74 completed on executor-edge-stockholm-01 (took 300ms)
+2025/09/03 15:24:31 Workload workload-24 completed on executor-hpc-iceland-01 (took 1m49.2s)
+2025/09/03 15:24:32 
+Simulation Stats (Uptime: 2m40s)
+2025/09/03 15:24:32 =================================
+2025/09/03 15:24:32 Workloads: 79 total, 31 active, 48 completed, 0 failed
+2025/09/03 15:24:32 Success Rate: 60.8%
+2025/09/03 15:24:32 Throughput: 0.30 workloads/second
+2025/09/03 15:24:32 
+Executor States:
+2025/09/03 15:24:32   executor-edge-stockholm-01: CPU=1.0%, Mem=19.8%, Net=21.5%, Temp=40.6°C, Healthy=false
+2025/09/03 15:24:32   executor-cloud-aws-us-east-1-01: CPU=32.0%, Mem=20.2%, Net=22.8%, Temp=62.5°C, Healthy=false
+2025/09/03 15:24:32   executor-hpc-iceland-01: CPU=0.0%, Mem=0.0%, Net=11.1%, Temp=68.5°C, Healthy=true
+2025/09/03 15:24:32 Generated 80 workloads...
+
+ 15:24:37 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 2m45s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 82
+   Completed: 48, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: -7.0%, Memory: 20.0%, Network: 22.0%
+     Temperature: 42.6°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 24.0%, Memory: 20.7%, Network: 23.4%
+     Temperature: 51.7°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 71.0%, Memory: 8.8%, Network: 9.5%
+     Temperature: 77.6°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:24:37  Completed scenario: Recovery
+2025/09/03 15:24:42 
+Simulation Stats (Uptime: 2m50s)
+2025/09/03 15:24:42 =================================
+2025/09/03 15:24:42 Workloads: 84 total, 36 active, 48 completed, 0 failed
+2025/09/03 15:24:42 Success Rate: 57.1%
+2025/09/03 15:24:42 Throughput: 0.28 workloads/second
+2025/09/03 15:24:42 
+Executor States:
+2025/09/03 15:24:42   executor-edge-stockholm-01: CPU=-25.0%, Mem=20.7%, Net=32.1%, Temp=37.0°C, Healthy=false
+2025/09/03 15:24:42   executor-cloud-aws-us-east-1-01: CPU=24.0%, Mem=20.7%, Net=23.4%, Temp=54.3°C, Healthy=false
+2025/09/03 15:24:42   executor-hpc-iceland-01: CPU=63.0%, Mem=10.0%, Net=11.6%, Temp=67.1°C, Healthy=true
+2025/09/03 15:24:43 Workload workload-80 completed on executor-edge-stockholm-01 (took 9.3s)
+2025/09/03 15:24:44 Workload workload-85 completed on executor-cloud-aws-us-east-1-01 (took 601ms)
+2025/09/03 15:24:46 Workload workload-66 completed on executor-cloud-aws-us-east-1-01 (took 40.5s)
+
+ 15:24:52 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 3m0s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 89
+   Completed: 51, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+2025/09/03 15:24:52 Generated 90 workloads...
+    executor-edge-stockholm-01:
+     CPU: -31.0%, Memory: 26.2%, Network: 31.9%
+     Temperature: 28.2°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 33.0%, Memory: 20.4%, Network: 22.1%
+     Temperature: 56.9°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 47.0%, Memory: 11.9%, Network: 16.1%
+     Temperature: 66.1°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:24:52 
+Simulation Stats (Uptime: 3m0s)
+2025/09/03 15:24:52 =================================
+2025/09/03 15:24:52 Workloads: 90 total, 39 active, 51 completed, 0 failed
+2025/09/03 15:24:52 Success Rate: 56.7%
+2025/09/03 15:24:52 Throughput: 0.28 workloads/second
+2025/09/03 15:24:52 
+Executor States:
+2025/09/03 15:24:52   executor-cloud-aws-us-east-1-01: CPU=33.0%, Mem=20.4%, Net=22.1%, Temp=56.9°C, Healthy=false
+2025/09/03 15:24:52   executor-hpc-iceland-01: CPU=47.0%, Mem=11.9%, Net=16.1%, Temp=66.1°C, Healthy=true
+2025/09/03 15:24:52   executor-edge-stockholm-01: CPU=-31.0%, Mem=26.2%, Net=31.9%, Temp=28.2°C, Healthy=false
+2025/09/03 15:24:56 Workload workload-63 completed on executor-cloud-aws-us-east-1-01 (took 56.4s)
+2025/09/03 15:25:01 Workload workload-93 completed on executor-cloud-aws-us-east-1-01 (took 1s)
+2025/09/03 15:25:02 
+Simulation Stats (Uptime: 3m10s)
+2025/09/03 15:25:02 =================================
+2025/09/03 15:25:02 Workloads: 94 total, 41 active, 53 completed, 0 failed
+2025/09/03 15:25:02 Success Rate: 56.4%
+2025/09/03 15:25:02 Throughput: 0.28 workloads/second
+2025/09/03 15:25:02 
+Executor States:
+2025/09/03 15:25:02   executor-cloud-aws-us-east-1-01: CPU=12.0%, Mem=20.2%, Net=24.3%, Temp=53.0°C, Healthy=false
+2025/09/03 15:25:02   executor-hpc-iceland-01: CPU=23.0%, Mem=14.2%, Net=22.4%, Temp=49.6°C, Healthy=false
+2025/09/03 15:25:02   executor-edge-stockholm-01: CPU=-40.0%, Mem=26.6%, Net=34.1%, Temp=26.6°C, Healthy=false
+2025/09/03 15:25:03 Workload workload-75 completed on executor-edge-stockholm-01 (took 39.5s)
+2025/09/03 15:25:03 Workload workload-94 completed on executor-edge-stockholm-01 (took 1.5s)
+2025/09/03 15:25:06 Workload workload-96 completed on executor-edge-stockholm-01 (took 800ms)
+
+ 15:25:07 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 3m15s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 97
+   Completed: 56, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-cloud-aws-us-east-1-01:
+     CPU: 32.0%, Memory: 20.2%, Network: 24.3%
+     Temperature: 57.1°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 14.0%, Memory: 14.6%, Network: 24.1%
+     Temperature: 46.9°C, Active Workloads: 0
+    executor-edge-stockholm-01:
+     CPU: 0.0%, Memory: 25.7%, Network: 35.3%
+     Temperature: 32.0°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:25:09 Workload workload-97 completed on executor-edge-stockholm-01 (took 1.3s)
+2025/09/03 15:25:10 Workload workload-98 completed on executor-edge-stockholm-01 (took 501ms)
+2025/09/03 15:25:11 Workload workload-90 completed on executor-cloud-aws-us-east-1-01 (took 17.201s)
+2025/09/03 15:25:12 
+Simulation Stats (Uptime: 3m20s)
+2025/09/03 15:25:12 =================================
+2025/09/03 15:25:12 Workloads: 99 total, 40 active, 59 completed, 0 failed
+2025/09/03 15:25:12 Success Rate: 59.6%
+2025/09/03 15:25:12 Throughput: 0.29 workloads/second
+2025/09/03 15:25:12 
+Executor States:
+2025/09/03 15:25:12   executor-hpc-iceland-01: CPU=6.0%, Mem=14.9%, Net=24.7%, Temp=48.2°C, Healthy=false
+2025/09/03 15:25:12   executor-edge-stockholm-01: CPU=0.0%, Mem=26.5%, Net=33.8%, Temp=35.0°C, Healthy=false
+2025/09/03 15:25:12   executor-cloud-aws-us-east-1-01: CPU=0.0%, Mem=12.8%, Net=24.3%, Temp=52.8°C, Healthy=false
+2025/09/03 15:25:12 Generated 100 workloads...
+2025/09/03 15:25:12 Workload workload-99 completed on executor-cloud-aws-us-east-1-01 (took 801ms)
+2025/09/03 15:25:14 Workload workload-79 completed on executor-edge-stockholm-01 (took 42.8s)
+2025/09/03 15:25:15 Workload workload-19 completed on executor-edge-stockholm-01 (took 2m43.4s)
+2025/09/03 15:25:15 Workload workload-44 completed on executor-edge-stockholm-01 (took 1m53.499s)
+2025/09/03 15:25:16 Workload workload-101 completed on executor-cloud-aws-us-east-1-01 (took 800ms)
+2025/09/03 15:25:19 Workload workload-102 completed on executor-hpc-iceland-01 (took 1.299s)
+
+ 15:25:22 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 3m30s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 104
+   Completed: 65, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: -6.0%, Memory: 24.1%, Network: 28.3%
+     Temperature: 40.1°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 32.0%, Memory: 20.1%, Network: 28.5%
+     Temperature: 55.1°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 14.9%, Network: 24.7%
+     Temperature: 44.4°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:25:22 
+Simulation Stats (Uptime: 3m30s)
+2025/09/03 15:25:22 =================================
+2025/09/03 15:25:22 Workloads: 104 total, 39 active, 65 completed, 0 failed
+2025/09/03 15:25:22 Success Rate: 62.5%
+2025/09/03 15:25:22 Throughput: 0.31 workloads/second
+2025/09/03 15:25:22 
+Executor States:
+2025/09/03 15:25:22   executor-edge-stockholm-01: CPU=-6.0%, Mem=24.1%, Net=28.3%, Temp=37.7°C, Healthy=false
+2025/09/03 15:25:22   executor-cloud-aws-us-east-1-01: CPU=32.0%, Mem=20.1%, Net=28.5%, Temp=60.6°C, Healthy=false
+2025/09/03 15:25:22   executor-hpc-iceland-01: CPU=-2.0%, Mem=16.1%, Net=27.0%, Temp=43.8°C, Healthy=false
+2025/09/03 15:25:22 Workload workload-104 completed on executor-edge-stockholm-01 (took 201ms)
+2025/09/03 15:25:22 Workload workload-100 completed on executor-cloud-aws-us-east-1-01 (took 8.401s)
+2025/09/03 15:25:24 Workload workload-87 completed on executor-edge-stockholm-01 (took 35.9s)
+2025/09/03 15:25:24 Workload workload-26 completed on executor-edge-stockholm-01 (took 2m38s)
+2025/09/03 15:25:26 Workload workload-20 completed on executor-hpc-iceland-01 (took 2m52.599s)
+2025/09/03 15:25:27 Workload workload-22 completed on executor-edge-stockholm-01 (took 2m49.299s)
+2025/09/03 15:25:28 Workload workload-107 completed on executor-hpc-iceland-01 (took 500ms)
+2025/09/03 15:25:30 Workload workload-108 completed on executor-edge-stockholm-01 (took 200ms)
+2025/09/03 15:25:32 Workload workload-50 completed on executor-edge-stockholm-01 (took 1m57.9s)
+2025/09/03 15:25:32 
+Simulation Stats (Uptime: 3m40s)
+2025/09/03 15:25:32 =================================
+2025/09/03 15:25:32 Workloads: 109 total, 35 active, 74 completed, 0 failed
+2025/09/03 15:25:32 Success Rate: 67.9%
+2025/09/03 15:25:32 Throughput: 0.34 workloads/second
+2025/09/03 15:25:32 
+Executor States:
+2025/09/03 15:25:32   executor-hpc-iceland-01: CPU=0.0%, Mem=15.4%, Net=27.4%, Temp=48.7°C, Healthy=false
+2025/09/03 15:25:32   executor-edge-stockholm-01: CPU=0.0%, Mem=10.2%, Net=23.9%, Temp=45.9°C, Healthy=false
+2025/09/03 15:25:32   executor-cloud-aws-us-east-1-01: CPU=33.0%, Mem=19.9%, Net=19.3%, Temp=58.6°C, Healthy=false
+2025/09/03 15:25:32 Generated 110 workloads...
+2025/09/03 15:25:32 Workload workload-30 completed on executor-cloud-aws-us-east-1-01 (took 2m37.999s)
+2025/09/03 15:25:33 Workload workload-89 completed on executor-hpc-iceland-01 (took 40.999s)
+2025/09/03 15:25:33 Workload workload-86 completed on executor-hpc-iceland-01 (took 47.1s)
+
+ 15:25:37 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 3m45s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 112
+   Completed: 77, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 27.0%, Memory: 21.6%, Network: 22.6%
+     Temperature: 54.6°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 33.0%, Memory: 19.6%, Network: 20.3%
+     Temperature: 55.1°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 3.0%, Network: 27.4%
+     Temperature: 47.5°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:25:38 Workload workload-112 completed on executor-edge-stockholm-01 (took 200ms)
+2025/09/03 15:25:41 Workload workload-92 completed on executor-hpc-iceland-01 (took 42.999s)
+2025/09/03 15:25:41 Workload workload-113 completed on executor-cloud-aws-us-east-1-01 (took 1.4s)
+2025/09/03 15:25:42 
+Simulation Stats (Uptime: 3m50s)
+2025/09/03 15:25:42 =================================
+2025/09/03 15:25:42 Workloads: 114 total, 34 active, 80 completed, 0 failed
+2025/09/03 15:25:42 Success Rate: 70.2%
+2025/09/03 15:25:42 Throughput: 0.35 workloads/second
+2025/09/03 15:25:42 
+Executor States:
+2025/09/03 15:25:42   executor-edge-stockholm-01: CPU=0.0%, Mem=21.9%, Net=26.5%, Temp=53.5°C, Healthy=false
+2025/09/03 15:25:42   executor-cloud-aws-us-east-1-01: CPU=13.0%, Mem=19.6%, Net=20.3%, Temp=61.9°C, Healthy=false
+2025/09/03 15:25:42   executor-hpc-iceland-01: CPU=0.0%, Mem=8.9%, Net=26.5%, Temp=48.3°C, Healthy=false
+2025/09/03 15:25:49 Workload workload-111 completed on executor-hpc-iceland-01 (took 13.7s)
+
+ 15:25:52 - Simulation Status
+2025/09/03 15:25:52 Generated 120 workloads...
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 4m0s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 119
+   Completed: 81, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 12.0%, Memory: 23.8%, Network: 30.1%
+     Temperature: 46.7°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 24.0%, Memory: 19.9%, Network: 25.1%
+     Temperature: 59.5°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 10.4%, Network: 25.8%
+     Temperature: 50.7°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:25:52 
+Simulation Stats (Uptime: 4m0s)
+2025/09/03 15:25:52 =================================
+2025/09/03 15:25:52 Workloads: 120 total, 39 active, 81 completed, 0 failed
+2025/09/03 15:25:52 Success Rate: 67.5%
+2025/09/03 15:25:52 Throughput: 0.34 workloads/second
+2025/09/03 15:25:52 
+Executor States:
+2025/09/03 15:25:52   executor-edge-stockholm-01: CPU=12.0%, Mem=23.8%, Net=30.1%, Temp=46.7°C, Healthy=false
+2025/09/03 15:25:52   executor-cloud-aws-us-east-1-01: CPU=24.0%, Mem=19.9%, Net=25.1%, Temp=59.5°C, Healthy=false
+2025/09/03 15:25:52   executor-hpc-iceland-01: CPU=0.0%, Mem=10.4%, Net=25.8%, Temp=50.7°C, Healthy=false
+2025/09/03 15:25:55 Workload workload-115 completed on executor-cloud-aws-us-east-1-01 (took 11.8s)
+2025/09/03 15:25:56 Workload workload-121 completed on executor-hpc-iceland-01 (took 700ms)
+2025/09/03 15:25:58 Workload workload-110 completed on executor-edge-stockholm-01 (took 23.9s)
+2025/09/03 15:25:59 Workload workload-39 completed on executor-hpc-iceland-01 (took 2m47.4s)
+2025/09/03 15:26:01 Workload workload-42 completed on executor-edge-stockholm-01 (took 2m43.8s)
+2025/09/03 15:26:02 
+Simulation Stats (Uptime: 4m10s)
+2025/09/03 15:26:02 =================================
+2025/09/03 15:26:02 Workloads: 124 total, 38 active, 86 completed, 0 failed
+2025/09/03 15:26:02 Success Rate: 69.4%
+2025/09/03 15:26:02 Throughput: 0.34 workloads/second
+2025/09/03 15:26:02 
+Executor States:
+2025/09/03 15:26:02   executor-edge-stockholm-01: CPU=0.0%, Mem=0.0%, Net=30.1%, Temp=53.1°C, Healthy=false
+2025/09/03 15:26:02   executor-cloud-aws-us-east-1-01: CPU=24.0%, Mem=19.9%, Net=23.3%, Temp=51.3°C, Healthy=false
+2025/09/03 15:26:02   executor-hpc-iceland-01: CPU=0.0%, Mem=1.2%, Net=30.6%, Temp=42.1°C, Healthy=false
+2025/09/03 15:26:05 Workload workload-125 completed on executor-cloud-aws-us-east-1-01 (took 899ms)
+
+ 15:26:07 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 4m15s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 127
+   Completed: 87, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-cloud-aws-us-east-1-01:
+     CPU: 0.0%, Memory: 22.7%, Network: 30.8%
+     Temperature: 51.2°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: -10.0%, Memory: 17.7%, Network: 30.8%
+     Temperature: 43.2°C, Active Workloads: 0
+    executor-edge-stockholm-01:
+     CPU: 28.0%, Memory: 22.3%, Network: 24.3%
+     Temperature: 52.7°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:26:07 Workload workload-126 completed on executor-edge-stockholm-01 (took 1.4s)
+2025/09/03 15:26:08 Workload workload-114 completed on executor-hpc-iceland-01 (took 26.101s)
+2025/09/03 15:26:12 
+Simulation Stats (Uptime: 4m20s)
+2025/09/03 15:26:12 =================================
+2025/09/03 15:26:12 Workloads: 129 total, 40 active, 89 completed, 0 failed
+2025/09/03 15:26:12 Success Rate: 69.0%
+2025/09/03 15:26:12 Throughput: 0.34 workloads/second
+2025/09/03 15:26:12 
+Executor States:
+2025/09/03 15:26:12   executor-edge-stockholm-01: CPU=6.0%, Mem=22.3%, Net=25.0%, Temp=52.1°C, Healthy=false
+2025/09/03 15:26:12   executor-cloud-aws-us-east-1-01: CPU=8.0%, Mem=22.8%, Net=30.8%, Temp=47.5°C, Healthy=false
+2025/09/03 15:26:12   executor-hpc-iceland-01: CPU=0.0%, Mem=15.5%, Net=30.8%, Temp=38.4°C, Healthy=false
+2025/09/03 15:26:12 Generated 130 workloads...
+2025/09/03 15:26:14 Workload workload-119 completed on executor-cloud-aws-us-east-1-01 (took 22.5s)
+2025/09/03 15:26:18 Workload workload-132 completed on executor-cloud-aws-us-east-1-01 (took 699ms)
+2025/09/03 15:26:19 Workload workload-41 completed on executor-cloud-aws-us-east-1-01 (took 3m3.4s)
+2025/09/03 15:26:19 Workload workload-51 completed on executor-cloud-aws-us-east-1-01 (took 2m43.6s)
+2025/09/03 15:26:21 Workload workload-133 completed on executor-hpc-iceland-01 (took 1.6s)
+
+ 15:26:22 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 4m30s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 134
+   Completed: 94, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 22.2%, Network: 32.4%
+     Temperature: 38.5°C, Active Workloads: 0
+    executor-edge-stockholm-01:
+     CPU: 5.0%, Memory: 29.2%, Network: 30.5%
+     Temperature: 43.6°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 35.3%
+     Temperature: 49.2°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:26:22 
+Simulation Stats (Uptime: 4m30s)
+2025/09/03 15:26:22 =================================
+2025/09/03 15:26:22 Workloads: 135 total, 41 active, 94 completed, 0 failed
+2025/09/03 15:26:22 Success Rate: 69.6%
+2025/09/03 15:26:22 Throughput: 0.35 workloads/second
+2025/09/03 15:26:22 
+Executor States:
+2025/09/03 15:26:22   executor-edge-stockholm-01: CPU=-3.0%, Mem=30.9%, Net=32.7%, Temp=44.1°C, Healthy=false
+2025/09/03 15:26:22   executor-cloud-aws-us-east-1-01: CPU=24.0%, Mem=20.5%, Net=31.7%, Temp=58.0°C, Healthy=false
+2025/09/03 15:26:22   executor-hpc-iceland-01: CPU=-8.0%, Mem=22.3%, Net=32.4%, Temp=42.3°C, Healthy=false
+2025/09/03 15:26:25 Workload workload-130 completed on executor-cloud-aws-us-east-1-01 (took 11.399s)
+2025/09/03 15:26:25 Workload workload-78 completed on executor-edge-stockholm-01 (took 1m55.5s)
+2025/09/03 15:26:25 Workload workload-62 completed on executor-cloud-aws-us-east-1-01 (took 2m27.5s)
+2025/09/03 15:26:26 Workload workload-136 completed on executor-edge-stockholm-01 (took 600ms)
+2025/09/03 15:26:30 Workload workload-138 completed on executor-edge-stockholm-01 (took 400ms)
+2025/09/03 15:26:32 
+Simulation Stats (Uptime: 4m40s)
+2025/09/03 15:26:32 =================================
+2025/09/03 15:26:32 Workloads: 139 total, 40 active, 99 completed, 0 failed
+2025/09/03 15:26:32 Success Rate: 71.2%
+2025/09/03 15:26:32 Throughput: 0.35 workloads/second
+2025/09/03 15:26:32 
+Executor States:
+2025/09/03 15:26:32   executor-edge-stockholm-01: CPU=0.0%, Mem=31.1%, Net=35.0%, Temp=45.3°C, Healthy=false
+2025/09/03 15:26:32   executor-cloud-aws-us-east-1-01: CPU=41.0%, Mem=19.7%, Net=23.6%, Temp=60.8°C, Healthy=true
+2025/09/03 15:26:32   executor-hpc-iceland-01: CPU=-8.0%, Mem=22.3%, Net=32.4%, Temp=42.3°C, Healthy=false
+2025/09/03 15:26:32 Generated 140 workloads...
+2025/09/03 15:26:32 Workload workload-139 completed on executor-cloud-aws-us-east-1-01 (took 700ms)
+
+ 15:26:37 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 4m45s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 142
+   Completed: 100, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: -13.0%, Memory: 31.3%, Network: 35.4%
+     Temperature: 37.1°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 19.0%, Memory: 19.7%, Network: 28.4%
+     Temperature: 64.1°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: -8.0%, Memory: 22.3%, Network: 32.4%
+     Temperature: 40.7°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:26:37 Workload workload-128 completed on executor-edge-stockholm-01 (took 27.1s)
+2025/09/03 15:26:38 Workload workload-60 completed on executor-hpc-iceland-01 (took 2m43.9s)
+2025/09/03 15:26:40 Workload workload-143 completed on executor-hpc-iceland-01 (took 199ms)
+2025/09/03 15:26:42 Workload workload-105 completed on executor-hpc-iceland-01 (took 1m17.9s)
+2025/09/03 15:26:42 
+Simulation Stats (Uptime: 4m50s)
+2025/09/03 15:26:42 =================================
+2025/09/03 15:26:42 Workloads: 144 total, 40 active, 104 completed, 0 failed
+2025/09/03 15:26:42 Success Rate: 72.2%
+2025/09/03 15:26:42 Throughput: 0.36 workloads/second
+2025/09/03 15:26:42 
+Executor States:
+2025/09/03 15:26:42   executor-edge-stockholm-01: CPU=0.0%, Mem=25.4%, Net=39.0%, Temp=41.5°C, Healthy=false
+2025/09/03 15:26:42   executor-cloud-aws-us-east-1-01: CPU=41.0%, Mem=19.7%, Net=23.6%, Temp=57.9°C, Healthy=true
+2025/09/03 15:26:42   executor-hpc-iceland-01: CPU=0.0%, Mem=0.0%, Net=32.8%, Temp=35.2°C, Healthy=false
+2025/09/03 15:26:45 Workload workload-49 completed on executor-edge-stockholm-01 (took 3m12.999s)
+2025/09/03 15:26:46 Workload workload-122 completed on executor-hpc-iceland-01 (took 48.7s)
+2025/09/03 15:26:48 Workload workload-83 completed on executor-edge-stockholm-01 (took 2m7.9s)
+
+ 15:26:52 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 5m0s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 149
+   Completed: 107, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+2025/09/03 15:26:52 Generated 150 workloads...
+     CPU: 0.0%, Memory: 5.9%, Network: 43.3%
+     Temperature: 33.4°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 41.0%, Memory: 19.7%, Network: 23.6%
+     Temperature: 63.5°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: -2.0%, Memory: 20.4%, Network: 28.0%
+     Temperature: 41.9°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:26:52 
+Simulation Stats (Uptime: 5m0s)
+2025/09/03 15:26:52 =================================
+2025/09/03 15:26:52 Workloads: 150 total, 43 active, 107 completed, 0 failed
+2025/09/03 15:26:52 Success Rate: 71.3%
+2025/09/03 15:26:52 Throughput: 0.36 workloads/second
+2025/09/03 15:26:52 
+Executor States:
+2025/09/03 15:26:52   executor-edge-stockholm-01: CPU=-21.0%, Mem=33.1%, Net=39.6%, Temp=34.7°C, Healthy=false
+2025/09/03 15:26:52   executor-cloud-aws-us-east-1-01: CPU=32.0%, Mem=19.8%, Net=24.4%, Temp=59.4°C, Healthy=false
+2025/09/03 15:26:52   executor-hpc-iceland-01: CPU=-17.0%, Mem=25.8%, Net=30.9%, Temp=41.7°C, Healthy=false
+2025/09/03 15:26:53 Workload workload-29 completed on executor-edge-stockholm-01 (took 4m1.3s)
+2025/09/03 15:26:58 Workload workload-135 completed on executor-edge-stockholm-01 (took 34.101s)
+2025/09/03 15:27:01 Workload workload-81 completed on executor-hpc-iceland-01 (took 2m25.3s)
+2025/09/03 15:27:01 Workload workload-120 completed on executor-hpc-iceland-01 (took 1m7.6s)
+2025/09/03 15:27:02 
+Simulation Stats (Uptime: 5m10s)
+2025/09/03 15:27:02 =================================
+2025/09/03 15:27:02 Workloads: 154 total, 43 active, 111 completed, 0 failed
+2025/09/03 15:27:02 Success Rate: 72.1%
+2025/09/03 15:27:02 Throughput: 0.36 workloads/second
+2025/09/03 15:27:02 
+Executor States:
+2025/09/03 15:27:02   executor-hpc-iceland-01: CPU=0.0%, Mem=0.0%, Net=32.2%, Temp=35.5°C, Healthy=false
+2025/09/03 15:27:02   executor-edge-stockholm-01: CPU=0.0%, Mem=21.4%, Net=39.3%, Temp=32.3°C, Healthy=false
+2025/09/03 15:27:02   executor-cloud-aws-us-east-1-01: CPU=32.0%, Mem=19.8%, Net=24.4%, Temp=60.7°C, Healthy=false
+2025/09/03 15:27:03 Workload workload-82 completed on executor-hpc-iceland-01 (took 2m25.4s)
+2025/09/03 15:27:03 Workload workload-73 completed on executor-edge-stockholm-01 (took 2m43.701s)
+2025/09/03 15:27:05 Workload workload-28 completed on executor-edge-stockholm-01 (took 4m15.6s)
+2025/09/03 15:27:06 Workload workload-145 completed on executor-edge-stockholm-01 (took 22s)
+2025/09/03 15:27:06 Workload workload-95 completed on executor-hpc-iceland-01 (took 2m2s)
+2025/09/03 15:27:07 Workload workload-147 completed on executor-cloud-aws-us-east-1-01 (took 18.9s)
+
+ 15:27:07 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 5m15s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 157
+   Completed: 117, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-cloud-aws-us-east-1-01:
+     CPU: 0.0%, Memory: 18.6%, Network: 24.4%
+     Temperature: 61.5°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 27.2%
+     Temperature: 43.1°C, Active Workloads: 0
+    executor-edge-stockholm-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 43.8%
+     Temperature: 32.0°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:27:09 Workload workload-153 completed on executor-edge-stockholm-01 (took 9s)
+2025/09/03 15:27:12 
+Simulation Stats (Uptime: 5m20s)
+2025/09/03 15:27:12 =================================
+2025/09/03 15:27:12 Workloads: 159 total, 41 active, 118 completed, 0 failed
+2025/09/03 15:27:12 Success Rate: 74.2%
+2025/09/03 15:27:12 Throughput: 0.37 workloads/second
+2025/09/03 15:27:12 
+Executor States:
+2025/09/03 15:27:12   executor-edge-stockholm-01: CPU=0.0%, Mem=24.7%, Net=40.8%, Temp=38.0°C, Healthy=false
+2025/09/03 15:27:12   executor-cloud-aws-us-east-1-01: CPU=33.0%, Mem=20.5%, Net=26.1%, Temp=57.2°C, Healthy=false
+2025/09/03 15:27:12   executor-hpc-iceland-01: CPU=7.0%, Mem=22.5%, Net=23.7%, Temp=47.4°C, Healthy=false
+2025/09/03 15:27:12 Generated 160 workloads...
+2025/09/03 15:27:12 Workload workload-137 completed on executor-edge-stockholm-01 (took 44.6s)
+2025/09/03 15:27:13 Workload workload-61 completed on executor-cloud-aws-us-east-1-01 (took 3m16.9s)
+2025/09/03 15:27:13 Workload workload-159 completed on executor-cloud-aws-us-east-1-01 (took 1.601s)
+2025/09/03 15:27:15 Workload workload-116 completed on executor-edge-stockholm-01 (took 1m29s)
+2025/09/03 15:27:15 Workload workload-52 completed on executor-hpc-iceland-01 (took 3m37.6s)
+2025/09/03 15:27:17 Workload workload-161 completed on executor-cloud-aws-us-east-1-01 (took 1.1s)
+2025/09/03 15:27:18 Workload workload-162 completed on executor-edge-stockholm-01 (took 800ms)
+2025/09/03 15:27:19 Workload workload-150 completed on executor-edge-stockholm-01 (took 24.999s)
+2025/09/03 15:27:19 Workload workload-141 completed on executor-hpc-iceland-01 (took 43.2s)
+2025/09/03 15:27:19 Workload workload-84 completed on executor-edge-stockholm-01 (took 2m37.5s)
+2025/09/03 15:27:20 Workload workload-37 completed on executor-edge-stockholm-01 (took 4m12.1s)
+2025/09/03 15:27:21 Workload workload-163 completed on executor-cloud-aws-us-east-1-01 (took 1.5s)
+2025/09/03 15:27:21 Workload workload-88 completed on executor-hpc-iceland-01 (took 2m31.7s)
+
+ 15:27:22 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 5m30s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 164
+   Completed: 131, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 36.4%
+     Temperature: 41.5°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 0.0%, Memory: 15.4%, Network: 25.1%
+     Temperature: 64.7°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 0.7%, Network: 26.3%
+     Temperature: 48.6°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:27:22 
+Simulation Stats (Uptime: 5m30s)
+2025/09/03 15:27:22 =================================
+2025/09/03 15:27:22 Workloads: 164 total, 33 active, 131 completed, 0 failed
+2025/09/03 15:27:22 Success Rate: 79.9%
+2025/09/03 15:27:22 Throughput: 0.40 workloads/second
+2025/09/03 15:27:22 
+Executor States:
+2025/09/03 15:27:22   executor-edge-stockholm-01: CPU=17.0%, Mem=20.6%, Net=28.5%, Temp=49.5°C, Healthy=false
+2025/09/03 15:27:22   executor-cloud-aws-us-east-1-01: CPU=40.0%, Mem=15.4%, Net=21.6%, Temp=59.1°C, Healthy=true
+2025/09/03 15:27:22   executor-hpc-iceland-01: CPU=15.0%, Mem=21.0%, Net=23.7%, Temp=47.0°C, Healthy=false
+2025/09/03 15:27:26 Workload workload-144 completed on executor-hpc-iceland-01 (took 44s)
+2025/09/03 15:27:27 Workload workload-166 completed on executor-hpc-iceland-01 (took 1.399s)
+2025/09/03 15:27:29 Workload workload-167 completed on executor-hpc-iceland-01 (took 900ms)
+2025/09/03 15:27:30 Workload workload-59 completed on executor-cloud-aws-us-east-1-01 (took 3m38.5s)
+2025/09/03 15:27:30 Workload workload-168 completed on executor-hpc-iceland-01 (took 799ms)
+2025/09/03 15:27:32 Workload workload-91 completed on executor-hpc-iceland-01 (took 2m35.899s)
+2025/09/03 15:27:32 
+Simulation Stats (Uptime: 5m40s)
+2025/09/03 15:27:32 =================================
+2025/09/03 15:27:32 Workloads: 169 total, 32 active, 137 completed, 0 failed
+2025/09/03 15:27:32 Success Rate: 81.1%
+2025/09/03 15:27:32 Throughput: 0.40 workloads/second
+2025/09/03 15:27:32 
+Executor States:
+2025/09/03 15:27:32   executor-hpc-iceland-01: CPU=0.0%, Mem=12.0%, Net=23.2%, Temp=51.8°C, Healthy=false
+2025/09/03 15:27:32   executor-edge-stockholm-01: CPU=9.0%, Mem=22.0%, Net=30.2%, Temp=50.4°C, Healthy=false
+2025/09/03 15:27:32   executor-cloud-aws-us-east-1-01: CPU=0.0%, Mem=0.0%, Net=24.4%, Temp=60.5°C, Healthy=false
+2025/09/03 15:27:32 Generated 170 workloads...
+2025/09/03 15:27:34 Workload workload-103 completed on executor-hpc-iceland-01 (took 2m14.6s)
+2025/09/03 15:27:35 Workload workload-170 completed on executor-hpc-iceland-01 (took 1.3s)
+2025/09/03 15:27:35 Workload workload-109 completed on executor-cloud-aws-us-east-1-01 (took 2m3.501s)
+2025/09/03 15:27:35 Workload workload-56 completed on executor-edge-stockholm-01 (took 3m49.7s)
+2025/09/03 15:27:36 Workload workload-160 completed on executor-hpc-iceland-01 (took 22.501s)
+
+ 15:27:37 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 5m45s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 172
+   Completed: 142, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 21.5%
+     Temperature: 53.5°C, Active Workloads: 0
+    executor-edge-stockholm-01:
+     CPU: 0.0%, Memory: 4.5%, Network: 33.7%
+     Temperature: 47.4°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 22.7%
+     Temperature: 61.3°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:27:37 Workload workload-123 completed on executor-cloud-aws-us-east-1-01 (took 1m37.799s)
+2025/09/03 15:27:38 Workload workload-76 completed on executor-edge-stockholm-01 (took 3m12.3s)
+2025/09/03 15:27:39 Workload workload-77 completed on executor-cloud-aws-us-east-1-01 (took 3m11.301s)
+2025/09/03 15:27:39 Workload workload-172 completed on executor-cloud-aws-us-east-1-01 (took 1.5s)
+2025/09/03 15:27:42 
+Simulation Stats (Uptime: 5m50s)
+2025/09/03 15:27:42 =================================
+2025/09/03 15:27:42 Workloads: 174 total, 28 active, 146 completed, 0 failed
+2025/09/03 15:27:42 Success Rate: 83.9%
+2025/09/03 15:27:42 Throughput: 0.42 workloads/second
+2025/09/03 15:27:42 
+Executor States:
+2025/09/03 15:27:42   executor-edge-stockholm-01: CPU=0.0%, Mem=9.0%, Net=32.4%, Temp=50.3°C, Healthy=false
+2025/09/03 15:27:42   executor-cloud-aws-us-east-1-01: CPU=0.0%, Mem=0.0%, Net=23.6%, Temp=63.0°C, Healthy=true
+2025/09/03 15:27:42   executor-hpc-iceland-01: CPU=49.0%, Mem=18.7%, Net=16.6%, Temp=68.9°C, Healthy=true
+2025/09/03 15:27:42 Workload workload-174 completed on executor-edge-stockholm-01 (took 400ms)
+2025/09/03 15:27:43 Workload workload-106 completed on executor-cloud-aws-us-east-1-01 (took 2m17.8s)
+2025/09/03 15:27:44 Workload workload-124 completed on executor-cloud-aws-us-east-1-01 (took 1m42.2s)
+2025/09/03 15:27:47 Workload workload-176 completed on executor-edge-stockholm-01 (took 900ms)
+2025/09/03 15:27:49 Workload workload-171 completed on executor-cloud-aws-us-east-1-01 (took 13.8s)
+
+ 15:27:52 - Simulation Status
+2025/09/03 15:27:52 Generated 180 workloads...
+════════════════════════════════
+ CAPE Orchestrator:
+2025/09/03 15:27:52 
+Simulation Stats (Uptime: 6m0s)
+   Uptime: 6m0s
+2025/09/03 15:27:52 =================================
+   Processes: 0 assigned, 0 completed, 0 failed
+2025/09/03 15:27:52 Workloads: 180 total, 29 active, 151 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+2025/09/03 15:27:52 Success Rate: 83.9%
+   Total Workloads: 179
+2025/09/03 15:27:52 Throughput: 0.42 workloads/second
+   Completed: 151, Failed: 0
+2025/09/03 15:27:52 
+Executor States:
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+2025/09/03 15:27:52   executor-edge-stockholm-01: CPU=1.0%, Mem=21.8%, Net=32.1%, Temp=41.0°C, Healthy=false
+    executor-cloud-aws-us-east-1-01:
+2025/09/03 15:27:52   executor-cloud-aws-us-east-1-01: CPU=80.0%, Mem=9.2%, Net=8.1%, Temp=76.8°C, Healthy=true
+     CPU: 0.0%, Memory: 2.3%, Network: 15.0%
+2025/09/03 15:27:52   executor-hpc-iceland-01: CPU=24.0%, Mem=21.4%, Net=25.6%, Temp=53.9°C, Healthy=false
+     Temperature: 78.4°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 41.0%, Memory: 20.1%, Network: 23.6%
+     Temperature: 65.0°C, Active Workloads: 0
+    executor-edge-stockholm-01:
+     CPU: 9.0%, Memory: 21.5%, Network: 31.6%
+     Temperature: 52.6°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:27:56 Workload workload-72 completed on executor-cloud-aws-us-east-1-01 (took 3m38.701s)
+2025/09/03 15:28:02 
+Simulation Stats (Uptime: 6m10s)
+2025/09/03 15:28:02 =================================
+2025/09/03 15:28:02 Workloads: 184 total, 32 active, 152 completed, 0 failed
+2025/09/03 15:28:02 Success Rate: 82.6%
+2025/09/03 15:28:02 Throughput: 0.41 workloads/second
+2025/09/03 15:28:02 
+Executor States:
+2025/09/03 15:28:02   executor-edge-stockholm-01: CPU=-8.0%, Mem=21.9%, Net=33.0%, Temp=41.3°C, Healthy=false
+2025/09/03 15:28:02   executor-cloud-aws-us-east-1-01: CPU=79.0%, Mem=9.0%, Net=18.1%, Temp=73.8°C, Healthy=true
+2025/09/03 15:28:02   executor-hpc-iceland-01: CPU=24.0%, Mem=21.4%, Net=25.6%, Temp=51.1°C, Healthy=false
+2025/09/03 15:28:02 Workload workload-181 completed on executor-cloud-aws-us-east-1-01 (took 6.8s)
+2025/09/03 15:28:03 Workload workload-184 completed on executor-edge-stockholm-01 (took 1.1s)
+2025/09/03 15:28:05 Workload workload-118 completed on executor-hpc-iceland-01 (took 2m15s)
+
+ 15:28:07 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 6m15s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 187
+   Completed: 155, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 0.0%, Memory: 21.9%, Network: 33.2%
+     Temperature: 41.3°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 0.0%, Memory: 3.5%, Network: 21.3%
+     Temperature: 68.5°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 25.6%
+     Temperature: 55.6°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:28:08 Workload workload-187 completed on executor-edge-stockholm-01 (took 499ms)
+2025/09/03 15:28:08 Workload workload-140 completed on executor-edge-stockholm-01 (took 1m34.5s)
+2025/09/03 15:28:09 Workload workload-180 completed on executor-edge-stockholm-01 (took 15.2s)
+2025/09/03 15:28:10 Workload workload-183 completed on executor-cloud-aws-us-east-1-01 (took 10.499s)
+2025/09/03 15:28:11 Workload workload-179 completed on executor-hpc-iceland-01 (took 19.4s)
+2025/09/03 15:28:12 
+Simulation Stats (Uptime: 6m20s)
+2025/09/03 15:28:12 =================================
+2025/09/03 15:28:12 Workloads: 189 total, 29 active, 160 completed, 0 failed
+2025/09/03 15:28:12 Success Rate: 84.7%
+2025/09/03 15:28:12 Throughput: 0.42 workloads/second
+2025/09/03 15:28:12 
+Executor States:
+2025/09/03 15:28:12   executor-edge-stockholm-01: CPU=0.0%, Mem=0.8%, Net=33.7%, Temp=43.1°C, Healthy=false
+2025/09/03 15:28:12   executor-cloud-aws-us-east-1-01: CPU=0.0%, Mem=7.0%, Net=14.4%, Temp=67.0°C, Healthy=true
+2025/09/03 15:28:12   executor-hpc-iceland-01: CPU=0.0%, Mem=18.8%, Net=22.5%, Temp=61.3°C, Healthy=false
+2025/09/03 15:28:12 Generated 190 workloads...
+2025/09/03 15:28:12 Workload workload-142 completed on executor-edge-stockholm-01 (took 1m34.6s)
+2025/09/03 15:28:13 Workload workload-189 completed on executor-edge-stockholm-01 (took 1.3s)
+2025/09/03 15:28:16 Workload workload-157 completed on executor-edge-stockholm-01 (took 1m8.1s)
+2025/09/03 15:28:20 Workload workload-117 completed on executor-hpc-iceland-01 (took 2m32.7s)
+
+ 15:28:22 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 6m30s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 194
+   Completed: 164, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+2025/09/03 15:28:22 
+Simulation Stats (Uptime: 6m30s)
+     CPU: 8.0%, Memory: 17.4%, Network: 20.6%
+     Temperature: 52.2°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 53.0%, Memory: 11.2%, Network: 24.8%
+     Temperature: 63.6°C, Active Workloads: 0
+2025/09/03 15:28:22 =================================
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 21.9%
+     Temperature: 65.7°C, Active Workloads: 0
+2025/09/03 15:28:22 Workloads: 195 total, 31 active, 164 completed, 0 failed
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+2025/09/03 15:28:22 Success Rate: 84.1%
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:28:22 Throughput: 0.42 workloads/second
+2025/09/03 15:28:22 
+Executor States:
+2025/09/03 15:28:22   executor-edge-stockholm-01: CPU=0.0%, Mem=18.7%, Net=25.5%, Temp=47.5°C, Healthy=false
+2025/09/03 15:28:22   executor-cloud-aws-us-east-1-01: CPU=53.0%, Mem=11.2%, Net=24.8%, Temp=67.1°C, Healthy=true
+2025/09/03 15:28:22   executor-hpc-iceland-01: CPU=33.0%, Mem=20.2%, Net=25.4%, Temp=54.5°C, Healthy=false
+2025/09/03 15:28:23 Workload workload-185 completed on executor-cloud-aws-us-east-1-01 (took 19.4s)
+2025/09/03 15:28:24 Workload workload-195 completed on executor-hpc-iceland-01 (took 701ms)
+2025/09/03 15:28:30 Workload workload-156 completed on executor-cloud-aws-us-east-1-01 (took 1m24.1s)
+2025/09/03 15:28:30 Workload workload-198 completed on executor-hpc-iceland-01 (took 300ms)
+2025/09/03 15:28:32 
+Simulation Stats (Uptime: 6m40s)
+2025/09/03 15:28:32 =================================
+2025/09/03 15:28:32 Workloads: 199 total, 31 active, 168 completed, 0 failed
+2025/09/03 15:28:32 Success Rate: 84.4%
+2025/09/03 15:28:32 Throughput: 0.42 workloads/second
+2025/09/03 15:28:32 
+Executor States:
+2025/09/03 15:28:32   executor-edge-stockholm-01: CPU=0.0%, Mem=18.7%, Net=25.5%, Temp=49.2°C, Healthy=false
+2025/09/03 15:28:32   executor-cloud-aws-us-east-1-01: CPU=0.0%, Mem=0.0%, Net=26.6%, Temp=65.3°C, Healthy=true
+2025/09/03 15:28:32   executor-hpc-iceland-01: CPU=13.0%, Mem=20.2%, Net=25.4%, Temp=53.4°C, Healthy=false
+2025/09/03 15:28:32 Generated 200 workloads...
+2025/09/03 15:28:32 Workload workload-196 completed on executor-cloud-aws-us-east-1-01 (took 6.399s)
+2025/09/03 15:28:32 Workload workload-182 completed on executor-cloud-aws-us-east-1-01 (took 34.7s)
+2025/09/03 15:28:35 Workload workload-65 completed on executor-hpc-iceland-01 (took 4m31.6s)
+
+ 15:28:37 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 6m45s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 202
+   Completed: 171, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-cloud-aws-us-east-1-01:
+     CPU: 0.0%, Memory: 5.9%, Network: 24.1%
+     Temperature: 64.4°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 26.6%
+     Temperature: 53.5°C, Active Workloads: 0
+    executor-edge-stockholm-01:
+     CPU: -8.0%, Memory: 19.3%, Network: 26.3%
+     Temperature: 43.2°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:28:37 Workload workload-175 completed on executor-hpc-iceland-01 (took 53.1s)
+2025/09/03 15:28:38 Workload workload-151 completed on executor-hpc-iceland-01 (took 1m42.3s)
+2025/09/03 15:28:39 Workload workload-158 completed on executor-hpc-iceland-01 (took 1m29.199s)
+2025/09/03 15:28:42 
+Simulation Stats (Uptime: 6m50s)
+2025/09/03 15:28:42 =================================
+2025/09/03 15:28:42 Workloads: 204 total, 30 active, 174 completed, 0 failed
+2025/09/03 15:28:42 Success Rate: 85.3%
+2025/09/03 15:28:42 Throughput: 0.42 workloads/second
+2025/09/03 15:28:42 
+Executor States:
+2025/09/03 15:28:42   executor-edge-stockholm-01: CPU=-8.0%, Mem=19.3%, Net=26.3%, Temp=43.7°C, Healthy=false
+2025/09/03 15:28:42   executor-cloud-aws-us-east-1-01: CPU=62.0%, Mem=11.3%, Net=23.8%, Temp=70.6°C, Healthy=true
+2025/09/03 15:28:42   executor-hpc-iceland-01: CPU=0.0%, Mem=0.0%, Net=23.7%, Temp=57.1°C, Healthy=false
+2025/09/03 15:28:42 Workload workload-191 completed on executor-cloud-aws-us-east-1-01 (took 26.499s)
+2025/09/03 15:28:42 Workload workload-201 completed on executor-cloud-aws-us-east-1-01 (took 6.8s)
+2025/09/03 15:28:44 Workload workload-205 completed on executor-edge-stockholm-01 (took 300ms)
+2025/09/03 15:28:47 Workload workload-206 completed on executor-cloud-aws-us-east-1-01 (took 1.4s)
+2025/09/03 15:28:48 Workload workload-207 completed on executor-hpc-iceland-01 (took 500ms)
+
+ 15:28:52 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 7m0s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 209
+   Completed: 179, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: -15.0%, Memory: 23.8%, Network: 36.2%
+     Temperature: 35.7°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 58.0%, Memory: 10.8%, Network: 18.5%
+     Temperature: 73.9°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 19.0%, Memory: 14.3%, Network: 16.3%
+     Temperature: 61.4°C, Active Workloads: 0
+2025/09/03 15:28:52 Generated 210 workloads...
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:28:52 
+Simulation Stats (Uptime: 7m0s)
+2025/09/03 15:28:52 =================================
+2025/09/03 15:28:52 Workloads: 210 total, 31 active, 179 completed, 0 failed
+2025/09/03 15:28:52 Success Rate: 85.2%
+2025/09/03 15:28:52 Throughput: 0.43 workloads/second
+2025/09/03 15:28:52 
+Executor States:
+2025/09/03 15:28:52   executor-edge-stockholm-01: CPU=-15.0%, Mem=23.8%, Net=36.2%, Temp=35.7°C, Healthy=false
+2025/09/03 15:28:52   executor-cloud-aws-us-east-1-01: CPU=58.0%, Mem=10.8%, Net=18.5%, Temp=73.9°C, Healthy=true
+2025/09/03 15:28:52   executor-hpc-iceland-01: CPU=19.0%, Mem=14.3%, Net=16.3%, Temp=61.4°C, Healthy=true
+2025/09/03 15:28:54 Workload workload-188 completed on executor-cloud-aws-us-east-1-01 (took 44.699s)
+2025/09/03 15:29:00 Workload workload-213 completed on executor-edge-stockholm-01 (took 601ms)
+2025/09/03 15:29:02 
+Simulation Stats (Uptime: 7m10s)
+2025/09/03 15:29:02 =================================
+2025/09/03 15:29:02 Workloads: 214 total, 33 active, 181 completed, 0 failed
+2025/09/03 15:29:02 Success Rate: 84.6%
+2025/09/03 15:29:02 Throughput: 0.42 workloads/second
+2025/09/03 15:29:02 
+Executor States:
+2025/09/03 15:29:02   executor-edge-stockholm-01: CPU=0.0%, Mem=24.7%, Net=37.7%, Temp=31.1°C, Healthy=false
+2025/09/03 15:29:02   executor-cloud-aws-us-east-1-01: CPU=70.0%, Mem=9.6%, Net=11.5%, Temp=74.3°C, Healthy=true
+2025/09/03 15:29:02   executor-hpc-iceland-01: CPU=30.0%, Mem=14.4%, Net=18.4%, Temp=60.4°C, Healthy=false
+2025/09/03 15:29:02 Workload workload-214 completed on executor-edge-stockholm-01 (took 300ms)
+2025/09/03 15:29:02 Workload workload-154 completed on executor-edge-stockholm-01 (took 2m0.4s)
+2025/09/03 15:29:05 Workload workload-210 completed on executor-hpc-iceland-01 (took 11.3s)
+2025/09/03 15:29:05 Workload workload-169 completed on executor-edge-stockholm-01 (took 1m33.4s)
+
+ 15:29:07 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 7m15s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 217
+   Completed: 185, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 47.7%
+     Temperature: 31.2°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 90.0%, Memory: 9.6%, Network: 11.5%
+     Temperature: 72.3°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 13.6%, Network: 23.3%
+     Temperature: 56.0°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:29:09 Workload workload-217 completed on executor-hpc-iceland-01 (took 1.501s)
+2025/09/03 15:29:12 
+Simulation Stats (Uptime: 7m20s)
+2025/09/03 15:29:12 =================================
+2025/09/03 15:29:12 Workloads: 219 total, 33 active, 186 completed, 0 failed
+2025/09/03 15:29:12 Success Rate: 84.9%
+2025/09/03 15:29:12 Throughput: 0.42 workloads/second
+2025/09/03 15:29:12 
+Executor States:
+2025/09/03 15:29:12   executor-cloud-aws-us-east-1-01: CPU=54.0%, Mem=10.9%, Net=16.2%, Temp=67.8°C, Healthy=true
+2025/09/03 15:29:12   executor-hpc-iceland-01: CPU=11.0%, Mem=15.3%, Net=21.1%, Temp=60.7°C, Healthy=false
+2025/09/03 15:29:12   executor-edge-stockholm-01: CPU=-7.0%, Mem=22.0%, Net=30.8%, Temp=40.9°C, Healthy=false
+2025/09/03 15:29:12 Generated 220 workloads...
+2025/09/03 15:29:12 Workload workload-219 completed on executor-edge-stockholm-01 (took 400ms)
+2025/09/03 15:29:15 Workload workload-211 completed on executor-cloud-aws-us-east-1-01 (took 19.4s)
+2025/09/03 15:29:16 Workload workload-208 completed on executor-cloud-aws-us-east-1-01 (took 26.1s)
+2025/09/03 15:29:19 Workload workload-222 completed on executor-hpc-iceland-01 (took 1.5s)
+2025/09/03 15:29:20 Workload workload-197 completed on executor-hpc-iceland-01 (took 52.2s)
+
+ 15:29:22 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 7m30s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 224
+   Completed: 191, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-cloud-aws-us-east-1-01:
+     CPU: 56.0%, Memory: 12.6%, Network: 17.9%
+     Temperature: 63.5°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 11.4%, Network: 21.1%
+     Temperature: 52.9°C, Active Workloads: 0
+    executor-edge-stockholm-01:
+     CPU: -14.0%, Memory: 24.5%, Network: 32.0%
+     Temperature: 39.7°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:29:22 
+Simulation Stats (Uptime: 7m30s)
+2025/09/03 15:29:22 =================================
+2025/09/03 15:29:22 Workloads: 225 total, 34 active, 191 completed, 0 failed
+2025/09/03 15:29:22 Success Rate: 84.9%
+2025/09/03 15:29:22 Throughput: 0.42 workloads/second
+2025/09/03 15:29:22 
+Executor States:
+2025/09/03 15:29:22   executor-edge-stockholm-01: CPU=-14.0%, Mem=24.5%, Net=32.0%, Temp=39.7°C, Healthy=false
+2025/09/03 15:29:22   executor-cloud-aws-us-east-1-01: CPU=56.0%, Mem=12.6%, Net=17.9%, Temp=63.5°C, Healthy=true
+2025/09/03 15:29:22   executor-hpc-iceland-01: CPU=0.0%, Mem=11.4%, Net=21.1%, Temp=52.9°C, Healthy=false
+2025/09/03 15:29:24 Workload workload-202 completed on executor-hpc-iceland-01 (took 46.2s)
+2025/09/03 15:29:25 Workload workload-225 completed on executor-cloud-aws-us-east-1-01 (took 1.401s)
+2025/09/03 15:29:29 Workload workload-149 completed on executor-hpc-iceland-01 (took 2m37.7s)
+2025/09/03 15:29:31 Workload workload-228 completed on executor-cloud-aws-us-east-1-01 (took 1.1s)
+2025/09/03 15:29:32 
+Simulation Stats (Uptime: 7m40s)
+2025/09/03 15:29:32 =================================
+2025/09/03 15:29:32 Workloads: 229 total, 34 active, 195 completed, 0 failed
+2025/09/03 15:29:32 Success Rate: 85.2%
+2025/09/03 15:29:32 Throughput: 0.42 workloads/second
+2025/09/03 15:29:32 
+Executor States:
+2025/09/03 15:29:32   executor-edge-stockholm-01: CPU=-31.0%, Mem=25.3%, Net=39.2%, Temp=31.5°C, Healthy=false
+2025/09/03 15:29:32   executor-cloud-aws-us-east-1-01: CPU=36.0%, Mem=12.6%, Net=17.9%, Temp=66.1°C, Healthy=true
+2025/09/03 15:29:32   executor-hpc-iceland-01: CPU=0.0%, Mem=9.5%, Net=19.0%, Temp=62.0°C, Healthy=true
+2025/09/03 15:29:32 Generated 230 workloads...
+2025/09/03 15:29:32 Workload workload-194 completed on executor-edge-stockholm-01 (took 1m10.2s)
+2025/09/03 15:29:32 Workload workload-229 completed on executor-edge-stockholm-01 (took 800ms)
+2025/09/03 15:29:33 Workload workload-192 completed on executor-hpc-iceland-01 (took 1m15.4s)
+
+ 15:29:37 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 7m45s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 232
+   Completed: 198, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 0.0%, Memory: 8.3%, Network: 56.0%
+     Temperature: 30.2°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 56.0%, Memory: 12.6%, Network: 17.9%
+     Temperature: 71.2°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 18.4%
+     Temperature: 62.6°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:29:41 Workload workload-226 completed on executor-edge-stockholm-01 (took 15.001s)
+2025/09/03 15:29:41 Workload workload-233 completed on executor-cloud-aws-us-east-1-01 (took 1.399s)
+2025/09/03 15:29:42 
+Simulation Stats (Uptime: 7m50s)
+2025/09/03 15:29:42 =================================
+2025/09/03 15:29:42 Workloads: 234 total, 34 active, 200 completed, 0 failed
+2025/09/03 15:29:42 Success Rate: 85.5%
+2025/09/03 15:29:42 Throughput: 0.43 workloads/second
+2025/09/03 15:29:42 
+Executor States:
+2025/09/03 15:29:42   executor-edge-stockholm-01: CPU=0.0%, Mem=21.6%, Net=46.9%, Temp=30.9°C, Healthy=false
+2025/09/03 15:29:42   executor-cloud-aws-us-east-1-01: CPU=29.0%, Mem=14.7%, Net=21.9%, Temp=68.7°C, Healthy=true
+2025/09/03 15:29:42   executor-hpc-iceland-01: CPU=47.0%, Mem=13.5%, Net=17.7%, Temp=66.6°C, Healthy=true
+2025/09/03 15:29:44 Workload workload-134 completed on executor-edge-stockholm-01 (took 3m21.899s)
+2025/09/03 15:29:47 Workload workload-231 completed on executor-hpc-iceland-01 (took 11.601s)
+2025/09/03 15:29:49 Workload workload-237 completed on executor-edge-stockholm-01 (took 1.6s)
+2025/09/03 15:29:50 Workload workload-234 completed on executor-hpc-iceland-01 (took 8.1s)
+
+ 15:29:52 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+2025/09/03 15:29:52 Generated 240 workloads...
+   Uptime: 8m0s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 239
+   Completed: 204, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 5.8%, Network: 27.6%
+     Temperature: 60.0°C, Active Workloads: 0
+    executor-edge-stockholm-01:
+     CPU: 0.0%, Memory: 32.5%, Network: 42.6%
+     Temperature: 35.4°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 49.0%, Memory: 14.7%, Network: 21.9%
+     Temperature: 67.6°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:29:52 
+Simulation Stats (Uptime: 8m0s)
+2025/09/03 15:29:52 =================================
+2025/09/03 15:29:52 Workloads: 240 total, 36 active, 204 completed, 0 failed
+2025/09/03 15:29:52 Success Rate: 85.0%
+2025/09/03 15:29:52 Throughput: 0.42 workloads/second
+2025/09/03 15:29:52 
+Executor States:
+2025/09/03 15:29:52   executor-hpc-iceland-01: CPU=47.0%, Mem=13.6%, Net=16.6%, Temp=67.0°C, Healthy=true
+2025/09/03 15:29:52   executor-edge-stockholm-01: CPU=-27.0%, Mem=32.5%, Net=42.6%, Temp=36.5°C, Healthy=false
+2025/09/03 15:29:52   executor-cloud-aws-us-east-1-01: CPU=31.0%, Mem=15.2%, Net=26.0%, Temp=62.2°C, Healthy=false
+2025/09/03 15:29:56 Workload workload-212 completed on executor-hpc-iceland-01 (took 58.3s)
+2025/09/03 15:29:56 Workload workload-232 completed on executor-hpc-iceland-01 (took 18.5s)
+2025/09/03 15:29:57 Workload workload-241 completed on executor-cloud-aws-us-east-1-01 (took 1s)
+2025/09/03 15:29:58 Workload workload-203 completed on executor-edge-stockholm-01 (took 1m18.6s)
+2025/09/03 15:30:02 
+Simulation Stats (Uptime: 8m10s)
+2025/09/03 15:30:02 =================================
+2025/09/03 15:30:02 Workloads: 244 total, 36 active, 208 completed, 0 failed
+2025/09/03 15:30:02 Success Rate: 85.2%
+2025/09/03 15:30:02 Throughput: 0.42 workloads/second
+2025/09/03 15:30:02 
+Executor States:
+2025/09/03 15:30:02   executor-edge-stockholm-01: CPU=0.0%, Mem=0.0%, Net=42.6%, Temp=38.1°C, Healthy=false
+2025/09/03 15:30:02   executor-cloud-aws-us-east-1-01: CPU=9.0%, Mem=15.2%, Net=28.1%, Temp=58.9°C, Healthy=false
+2025/09/03 15:30:02   executor-hpc-iceland-01: CPU=57.0%, Mem=17.6%, Net=14.0%, Temp=69.9°C, Healthy=true
+2025/09/03 15:30:02 Workload workload-244 completed on executor-cloud-aws-us-east-1-01 (took 500ms)
+2025/09/03 15:30:04 Workload workload-242 completed on executor-hpc-iceland-01 (took 6.2s)
+2025/09/03 15:30:05 Workload workload-245 completed on executor-edge-stockholm-01 (took 900ms)
+
+ 15:30:07 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 8m15s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 247
+   Completed: 211, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 14.7%, Network: 22.3%
+     Temperature: 62.6°C, Active Workloads: 0
+    executor-edge-stockholm-01:
+     CPU: 0.0%, Memory: 28.0%, Network: 32.7%
+     Temperature: 33.9°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 9.0%, Memory: 15.2%, Network: 33.3%
+     Temperature: 51.6°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:30:09 Workload workload-177 completed on executor-edge-stockholm-01 (took 2m21.5s)
+2025/09/03 15:30:11 Workload workload-248 completed on executor-cloud-aws-us-east-1-01 (took 1.5s)
+2025/09/03 15:30:12 
+Simulation Stats (Uptime: 8m20s)
+2025/09/03 15:30:12 =================================
+2025/09/03 15:30:12 Workloads: 249 total, 36 active, 213 completed, 0 failed
+2025/09/03 15:30:12 Success Rate: 85.5%
+2025/09/03 15:30:12 Throughput: 0.43 workloads/second
+2025/09/03 15:30:12 
+Executor States:
+2025/09/03 15:30:12   executor-edge-stockholm-01: CPU=0.0%, Mem=24.0%, Net=36.2%, Temp=33.1°C, Healthy=false
+2025/09/03 15:30:12   executor-cloud-aws-us-east-1-01: CPU=11.0%, Mem=15.2%, Net=26.0%, Temp=57.0°C, Healthy=false
+2025/09/03 15:30:12   executor-hpc-iceland-01: CPU=48.0%, Mem=17.9%, Net=15.4%, Temp=68.4°C, Healthy=true
+2025/09/03 15:30:12 Generated 250 workloads...
+2025/09/03 15:30:12 Workload workload-216 completed on executor-cloud-aws-us-east-1-01 (took 1m6.5s)
+2025/09/03 15:30:13 Workload workload-249 completed on executor-edge-stockholm-01 (took 1.199s)
+2025/09/03 15:30:13 Workload workload-239 completed on executor-cloud-aws-us-east-1-01 (took 21.599s)
+2025/09/03 15:30:16 Workload workload-223 completed on executor-edge-stockholm-01 (took 56.6s)
+2025/09/03 15:30:19 Workload workload-252 completed on executor-cloud-aws-us-east-1-01 (took 999ms)
+2025/09/03 15:30:19 Workload workload-250 completed on executor-hpc-iceland-01 (took 5.1s)
+2025/09/03 15:30:20 Workload workload-155 completed on executor-edge-stockholm-01 (took 3m16.401s)
+
+ 15:30:22 - Simulation Status
+2025/09/03 15:30:22 
+Simulation Stats (Uptime: 8m30s)
+════════════════════════════════
+2025/09/03 15:30:22 =================================
+ CAPE Orchestrator:
+2025/09/03 15:30:22 Workloads: 255 total, 35 active, 220 completed, 0 failed
+   Uptime: 8m30s
+2025/09/03 15:30:22 Success Rate: 86.3%
+   Processes: 0 assigned, 0 completed, 0 failed
+2025/09/03 15:30:22 Throughput: 0.43 workloads/second
+2025/09/03 15:30:22 
+Executor States:
+2025/09/03 15:30:22   executor-hpc-iceland-01: CPU=40.0%, Mem=18.8%, Net=16.9%, Temp=61.0°C, Healthy=true
+   CAPE Decisions: 0 (avg time: 0s)
+2025/09/03 15:30:22   executor-edge-stockholm-01: CPU=-12.0%, Mem=29.5%, Net=38.7%, Temp=37.3°C, Healthy=false
+
+  Workload Simulation:
+2025/09/03 15:30:22   executor-cloud-aws-us-east-1-01: CPU=33.0%, Mem=20.0%, Net=24.8%, Temp=53.7°C, Healthy=false
+   Total Workloads: 254
+   Completed: 220, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 0.0%, Memory: 13.6%, Network: 40.1%
+     Temperature: 36.6°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 28.0%, Memory: 13.9%, Network: 19.3%
+     Temperature: 62.5°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 16.3%, Network: 23.5%
+     Temperature: 62.2°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:30:23 Workload workload-227 completed on executor-edge-stockholm-01 (took 55.1s)
+2025/09/03 15:30:26 Workload workload-246 completed on executor-edge-stockholm-01 (took 20.2s)
+2025/09/03 15:30:27 Workload workload-146 completed on executor-edge-stockholm-01 (took 3m41.3s)
+2025/09/03 15:30:27 Workload workload-238 completed on executor-cloud-aws-us-east-1-01 (took 37.801s)
+2025/09/03 15:30:29 Workload workload-257 completed on executor-hpc-iceland-01 (took 900ms)
+2025/09/03 15:30:29 Workload workload-204 completed on executor-hpc-iceland-01 (took 1m47.6s)
+2025/09/03 15:30:29 Workload workload-165 completed on executor-cloud-aws-us-east-1-01 (took 3m5.8s)
+2025/09/03 15:30:32 
+Simulation Stats (Uptime: 8m40s)
+2025/09/03 15:30:32 =================================
+2025/09/03 15:30:32 Workloads: 259 total, 32 active, 227 completed, 0 failed
+2025/09/03 15:30:32 Success Rate: 87.6%
+2025/09/03 15:30:32 Throughput: 0.44 workloads/second
+2025/09/03 15:30:32 
+Executor States:
+2025/09/03 15:30:32   executor-edge-stockholm-01: CPU=0.0%, Mem=2.8%, Net=27.3%, Temp=40.5°C, Healthy=false
+2025/09/03 15:30:32   executor-cloud-aws-us-east-1-01: CPU=0.0%, Mem=0.0%, Net=24.8%, Temp=59.5°C, Healthy=false
+2025/09/03 15:30:32   executor-hpc-iceland-01: CPU=0.0%, Mem=15.4%, Net=16.9%, Temp=62.0°C, Healthy=true
+2025/09/03 15:30:32 Generated 260 workloads...
+2025/09/03 15:30:32 Workload workload-259 completed on executor-edge-stockholm-01 (took 801ms)
+2025/09/03 15:30:35 Workload workload-221 completed on executor-cloud-aws-us-east-1-01 (took 1m19.501s)
+2025/09/03 15:30:36 Workload workload-243 completed on executor-hpc-iceland-01 (took 35.999s)
+2025/09/03 15:30:36 Workload workload-152 completed on executor-edge-stockholm-01 (took 3m38.1s)
+
+ 15:30:37 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 8m45s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 262
+   Completed: 231, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 0.0%, Memory: 20.3%, Network: 25.6%
+     Temperature: 38.4°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 20.4%
+     Temperature: 62.5°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 17.5%, Network: 20.2%
+     Temperature: 62.3°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:30:40 Workload workload-263 completed on executor-edge-stockholm-01 (took 500ms)
+2025/09/03 15:30:42 
+Simulation Stats (Uptime: 8m50s)
+2025/09/03 15:30:42 =================================
+2025/09/03 15:30:42 Workloads: 264 total, 32 active, 232 completed, 0 failed
+2025/09/03 15:30:42 Success Rate: 87.9%
+2025/09/03 15:30:42 Throughput: 0.44 workloads/second
+2025/09/03 15:30:42 
+Executor States:
+2025/09/03 15:30:42   executor-edge-stockholm-01: CPU=0.0%, Mem=25.0%, Net=26.0%, Temp=41.4°C, Healthy=false
+2025/09/03 15:30:42   executor-cloud-aws-us-east-1-01: CPU=49.0%, Mem=16.5%, Net=17.4%, Temp=63.1°C, Healthy=true
+2025/09/03 15:30:42   executor-hpc-iceland-01: CPU=50.0%, Mem=21.3%, Net=18.8%, Temp=68.8°C, Healthy=true
+2025/09/03 15:30:48 Workload workload-200 completed on executor-cloud-aws-us-east-1-01 (took 2m14.6s)
+2025/09/03 15:30:49 Workload workload-193 completed on executor-hpc-iceland-01 (took 2m29.6s)
+
+ 15:30:52 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 9m0s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 269
+   Completed: 234, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: -23.0%, Memory: 26.4%, Network: 28.8%
+     Temperature: 39.1°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 19.5%
+     Temperature: 64.8°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 9.8%, Network: 19.9%
+     Temperature: 65.8°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:30:52 
+Simulation Stats (Uptime: 9m0s)
+2025/09/03 15:30:52 =================================
+2025/09/03 15:30:52 Workloads: 269 total, 35 active, 234 completed, 0 failed
+2025/09/03 15:30:52 Success Rate: 87.0%
+2025/09/03 15:30:52 Throughput: 0.43 workloads/second
+2025/09/03 15:30:52 
+Executor States:
+2025/09/03 15:30:52   executor-edge-stockholm-01: CPU=-23.0%, Mem=26.4%, Net=28.8%, Temp=40.2°C, Healthy=false
+2025/09/03 15:30:52   executor-cloud-aws-us-east-1-01: CPU=33.0%, Mem=17.8%, Net=21.1%, Temp=53.6°C, Healthy=false
+2025/09/03 15:30:52   executor-hpc-iceland-01: CPU=50.0%, Mem=21.3%, Net=18.5%, Temp=65.0°C, Healthy=true
+2025/09/03 15:30:52 Generated 270 workloads...
+2025/09/03 15:30:54 Workload workload-186 completed on executor-edge-stockholm-01 (took 2m47.999s)
+2025/09/03 15:30:56 Workload workload-271 completed on executor-hpc-iceland-01 (took 600ms)
+2025/09/03 15:30:57 Workload workload-164 completed on executor-edge-stockholm-01 (took 3m35.3s)
+2025/09/03 15:30:58 Workload workload-272 completed on executor-hpc-iceland-01 (took 201ms)
+2025/09/03 15:30:59 Workload workload-67 completed on executor-cloud-aws-us-east-1-01 (took 6m51.2s)
+2025/09/03 15:31:01 Workload workload-273 completed on executor-cloud-aws-us-east-1-01 (took 1.2s)
+2025/09/03 15:31:02 
+Simulation Stats (Uptime: 9m10s)
+2025/09/03 15:31:02 =================================
+2025/09/03 15:31:02 Workloads: 274 total, 34 active, 240 completed, 0 failed
+2025/09/03 15:31:02 Success Rate: 87.6%
+2025/09/03 15:31:02 Throughput: 0.44 workloads/second
+2025/09/03 15:31:02 
+Executor States:
+2025/09/03 15:31:02   executor-edge-stockholm-01: CPU=0.0%, Mem=4.4%, Net=41.4%, Temp=32.7°C, Healthy=false
+2025/09/03 15:31:02   executor-cloud-aws-us-east-1-01: CPU=0.0%, Mem=0.0%, Net=21.1%, Temp=54.3°C, Healthy=false
+2025/09/03 15:31:02   executor-hpc-iceland-01: CPU=21.0%, Mem=21.6%, Net=21.3%, Temp=60.7°C, Healthy=true
+2025/09/03 15:31:02 Workload workload-274 completed on executor-cloud-aws-us-east-1-01 (took 600ms)
+2025/09/03 15:31:05 Workload workload-230 completed on executor-cloud-aws-us-east-1-01 (took 1m31s)
+2025/09/03 15:31:05 Workload workload-275 completed on executor-cloud-aws-us-east-1-01 (took 1.399s)
+2025/09/03 15:31:06 Workload workload-266 completed on executor-edge-stockholm-01 (took 20.2s)
+2025/09/03 15:31:06 Workload workload-255 completed on executor-edge-stockholm-01 (took 42.7s)
+
+ 15:31:07 - Simulation Status
+2025/09/03 15:31:07 Workload workload-215 completed on executor-cloud-aws-us-east-1-01 (took 2m3s)
+════════════════════════════════
+2025/09/03 15:31:07 Workload workload-276 completed on executor-cloud-aws-us-east-1-01 (took 1s)
+ CAPE Orchestrator:
+   Uptime: 9m15s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 277
+   Completed: 245, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-cloud-aws-us-east-1-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 19.5%
+     Temperature: 56.3°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 41.0%, Memory: 21.6%, Network: 21.3%
+     Temperature: 60.7°C, Active Workloads: 0
+    executor-edge-stockholm-01:
+     CPU: 0.0%, Memory: 19.2%, Network: 39.7%
+     Temperature: 42.5°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:31:09 Workload workload-277 completed on executor-cloud-aws-us-east-1-01 (took 1.299s)
+2025/09/03 15:31:10 Workload workload-278 completed on executor-edge-stockholm-01 (took 699ms)
+2025/09/03 15:31:12 
+Simulation Stats (Uptime: 9m20s)
+2025/09/03 15:31:12 =================================
+2025/09/03 15:31:12 Workloads: 279 total, 30 active, 249 completed, 0 failed
+2025/09/03 15:31:12 Success Rate: 89.2%
+2025/09/03 15:31:12 Throughput: 0.44 workloads/second
+2025/09/03 15:31:12 
+Executor States:
+2025/09/03 15:31:12   executor-hpc-iceland-01: CPU=41.0%, Mem=21.6%, Net=21.3%, Temp=65.0°C, Healthy=true
+2025/09/03 15:31:12   executor-edge-stockholm-01: CPU=0.0%, Mem=25.4%, Net=37.5%, Temp=42.0°C, Healthy=false
+2025/09/03 15:31:12   executor-cloud-aws-us-east-1-01: CPU=55.0%, Mem=10.7%, Net=14.5%, Temp=70.8°C, Healthy=true
+2025/09/03 15:31:12 Generated 280 workloads...
+2025/09/03 15:31:12 Workload workload-270 completed on executor-hpc-iceland-01 (took 18.001s)
+2025/09/03 15:31:13 Workload workload-190 completed on executor-edge-stockholm-01 (took 2m59.3s)
+2025/09/03 15:31:16 Workload workload-281 completed on executor-cloud-aws-us-east-1-01 (took 199ms)
+2025/09/03 15:31:16 Workload workload-260 completed on executor-edge-stockholm-01 (took 42.3s)
+2025/09/03 15:31:16 Workload workload-127 completed on executor-hpc-iceland-01 (took 5m8.7s)
+2025/09/03 15:31:18 Workload workload-269 completed on executor-edge-stockholm-01 (took 26.1s)
+2025/09/03 15:31:18 Workload workload-282 completed on executor-cloud-aws-us-east-1-01 (took 799ms)
+2025/09/03 15:31:19 Workload workload-279 completed on executor-edge-stockholm-01 (took 7.1s)
+2025/09/03 15:31:21 Workload workload-173 completed on executor-edge-stockholm-01 (took 3m41.4s)
+
+ 15:31:22 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 9m30s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 284
+   Completed: 258, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 38.5%
+     Temperature: 53.8°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 26.0%, Memory: 10.9%, Network: 15.9%
+     Temperature: 63.9°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 57.0%, Memory: 16.6%, Network: 15.9%
+     Temperature: 62.9°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:31:22 
+Simulation Stats (Uptime: 9m30s)
+2025/09/03 15:31:22 =================================
+2025/09/03 15:31:22 Workloads: 284 total, 26 active, 258 completed, 0 failed
+2025/09/03 15:31:22 Success Rate: 90.8%
+2025/09/03 15:31:22 Throughput: 0.45 workloads/second
+2025/09/03 15:31:22 
+Executor States:
+2025/09/03 15:31:22   executor-edge-stockholm-01: CPU=28.0%, Mem=23.1%, Net=22.0%, Temp=57.4°C, Healthy=false
+2025/09/03 15:31:22   executor-cloud-aws-us-east-1-01: CPU=46.0%, Mem=10.9%, Net=15.9%, Temp=63.3°C, Healthy=true
+2025/09/03 15:31:22   executor-hpc-iceland-01: CPU=57.0%, Mem=16.6%, Net=15.9%, Temp=68.2°C, Healthy=true
+2025/09/03 15:31:27 Workload workload-286 completed on executor-cloud-aws-us-east-1-01 (took 1.5s)
+2025/09/03 15:31:28 Workload workload-265 completed on executor-cloud-aws-us-east-1-01 (took 44.1s)
+2025/09/03 15:31:28 Workload workload-178 completed on executor-hpc-iceland-01 (took 3m38.401s)
+2025/09/03 15:31:32 
+Simulation Stats (Uptime: 9m40s)
+2025/09/03 15:31:32 =================================
+2025/09/03 15:31:32 Workloads: 289 total, 28 active, 261 completed, 0 failed
+2025/09/03 15:31:32 Success Rate: 90.3%
+2025/09/03 15:31:32 Throughput: 0.45 workloads/second
+2025/09/03 15:31:32 
+Executor States:
+2025/09/03 15:31:32   executor-edge-stockholm-01: CPU=20.0%, Mem=23.3%, Net=22.4%, Temp=49.6°C, Healthy=false
+2025/09/03 15:31:32   executor-cloud-aws-us-east-1-01: CPU=0.0%, Mem=6.6%, Net=21.1%, Temp=58.6°C, Healthy=false
+2025/09/03 15:31:32   executor-hpc-iceland-01: CPU=0.0%, Mem=0.0%, Net=15.9%, Temp=65.4°C, Healthy=true
+2025/09/03 15:31:32 Generated 290 workloads...
+2025/09/03 15:31:33 Workload workload-251 completed on executor-edge-stockholm-01 (took 1m17.7s)
+2025/09/03 15:31:35 Workload workload-290 completed on executor-cloud-aws-us-east-1-01 (took 1.1s)
+
+ 15:31:37 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 9m45s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 292
+   Completed: 263, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 23.6%
+     Temperature: 51.6°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 17.0%, Memory: 12.2%, Network: 17.8%
+     Temperature: 59.2°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 58.0%, Memory: 19.1%, Network: 16.5%
+     Temperature: 71.4°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:31:41 Workload workload-293 completed on executor-edge-stockholm-01 (took 1s)
+2025/09/03 15:31:42 
+Simulation Stats (Uptime: 9m50s)
+2025/09/03 15:31:42 =================================
+2025/09/03 15:31:42 Workloads: 294 total, 30 active, 264 completed, 0 failed
+2025/09/03 15:31:42 Success Rate: 89.8%
+2025/09/03 15:31:42 Throughput: 0.45 workloads/second
+2025/09/03 15:31:42 
+Executor States:
+2025/09/03 15:31:42   executor-cloud-aws-us-east-1-01: CPU=37.0%, Mem=12.2%, Net=17.8%, Temp=54.8°C, Healthy=true
+2025/09/03 15:31:42   executor-hpc-iceland-01: CPU=58.0%, Mem=19.1%, Net=16.5%, Temp=70.8°C, Healthy=true
+2025/09/03 15:31:42   executor-edge-stockholm-01: CPU=0.0%, Mem=22.6%, Net=20.4%, Temp=47.5°C, Healthy=false
+2025/09/03 15:31:42 Workload workload-209 completed on executor-edge-stockholm-01 (took 2m50.6s)
+2025/09/03 15:31:49 Workload workload-297 completed on executor-edge-stockholm-01 (took 1.2s)
+2025/09/03 15:31:50 Workload workload-280 completed on executor-cloud-aws-us-east-1-01 (took 36.4s)
+2025/09/03 15:31:51 Workload workload-298 completed on executor-cloud-aws-us-east-1-01 (took 1.1s)
+
+ 15:31:52 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 10m0s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 299
+   Completed: 268, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 0.0%, Memory: 21.8%, Network: 19.4%
+     Temperature: 46.5°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 0.0%, Memory: 9.7%, Network: 21.1%
+     Temperature: 51.7°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 70.0%, Memory: 20.3%, Network: 18.3%
+     Temperature: 63.8°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:31:52 
+Simulation Stats (Uptime: 10m0s)
+2025/09/03 15:31:52 =================================
+2025/09/03 15:31:52 Workloads: 299 total, 31 active, 268 completed, 0 failed
+2025/09/03 15:31:52 Success Rate: 89.6%
+2025/09/03 15:31:52 Throughput: 0.45 workloads/second
+2025/09/03 15:31:52 
+Executor States:
+2025/09/03 15:31:52   executor-edge-stockholm-01: CPU=10.0%, Mem=21.8%, Net=19.4%, Temp=45.2°C, Healthy=false
+2025/09/03 15:31:52   executor-cloud-aws-us-east-1-01: CPU=30.0%, Mem=13.5%, Net=19.7%, Temp=53.0°C, Healthy=false
+2025/09/03 15:31:52   executor-hpc-iceland-01: CPU=50.0%, Mem=20.3%, Net=18.3%, Temp=68.0°C, Healthy=true
+2025/09/03 15:31:52 Generated 300 workloads...
+2025/09/03 15:31:52 Workload workload-299 completed on executor-cloud-aws-us-east-1-01 (took 600ms)
+2025/09/03 15:31:58 Workload workload-256 completed on executor-edge-stockholm-01 (took 1m32s)
+2025/09/03 15:31:58 Workload workload-199 completed on executor-edge-stockholm-01 (took 3m26.1s)
+2025/09/03 15:32:02 
+Simulation Stats (Uptime: 10m10s)
+2025/09/03 15:32:02 =================================
+2025/09/03 15:32:02 Workloads: 304 total, 33 active, 271 completed, 0 failed
+2025/09/03 15:32:02 Success Rate: 89.1%
+2025/09/03 15:32:02 Throughput: 0.44 workloads/second
+2025/09/03 15:32:02 
+Executor States:
+2025/09/03 15:32:02   executor-edge-stockholm-01: CPU=0.0%, Mem=0.0%, Net=19.4%, Temp=51.5°C, Healthy=false
+2025/09/03 15:32:02   executor-cloud-aws-us-east-1-01: CPU=22.0%, Mem=14.2%, Net=21.8%, Temp=52.4°C, Healthy=false
+2025/09/03 15:32:02   executor-hpc-iceland-01: CPU=42.0%, Mem=21.9%, Net=20.5%, Temp=63.0°C, Healthy=true
+2025/09/03 15:32:04 Workload workload-287 completed on executor-edge-stockholm-01 (took 36.6s)
+
+ 15:32:07 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 10m15s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 307
+   Completed: 272, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 0.0%, Memory: 16.9%, Network: 20.7%
+     Temperature: 49.8°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 22.0%, Memory: 14.2%, Network: 21.8%
+     Temperature: 49.4°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 34.0%, Memory: 23.4%, Network: 23.1%
+     Temperature: 59.7°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:32:12 
+Simulation Stats (Uptime: 10m20s)
+2025/09/03 15:32:12 =================================
+2025/09/03 15:32:12 Workloads: 309 total, 37 active, 272 completed, 0 failed
+2025/09/03 15:32:12 Success Rate: 88.0%
+2025/09/03 15:32:12 Throughput: 0.44 workloads/second
+2025/09/03 15:32:12 
+Executor States:
+2025/09/03 15:32:12   executor-edge-stockholm-01: CPU=8.0%, Mem=20.8%, Net=21.3%, Temp=47.0°C, Healthy=false
+2025/09/03 15:32:12   executor-cloud-aws-us-east-1-01: CPU=15.0%, Mem=16.4%, Net=23.7%, Temp=54.1°C, Healthy=false
+2025/09/03 15:32:12   executor-hpc-iceland-01: CPU=34.0%, Mem=23.4%, Net=23.1%, Temp=59.5°C, Healthy=false
+2025/09/03 15:32:12 Generated 310 workloads...
+2025/09/03 15:32:16 Workload workload-303 completed on executor-edge-stockholm-01 (took 16.401s)
+2025/09/03 15:32:16 Workload workload-311 completed on executor-cloud-aws-us-east-1-01 (took 499ms)
+2025/09/03 15:32:16 Workload workload-289 completed on executor-cloud-aws-us-east-1-01 (took 44.5s)
+2025/09/03 15:32:20 Workload workload-131 completed on executor-edge-stockholm-01 (took 6m4.5s)
+
+ 15:32:22 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 10m30s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 314
+   Completed: 276, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 20.7%
+     Temperature: 47.7°C, Active Workloads: 0
+2025/09/03 15:32:22 
+Simulation Stats (Uptime: 10m30s)
+    executor-cloud-aws-us-east-1-01:
+     CPU: 9.0%, Memory: 22.3%, Network: 33.5%
+2025/09/03 15:32:22 =================================
+     Temperature: 43.7°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+2025/09/03 15:32:22 Workloads: 315 total, 39 active, 276 completed, 0 failed
+     CPU: 34.0%, Memory: 23.4%, Network: 23.1%
+     Temperature: 56.9°C, Active Workloads: 0
+2025/09/03 15:32:22 Success Rate: 87.6%
+
+ CAPE Algorithm Status:
+2025/09/03 15:32:22 Throughput: 0.44 workloads/second
+   Strategy: hybrid deployment
+2025/09/03 15:32:22 
+Executor States:
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:32:22   executor-edge-stockholm-01: CPU=-0.0%, Mem=23.3%, Net=22.0%, Temp=47.1°C, Healthy=false
+2025/09/03 15:32:22   executor-cloud-aws-us-east-1-01: CPU=9.0%, Mem=22.3%, Net=33.5%, Temp=52.8°C, Healthy=false
+2025/09/03 15:32:22   executor-hpc-iceland-01: CPU=19.0%, Mem=26.9%, Net=25.9%, Temp=55.6°C, Healthy=false
+2025/09/03 15:32:24 Workload workload-315 completed on executor-edge-stockholm-01 (took 200ms)
+2025/09/03 15:32:27 Workload workload-316 completed on executor-hpc-iceland-01 (took 1.101s)
+2025/09/03 15:32:29 Workload workload-302 completed on executor-edge-stockholm-01 (took 31.201s)
+2025/09/03 15:32:32 Workload workload-220 completed on executor-cloud-aws-us-east-1-01 (took 3m17.9s)
+2025/09/03 15:32:32 
+Simulation Stats (Uptime: 10m40s)
+2025/09/03 15:32:32 =================================
+2025/09/03 15:32:32 Workloads: 319 total, 39 active, 280 completed, 0 failed
+2025/09/03 15:32:32 Success Rate: 87.8%
+2025/09/03 15:32:32 Throughput: 0.44 workloads/second
+2025/09/03 15:32:32 
+Executor States:
+2025/09/03 15:32:32   executor-cloud-aws-us-east-1-01: CPU=0.0%, Mem=11.0%, Net=33.5%, Temp=47.7°C, Healthy=false
+2025/09/03 15:32:32   executor-hpc-iceland-01: CPU=17.0%, Mem=26.8%, Net=28.2%, Temp=55.1°C, Healthy=false
+2025/09/03 15:32:32   executor-edge-stockholm-01: CPU=0.0%, Mem=21.7%, Net=22.0%, Temp=41.4°C, Healthy=false
+2025/09/03 15:32:32 Generated 320 workloads...
+2025/09/03 15:32:33 Workload workload-319 completed on executor-hpc-iceland-01 (took 1.3s)
+2025/09/03 15:32:33 Workload workload-247 completed on executor-hpc-iceland-01 (took 2m25.4s)
+2025/09/03 15:32:34 Workload workload-129 completed on executor-edge-stockholm-01 (took 6m22.3s)
+2025/09/03 15:32:35 Workload workload-320 completed on executor-cloud-aws-us-east-1-01 (took 1s)
+2025/09/03 15:32:37 Workload workload-321 completed on executor-cloud-aws-us-east-1-01 (took 900ms)
+
+ 15:32:37 - Simulation Status
+════════════════════════════════
+ CAPE Orchestrator:
+   Uptime: 10m45s
+   Processes: 0 assigned, 0 completed, 0 failed
+   CAPE Decisions: 0 (avg time: 0s)
+
+  Workload Simulation:
+   Total Workloads: 322
+   Completed: 285, Failed: 0
+   Throughput: 0.00 workloads/second
+
+ Executor States:
+    executor-edge-stockholm-01:
+     CPU: 0.0%, Memory: 0.0%, Network: 21.3%
+     Temperature: 50.8°C, Active Workloads: 0
+    executor-cloud-aws-us-east-1-01:
+     CPU: 0.0%, Memory: 23.2%, Network: 34.7%
+     Temperature: 51.7°C, Active Workloads: 0
+    executor-hpc-iceland-01:
+     CPU: 0.0%, Memory: 13.4%, Network: 36.4%
+     Temperature: 47.6°C, Active Workloads: 0
+
+ CAPE Algorithm Status:
+   Strategy: hybrid deployment
+   Data Gravity Factor: 0.70
+   Learning Rate: 0.001
+2025/09/03 15:32:39 Workload workload-224 completed on executor-hpc-iceland-01 (took 3m16.9s)
+2025/09/03 15:32:40 Workload workload-323 completed on executor-hpc-iceland-01 (took 800ms)
+2025/09/03 15:32:42 
+Simulation Stats (Uptime: 10m50s)
+2025/09/03 15:32:42 =================================
+2025/09/03 15:32:42 Workloads: 324 total, 37 active, 287 completed, 0 failed
+2025/09/03 15:32:42 Success Rate: 88.6%
+2025/09/03 15:32:42 Throughput: 0.44 workloads/second
+2025/09/03 15:32:42 
+Executor States:
+2025/09/03 15:32:42   executor-edge-stockholm-01: CPU=16.0%, Mem=18.5%, Net=19.2%, Temp=48.7°C, Healthy=false
+2025/09/03 15:32:42   executor-cloud-aws-us-east-1-01: CPU=9.0%, Mem=23.2%, Net=34.7%, Temp=44.7°C, Healthy=false
+2025/09/03 15:32:42   executor-hpc-iceland-01: CPU=0.0%, Mem=22.9%, Net=31.7%, Temp=56.4°C, Healthy=false
+2025/09/03 15:32:43 Workload workload-268 completed on executor-cloud-aws-us-east-1-01 (took 1m53.2s)
+2025/09/03 15:32:43 Workload workload-324 completed on executor-cloud-aws-us-east-1-01 (took 1.2s)
+2025/09/03 15:32:45 Workload workload-325 completed on executor-hpc-iceland-01 (took 1.5s)
+
+ Received shutdown signal, stopping simulation...
+
+  Stopping simulation...
+2025/09/03 15:32:46 Stopping Compute Workload Simulator...
+2025/09/03 15:32:46 
+Final Simulation Results
+2025/09/03 15:32:46 ========================
+2025/09/03 15:32:46 Total Runtime: 10m54s
+2025/09/03 15:32:46 Workloads Generated: 327
+2025/09/03 15:32:46 Workloads Completed: 290
+2025/09/03 15:32:46 Workloads Failed: 0
+2025/09/03 15:32:46 Overall Success Rate: 88.7%
+2025/09/03 15:32:46 Average Throughput: 0.44 workloads/second
+2025/09/03 15:32:46 Stopping Zero-Hardcode CAPE Orchestrator...
+2025/09/03 15:32:46 Zero-Hardcode CAPE Orchestrator stopped
+ Compute simulation completed!

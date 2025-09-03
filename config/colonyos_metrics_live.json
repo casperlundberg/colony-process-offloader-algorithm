@@ -1,0 +1,296 @@
+{
+  "timestamp": "2025-09-03T15:01:00Z",
+  "colony_statistics": {
+    "colonies": 1,
+    "executors": 15,
+    "processes": {
+      "waiting": 45,
+      "running": 12,
+      "successful": 2847,
+      "failed": 18
+    },
+    "workflows": {
+      "waiting": 8,
+      "running": 3,
+      "successful": 289,
+      "failed": 2
+    }
+  },
+  "prometheus_metrics": {
+    "colonies_server_colonies": 1.0,
+    "colonies_server_executors": 15.0,
+    "colonies_server_processes_waiting": 45.0,
+    "colonies_server_processes_running": 12.0,
+    "colonies_server_processes_successful": 2847.0,
+    "colonies_server_processes_failed": 18.0,
+    "colonies_server_workflows_waiting": 8.0,
+    "colonies_server_workflows_running": 3.0,
+    "colonies_server_workflows_successful": 289.0,
+    "colonies_server_workflows_failed": 2.0,
+    "colonies_server_process_submission_rate_1m": 25.5,
+    "colonies_server_process_completion_rate_1m": 23.8,
+    "colonies_server_avg_queue_time_seconds": 8.2,
+    "colonies_server_avg_execution_time_seconds": 45.6,
+    "colonies_server_peak_concurrent_processes": 18,
+    "colonies_server_resource_pressure": 0.78
+  },
+  "system_health": {
+    "server_uptime_seconds": 1248932,
+    "memory_usage_bytes": 3221225472,
+    "cpu_usage_percent": 67.8,
+    "active_connections": 67,
+    "avg_process_queue_time_ms": 8200,
+    "avg_process_execution_time_ms": 45600,
+    "last_health_check": "2025-09-03T15:00:55Z",
+    "load_spike_detected": true,
+    "load_spike_start": "2025-09-03T14:45:00Z",
+    "current_load_factor": 2.1
+  },
+  "resource_utilization": {
+    "total_capacity": {
+      "cpu_millicores": 64000,
+      "memory_bytes": 274877906944,
+      "storage_bytes": 2748779069440,
+      "gpu_count": 12
+    },
+    "allocated_capacity": {
+      "cpu_millicores": 49800,
+      "memory_bytes": 214748364800,
+      "storage_bytes": 1649267441664,
+      "gpu_count": 9
+    },
+    "available_capacity": {
+      "cpu_millicores": 14200,
+      "memory_bytes": 60129542144,
+      "storage_bytes": 1099511627776,
+      "gpu_count": 3
+    },
+    "utilization_percentages": {
+      "cpu": 77.8,
+      "memory": 78.2,
+      "storage": 60.0,
+      "gpu": 75.0
+    }
+  },
+  "executors": [
+    {
+      "executor_id": "exec-edge-stockholm-01",
+      "executor_name": "edge-stockholm-01",
+      "executor_type": "edge",
+      "colony_name": "production-colony",
+      "state": 1,
+      "commission_time": "2025-09-02T08:30:00Z",
+      "last_heard_from": "2025-09-03T15:00:58Z",
+      "location": {
+        "longitude": 18.0686,
+        "latitude": 59.3293,
+        "description": "Stockholm Edge Node"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "Intel Xeon E-2174G",
+          "cpu": "2500m",
+          "memory": "16Gi",
+          "storage": "1Ti",
+          "gpu": null
+        },
+        "software": {
+          "name": "colonyos/edge:v2.1.0",
+          "type": "container",
+          "version": "v2.1.0"
+        }
+      },
+      "current_utilization": {
+        "cpu_usage": 0.85,
+        "memory_usage": 0.72,
+        "disk_usage": 0.45,
+        "network_usage": 0.68,
+        "temperature": 67.5,
+        "active_processes": 4
+      }
+    },
+    {
+      "executor_id": "exec-cloud-aws-us-east-01",
+      "executor_name": "cloud-aws-us-east-01", 
+      "executor_type": "cloud",
+      "colony_name": "production-colony",
+      "state": 1,
+      "commission_time": "2025-09-01T12:00:00Z",
+      "last_heard_from": "2025-09-03T15:00:59Z",
+      "location": {
+        "longitude": -77.0369,
+        "latitude": 38.9072,
+        "description": "AWS us-east-1"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "AWS c6i.4xlarge",
+          "cpu": "8000m",
+          "memory": "32Gi",
+          "storage": "500Gi",
+          "gpu": null
+        },
+        "software": {
+          "name": "colonyos/cloud:v2.1.0",
+          "type": "k8s",
+          "version": "v2.1.0"
+        }
+      },
+      "current_utilization": {
+        "cpu_usage": 0.65,
+        "memory_usage": 0.58,
+        "disk_usage": 0.35,
+        "network_usage": 0.42,
+        "temperature": 52.3,
+        "active_processes": 3
+      }
+    },
+    {
+      "executor_id": "exec-ml-iceland-gpu-01",
+      "executor_name": "ml-iceland-gpu-01",
+      "executor_type": "ml",
+      "colony_name": "production-colony",
+      "state": 1,
+      "commission_time": "2025-08-28T16:45:00Z",
+      "last_heard_from": "2025-09-03T15:00:57Z",
+      "location": {
+        "longitude": -21.9426,
+        "latitude": 64.1466,
+        "description": "Iceland GPU Datacenter"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "AMD EPYC 7763",
+          "cpu": "6000m",
+          "memory": "128Gi",
+          "storage": "4Ti",
+          "gpu": {
+            "name": "nvidia_rtx_4090",
+            "count": 4,
+            "memory_per_gpu": "24Gi"
+          }
+        },
+        "software": {
+          "name": "colonyos/ml:v3.2.0",
+          "type": "container",
+          "version": "v3.2.0"
+        }
+      },
+      "current_utilization": {
+        "cpu_usage": 0.89,
+        "memory_usage": 0.91,
+        "disk_usage": 0.67,
+        "network_usage": 0.23,
+        "gpu_usage": 0.94,
+        "temperature": 78.9,
+        "active_processes": 2
+      }
+    }
+  ],
+  "queued_processes": [
+    {
+      "process_id": "proc-spike-ml-001",
+      "func_name": "ml-training",
+      "executor_type": "ml",
+      "priority": 9,
+      "submission_time": "2025-09-03T14:58:30Z",
+      "estimated_duration": "00:45:00",
+      "resource_hints": {
+        "cpu_intensive": true,
+        "memory_intensive": true,
+        "gpu_required": true,
+        "latency_sensitive": false
+      },
+      "data_requirements": {
+        "input_size_gb": 15.5,
+        "output_size_gb": 2.3,
+        "data_locality": "cloud"
+      }
+    },
+    {
+      "process_id": "proc-spike-compute-002", 
+      "func_name": "data-processing",
+      "executor_type": "cloud",
+      "priority": 7,
+      "submission_time": "2025-09-03T14:59:15Z",
+      "estimated_duration": "00:12:00",
+      "resource_hints": {
+        "cpu_intensive": true,
+        "memory_intensive": false,
+        "latency_sensitive": false,
+        "cost_sensitive": true
+      },
+      "data_requirements": {
+        "input_size_gb": 8.2,
+        "output_size_gb": 1.1,
+        "data_locality": "cloud"
+      }
+    },
+    {
+      "process_id": "proc-spike-edge-003",
+      "func_name": "real-time-analysis",
+      "executor_type": "edge",
+      "priority": 8,
+      "submission_time": "2025-09-03T15:00:45Z",
+      "estimated_duration": "00:03:00",
+      "resource_hints": {
+        "latency_sensitive": true,
+        "cpu_intensive": false,
+        "memory_intensive": false
+      },
+      "data_requirements": {
+        "input_size_gb": 0.1,
+        "output_size_gb": 0.05,
+        "data_locality": "edge"
+      }
+    }
+  ],
+  "historical_trends": {
+    "last_15_minutes": {
+      "avg_processes_per_minute": 8.3,
+      "peak_processes_per_minute": 14,
+      "avg_queue_time_seconds": 6.8,
+      "success_rate": 0.994
+    },
+    "last_hour": {
+      "avg_processes_per_minute": 5.7,
+      "peak_processes_per_minute": 14,
+      "avg_queue_time_seconds": 4.2,
+      "success_rate": 0.998,
+      "load_spike_events": 1
+    },
+    "capacity_predictions": {
+      "next_15_minutes": {
+        "predicted_load_factor": 1.8,
+        "confidence": 0.87,
+        "recommendation": "scale_up_edge_nodes"
+      },
+      "next_hour": {
+        "predicted_load_factor": 1.2,
+        "confidence": 0.92,
+        "recommendation": "normal_operations"
+      }
+    }
+  },
+  "performance_metrics": {
+    "cape_algorithm": {
+      "decisions_per_minute": 12.5,
+      "avg_decision_time_microseconds": 78.3,
+      "strategy_distribution": {
+        "latency_first": 0.35,
+        "cost_optimal": 0.25,
+        "data_local": 0.20,
+        "balanced": 0.15,
+        "green_compute": 0.05
+      },
+      "adaptation_cycles_completed": 47,
+      "learning_convergence": 0.89
+    },
+    "system_efficiency": {
+      "resource_utilization_score": 0.78,
+      "cost_efficiency_score": 0.85,
+      "latency_performance_score": 0.91,
+      "energy_efficiency_score": 0.73
+    }
+  }
+}

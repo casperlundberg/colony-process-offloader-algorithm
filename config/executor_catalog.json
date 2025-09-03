@@ -1,0 +1,350 @@
+{
+  "_comment": "CAPE Executor Catalog - Templates for autoscaling decisions",
+  "_structure": {
+    "spec": "Standard ColonyOS executor.json specification (what ColonyOS sees)",
+    "config": "CAPE-specific human configuration (how CAPE should use this executor)"
+  },
+  
+  "templates": {
+    "ml-small": {
+      "template_id": "ml-small",
+      "name": "ML Small Instance",
+      "description": "Small ML executor for lightweight inference tasks",
+      
+      "spec": {
+        "_comment": "Standard ColonyOS executor.json specification",
+        "executorname": "ml-executor-small",
+        "executortype": "ml",
+        "location": {
+          "long": -21.9426,
+          "lat": 64.1466,
+          "desc": "Iceland Datacenter"
+        },
+        "capabilities": {
+          "hardware": {
+            "model": "Intel Xeon E-2174G",
+            "cpu": "2000m",
+            "mem": "8Gi",
+            "storage": "100Gi",
+            "gpu": {
+              "name": "nvidia_rtx_3060",
+              "count": 1
+            }
+          },
+          "software": {
+            "name": "colonyos/ml:v3.1.0",
+            "type": "container",
+            "version": "v3.1.0"
+          }
+        }
+      },
+      
+      "config": {
+        "_comment": "CAPE-specific human configuration for autoscaling decisions",
+        "deployment": {
+          "cost_to_deploy": 50.0,
+          "operational_cost_per_hour": 0.8,
+          "deployment_time_minutes": 2,
+          "shutdown_time_seconds": 30,
+          "min_instances": 0,
+          "max_instances": 10
+        },
+        "optimization_weights": {
+          "latency_weight": 0.4,
+          "cost_weight": 0.3,
+          "throughput_weight": 0.1,
+          "energy_weight": 0.1,
+          "data_gravity_weight": 0.5,
+          "network_weight": 0.2,
+          "cpu_preference": 0.3,
+          "memory_preference": 0.2,
+          "gpu_preference": 0.4,
+          "storage_preference": 0.1,
+          "scalability_weight": 0.8,
+          "reliability_weight": 0.7
+        },
+        "placement_preferences": {
+          "preferred_regions": ["eu-north-1", "eu-west-1"],
+          "data_affinities": ["ml-models", "inference-data"],
+          "avoid_regions": ["us-gov-west-1"],
+          "network_requirements": {
+            "min_bandwidth_mbps": 100.0,
+            "max_latency_ms": 50.0,
+            "requires_low_jitter": true
+          }
+        }
+      }
+    },
+    
+    "ml-large": {
+      "template_id": "ml-large",
+      "name": "ML Large Instance",
+      "description": "High-performance ML executor for training and heavy inference",
+      
+      "spec": {
+        "_comment": "Standard ColonyOS executor.json specification",
+        "executorname": "ml-executor-large",
+        "executortype": "ml",
+        "location": {
+          "long": -21.9426,
+          "lat": 64.1466,
+          "desc": "Iceland GPU Farm"
+        },
+        "capabilities": {
+          "hardware": {
+            "model": "AMD EPYC 7763",
+            "cpu": "8000m",
+            "mem": "64Gi",
+            "storage": "2Ti",
+            "gpu": {
+              "name": "nvidia_rtx_4090",
+              "count": 4
+            }
+          },
+          "software": {
+            "name": "colonyos/ml:v3.2.0",
+            "type": "container",
+            "version": "v3.2.0"
+          }
+        }
+      },
+      
+      "config": {
+        "_comment": "CAPE-specific human configuration for autoscaling decisions",
+        "deployment": {
+          "cost_to_deploy": 200.0,
+          "operational_cost_per_hour": 4.5,
+          "deployment_time_minutes": 5,
+          "shutdown_time_seconds": 120,
+          "min_instances": 0,
+          "max_instances": 3
+        },
+        "optimization_weights": {
+          "latency_weight": 0.2,
+          "cost_weight": 0.1,
+          "throughput_weight": 0.5,
+          "energy_weight": 0.1,
+          "data_gravity_weight": 0.8,
+          "network_weight": 0.1,
+          "cpu_preference": 0.2,
+          "memory_preference": 0.3,
+          "gpu_preference": 0.5,
+          "storage_preference": 0.3,
+          "scalability_weight": 0.6,
+          "reliability_weight": 0.9
+        },
+        "placement_preferences": {
+          "preferred_regions": ["eu-north-1"],
+          "data_affinities": ["training-datasets", "large-models", "research-data"],
+          "avoid_regions": ["us-gov-west-1", "ap-southeast-1"],
+          "network_requirements": {
+            "min_bandwidth_mbps": 1000.0,
+            "max_latency_ms": 100.0,
+            "requires_low_jitter": false
+          }
+        }
+      }
+    },
+    
+    "edge-fast": {
+      "template_id": "edge-fast",
+      "name": "Edge Fast Response",
+      "description": "Ultra-low latency edge executor for real-time processing",
+      
+      "spec": {
+        "_comment": "Standard ColonyOS executor.json specification",
+        "executorname": "edge-executor-fast",
+        "executortype": "edge",
+        "location": {
+          "long": 18.0686,
+          "lat": 59.3293,
+          "desc": "Stockholm Edge Node"
+        },
+        "capabilities": {
+          "hardware": {
+            "model": "Intel Core i7-12700K",
+            "cpu": "3000m",
+            "mem": "16Gi",
+            "storage": "500Gi"
+          },
+          "software": {
+            "name": "colonyos/edge:v2.0.0",
+            "type": "container",
+            "version": "v2.0.0"
+          }
+        }
+      },
+      
+      "config": {
+        "_comment": "CAPE-specific human configuration for autoscaling decisions",
+        "deployment": {
+          "cost_to_deploy": 30.0,
+          "operational_cost_per_hour": 0.5,
+          "deployment_time_minutes": 1,
+          "shutdown_time_seconds": 15,
+          "min_instances": 1,
+          "max_instances": 20
+        },
+        "optimization_weights": {
+          "latency_weight": 0.7,
+          "cost_weight": 0.1,
+          "throughput_weight": 0.1,
+          "energy_weight": 0.2,
+          "data_gravity_weight": 0.3,
+          "network_weight": 0.6,
+          "cpu_preference": 0.4,
+          "memory_preference": 0.2,
+          "gpu_preference": 0.0,
+          "storage_preference": 0.2,
+          "scalability_weight": 0.9,
+          "reliability_weight": 0.8
+        },
+        "placement_preferences": {
+          "preferred_regions": ["eu-north-stockholm", "us-east-nyc", "ap-southeast-singapore"],
+          "data_affinities": ["sensor-data", "real-time-streams", "iot-data"],
+          "avoid_regions": ["us-gov-west-1"],
+          "network_requirements": {
+            "min_bandwidth_mbps": 200.0,
+            "max_latency_ms": 10.0,
+            "requires_low_jitter": true
+          }
+        }
+      }
+    },
+    
+    "cloud-standard": {
+      "template_id": "cloud-standard",
+      "name": "Cloud Standard",
+      "description": "Cost-optimized cloud executor for batch processing",
+      
+      "spec": {
+        "_comment": "Standard ColonyOS executor.json specification",
+        "executorname": "cloud-executor-standard",
+        "executortype": "cloud",
+        "location": {
+          "long": -77.0369,
+          "lat": 38.9072,
+          "desc": "AWS us-east-1"
+        },
+        "capabilities": {
+          "hardware": {
+            "model": "AWS c6i.2xlarge",
+            "cpu": "4000m",
+            "mem": "16Gi",
+            "storage": "200Gi"
+          },
+          "software": {
+            "name": "colonyos/cloud:v2.1.0",
+            "type": "k8s",
+            "version": "v2.1.0"
+          }
+        }
+      },
+      
+      "config": {
+        "_comment": "CAPE-specific human configuration for autoscaling decisions",
+        "deployment": {
+          "cost_to_deploy": 20.0,
+          "operational_cost_per_hour": 0.3,
+          "deployment_time_minutes": 3,
+          "shutdown_time_seconds": 60,
+          "min_instances": 0,
+          "max_instances": 50
+        },
+        "optimization_weights": {
+          "latency_weight": 0.1,
+          "cost_weight": 0.6,
+          "throughput_weight": 0.2,
+          "energy_weight": 0.1,
+          "data_gravity_weight": 0.4,
+          "network_weight": 0.3,
+          "cpu_preference": 0.4,
+          "memory_preference": 0.3,
+          "gpu_preference": 0.0,
+          "storage_preference": 0.2,
+          "scalability_weight": 0.9,
+          "reliability_weight": 0.7
+        },
+        "placement_preferences": {
+          "preferred_regions": ["us-east-1", "us-west-2", "eu-west-1"],
+          "data_affinities": ["batch-data", "archives", "logs", "backups"],
+          "avoid_regions": ["us-gov-west-1", "cn-north-1"],
+          "network_requirements": {
+            "min_bandwidth_mbps": 500.0,
+            "max_latency_ms": 200.0,
+            "requires_low_jitter": false
+          }
+        }
+      }
+    },
+    
+    "cloud-compute": {
+      "template_id": "cloud-compute",
+      "name": "Cloud High Compute",
+      "description": "High CPU cloud executor for intensive computations",
+      
+      "spec": {
+        "_comment": "Standard ColonyOS executor.json specification",
+        "executorname": "cloud-executor-compute",
+        "executortype": "cloud",
+        "location": {
+          "long": -77.0369,
+          "lat": 38.9072,
+          "desc": "AWS us-east-1"
+        },
+        "capabilities": {
+          "hardware": {
+            "model": "AWS c6i.8xlarge",
+            "cpu": "16000m",
+            "mem": "64Gi",
+            "storage": "500Gi"
+          },
+          "software": {
+            "name": "colonyos/cloud:v2.1.0",
+            "type": "k8s",
+            "version": "v2.1.0"
+          }
+        }
+      },
+      
+      "config": {
+        "_comment": "CAPE-specific human configuration for autoscaling decisions",
+        "deployment": {
+          "cost_to_deploy": 80.0,
+          "operational_cost_per_hour": 1.2,
+          "deployment_time_minutes": 4,
+          "shutdown_time_seconds": 120,
+          "min_instances": 0,
+          "max_instances": 10
+        },
+        "optimization_weights": {
+          "latency_weight": 0.2,
+          "cost_weight": 0.3,
+          "throughput_weight": 0.4,
+          "energy_weight": 0.1,
+          "data_gravity_weight": 0.6,
+          "network_weight": 0.2,
+          "cpu_preference": 0.6,
+          "memory_preference": 0.3,
+          "gpu_preference": 0.0,
+          "storage_preference": 0.1,
+          "scalability_weight": 0.8,
+          "reliability_weight": 0.8
+        },
+        "placement_preferences": {
+          "preferred_regions": ["us-east-1", "eu-west-1"],
+          "data_affinities": ["computation-data", "scientific-datasets", "simulations"],
+          "avoid_regions": ["us-gov-west-1"],
+          "network_requirements": {
+            "min_bandwidth_mbps": 1000.0,
+            "max_latency_ms": 100.0,
+            "requires_low_jitter": false
+          }
+        }
+      }
+    }
+  },
+  
+  "version": "1.0.0",
+  "updated_at": "2025-09-03T15:15:00Z"
+}

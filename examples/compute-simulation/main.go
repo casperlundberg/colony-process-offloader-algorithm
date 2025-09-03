@@ -32,7 +32,7 @@ func main() {
 
 	// Configuration file paths
 	humanConfigPath := "./config/human_config.json"
-	metricsDataPath := "./config/colonyos_metrics.json"
+	metricsDataPath := "./config/colonyos_metrics_live.json"
 	simulatorConfigPath := "./config/simulator_config.json"
 
 	// Load simulator configuration
