@@ -13,6 +13,7 @@ const (
 	PRIVATE_CLOUD TargetType = "private_cloud"
 	PUBLIC_CLOUD TargetType = "public_cloud"
 	HYBRID_CLOUD TargetType = "hybrid_cloud"
+	HPC_CLUSTER  TargetType = "hpc_cluster"
 	FOG          TargetType = "fog"
 )
 
@@ -187,6 +188,22 @@ type Utilization float64
 // IsValid checks if a Utilization is valid
 func (u Utilization) IsValid() bool {
 	return u >= 0.0 && u <= 1.0
+}
+
+// DetailedUtilization represents detailed resource utilization metrics
+type DetailedUtilization struct {
+	ComputeUsage float64 `json:"compute_usage"` // CPU utilization (0.0-1.0)
+	MemoryUsage  float64 `json:"memory_usage"`  // Memory utilization (0.0-1.0)
+	DiskUsage    float64 `json:"disk_usage"`    // Disk utilization (0.0-1.0)
+	NetworkUsage float64 `json:"network_usage"` // Network utilization (0.0-1.0)
+}
+
+// IsValid checks if a DetailedUtilization is valid
+func (u DetailedUtilization) IsValid() bool {
+	return u.ComputeUsage >= 0.0 && u.ComputeUsage <= 1.0 &&
+		   u.MemoryUsage >= 0.0 && u.MemoryUsage <= 1.0 &&
+		   u.DiskUsage >= 0.0 && u.DiskUsage <= 1.0 &&
+		   u.NetworkUsage >= 0.0 && u.NetworkUsage <= 1.0
 }
 
 // Score represents a normalized score (0.0-1.0)

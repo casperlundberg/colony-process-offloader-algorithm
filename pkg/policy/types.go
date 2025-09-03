@@ -57,8 +57,25 @@ type PolicyEvaluation struct {
 	Allowed          bool                    `json:"allowed"`
 	ViolatedRules    []PolicyRule            `json:"violated_rules"`
 	AppliedRules     []PolicyRule            `json:"applied_rules"`
+	HardViolations   []PolicyViolation       `json:"hard_violations"`
+	SoftViolations   []PolicyViolation       `json:"soft_violations"`
 	ScoreAdjustment  float64                 `json:"score_adjustment"`
 	EvaluationTime   time.Duration           `json:"evaluation_time"`
+}
+
+// HasHardViolations returns true if there are hard constraint violations
+func (pe PolicyEvaluation) HasHardViolations() bool {
+	return len(pe.HardViolations) > 0
+}
+
+// GetHardViolationCount returns the number of hard violations
+func (pe PolicyEvaluation) GetHardViolationCount() int {
+	return len(pe.HardViolations)
+}
+
+// GetSoftViolationCount returns the number of soft violations
+func (pe PolicyEvaluation) GetSoftViolationCount() int {
+	return len(pe.SoftViolations)
 }
 
 // SafetyConstraints defines non-negotiable safety requirements

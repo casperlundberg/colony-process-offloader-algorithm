@@ -6,286 +6,251 @@ import (
 	"time"
 
 	"github.com/casperlundberg/colony-process-offloader-algorithm/pkg/algorithm"
-	"github.com/casperlundberg/colony-process-offloader-algorithm/pkg/decision"
-	"github.com/casperlundberg/colony-process-offloader-algorithm/pkg/learning"
 	"github.com/casperlundberg/colony-process-offloader-algorithm/pkg/models"
-	"github.com/casperlundberg/colony-process-offloader-algorithm/pkg/policy"
 )
 
 func main() {
-	fmt.Println("Colony Process Offloader Algorithm - Demo")
-	fmt.Println("=========================================")
+	fmt.Println("Colony Process Offloader Algorithm - Configurable CAPE Demo")
+	fmt.Println("==========================================================")
 
-	// Create algorithm configuration
-	config := algorithm.Config{
-		InitialWeights: decision.AdaptiveWeights{
-			QueueDepth:    0.2,
-			ProcessorLoad: 0.2,
-			NetworkCost:   0.2,
-			LatencyCost:   0.2,
-			EnergyCost:    0.1,
-			PolicyCost:    0.1,
-		},
-		LearningConfig: learning.LearningConfig{
-			WindowSize:      100,
-			LearningRate:    0.01,
-			ExplorationRate: 0.1,
-			MinSamples:      10,
-		},
-		SafetyConstraints: policy.SafetyConstraints{
-			MinLocalCompute:       0.2,
-			MinLocalMemory:        0.2,
-			MaxConcurrentOffloads: 10,
-			DataSovereignty:       true,
-			SecurityClearance:     true,
-			MaxLatencyTolerance:   500 * time.Millisecond,
-			MinReliability:        0.5,
-		},
-		PerformanceTargets: algorithm.PerformanceTargets{
-			MaxDecisionLatency:  500 * time.Millisecond,
-			MinDecisionAccuracy: 0.85,
-			MaxPolicyViolations: 5,
-			MinPerformanceGain:  0.1,
-			ConvergenceTimeout:  200,
-		},
+	// Create different deployment configurations to demonstrate
+	configs := []*models.DeploymentConfig{
+		models.NewDefaultDeploymentConfig(models.DeploymentTypeEdge),
+		models.NewDefaultDeploymentConfig(models.DeploymentTypeCloud),
+		models.NewDefaultDeploymentConfig(models.DeploymentTypeHybrid),
 	}
 
-	// Initialize the algorithm
-	alg, err := algorithm.NewAlgorithm(config)
-	if err != nil {
-		fmt.Printf("Failed to initialize algorithm: %v\n", err)
-		return
+	for i, config := range configs {
+		fmt.Printf("\n%d. Testing %s Deployment Configuration\n", i+1, config.DeploymentType)
+		fmt.Println("   " + config.Description)
+		fmt.Printf("   Data Gravity Factor: %.2f\n", config.DataGravityFactor)
+		
+		err := runConfigurationTest(config, 10)
+		if err != nil {
+			fmt.Printf("   ❌ Configuration test failed: %v\n", err)
+		} else {
+			fmt.Printf("   ✅ Configuration test completed successfully\n")
+		}
 	}
 
-	fmt.Println("✓ Algorithm initialized successfully")
-	fmt.Printf("✓ Health status: %v\n", alg.IsHealthy())
+	fmt.Println("\n🎯 All deployment configurations tested!")
+	fmt.Println("The configurable CAPE algorithm successfully adapts to different scenarios")
+}
 
-	// Create sample system state
-	systemState := models.SystemState{
-		QueueDepth:        25,
-		QueueThreshold:    20,
-		ComputeUsage:      0.75,
-		MemoryUsage:       0.60,
-		DiskUsage:         0.40,
-		NetworkUsage:      0.30,
-		MasterUsage:       0.25,
-		ActiveConnections: 50,
-		Timestamp:         time.Now(),
-		TimeSlot:          time.Now().Hour(),
-		DayOfWeek:         int(time.Now().Weekday()),
-	}
+func runConfigurationTest(config *models.DeploymentConfig, decisions int) error {
+	// Initialize configurable CAPE algorithm
+	cape := algorithm.NewConfigurableCAPE(config)
 
-	// Create sample targets
+	// Create sample targets for different location types
 	targets := []models.OffloadTarget{
 		{
-			ID:                "local-1",
+			ID:                "local-executor",
 			Type:              models.LOCAL,
+			Location:          string(models.DataLocationLocal),
 			TotalCapacity:     8.0,
-			AvailableCapacity: 4.0,
+			AvailableCapacity: 6.0,
 			MemoryTotal:       16 * 1024 * 1024 * 1024,
-			MemoryAvailable:   8 * 1024 * 1024 * 1024,
+			MemoryAvailable:   12 * 1024 * 1024 * 1024,
 			NetworkLatency:    1 * time.Millisecond,
-			NetworkBandwidth:  1000 * 1024 * 1024,
-			NetworkStability:  1.0,
 			ProcessingSpeed:   1.0,
 			Reliability:       0.99,
 			ComputeCost:       0.0,
 			SecurityLevel:     5,
-			DataJurisdiction:  "domestic",
-			LastSeen:          time.Now(),
 		},
 		{
-			ID:                "edge-1",
+			ID:                "edge-executor", 
 			Type:              models.EDGE,
+			Location:          string(models.DataLocationEdge),
 			TotalCapacity:     16.0,
-			AvailableCapacity: 12.0,
+			AvailableCapacity: 14.0,
 			MemoryTotal:       32 * 1024 * 1024 * 1024,
-			MemoryAvailable:   24 * 1024 * 1024 * 1024,
+			MemoryAvailable:   28 * 1024 * 1024 * 1024,
 			NetworkLatency:    5 * time.Millisecond,
-			NetworkBandwidth:  500 * 1024 * 1024,
-			NetworkStability:  0.98,
 			ProcessingSpeed:   1.5,
 			Reliability:       0.95,
 			ComputeCost:       0.05,
 			SecurityLevel:     4,
-			DataJurisdiction:  "domestic",
-			LastSeen:          time.Now(),
 		},
 		{
-			ID:                "cloud-1",
+			ID:                "cloud-executor",
 			Type:              models.PUBLIC_CLOUD,
+			Location:          string(models.DataLocationCloud),
 			TotalCapacity:     64.0,
 			AvailableCapacity: 48.0,
 			MemoryTotal:       128 * 1024 * 1024 * 1024,
 			MemoryAvailable:   96 * 1024 * 1024 * 1024,
 			NetworkLatency:    25 * time.Millisecond,
-			NetworkBandwidth:  200 * 1024 * 1024,
-			NetworkStability:  0.99,
 			ProcessingSpeed:   2.0,
 			Reliability:       0.99,
 			ComputeCost:       0.10,
 			SecurityLevel:     3,
-			DataJurisdiction:  "international",
-			LastSeen:          time.Now(),
+		},
+		{
+			ID:                "hpc-executor",
+			Type:              models.HPC_CLUSTER,
+			Location:          string(models.DataLocationHPC),
+			TotalCapacity:     256.0,
+			AvailableCapacity: 200.0,
+			MemoryTotal:       512 * 1024 * 1024 * 1024,
+			MemoryAvailable:   400 * 1024 * 1024 * 1024,
+			NetworkLatency:    10 * time.Millisecond,
+			ProcessingSpeed:   4.0,
+			Reliability:       0.98,
+			ComputeCost:       0.20,
+			SecurityLevel:     3,
 		},
 	}
 
-	fmt.Printf("✓ Created %d offload targets\n", len(targets))
+	// Add utilization field to targets
+	for i := range targets {
+		targets[i].Utilization = models.DetailedUtilization{
+			ComputeUsage: rand.Float64() * 0.5, // 0-50% utilization
+			MemoryUsage:  rand.Float64() * 0.6, // 0-60% utilization
+			DiskUsage:    rand.Float64() * 0.4, // 0-40% utilization
+			NetworkUsage: rand.Float64() * 0.3, // 0-30% utilization
+		}
+	}
 
-	// Simulate decision-making and learning over time
+	// Run decision simulation
+	successfulDecisions := 0
 	rand.Seed(time.Now().UnixNano())
-	
-	fmt.Println("\nRunning decision simulation...")
-	fmt.Println("==============================")
 
-	for i := 0; i < 20; i++ {
-		// Create a sample process
+	for i := 0; i < decisions; i++ {
+		// Create sample process
 		process := models.Process{
-			ID:                fmt.Sprintf("process-%d", i+1),
+			ID:                fmt.Sprintf("proc-%d", i+1),
 			Type:              []string{"compute", "data", "ml", "batch"}[rand.Intn(4)],
 			Priority:          rand.Intn(10) + 1,
 			CPURequirement:    float64(rand.Intn(8) + 1),
 			MemoryRequirement: int64(rand.Intn(16)+1) * 1024 * 1024 * 1024,
-			InputSize:         int64(rand.Intn(100)+1) * 1024 * 1024,
-			OutputSize:        int64(rand.Intn(50)+1) * 1024 * 1024,
 			EstimatedDuration: time.Duration(rand.Intn(300)+30) * time.Second,
-			RealTime:          rand.Float64() < 0.2, // 20% real-time
-			SafetyCritical:    rand.Float64() < 0.1, // 10% safety-critical
+			RealTime:          rand.Float64() < 0.2,
+			SafetyCritical:    rand.Float64() < 0.1,
 			SecurityLevel:     rand.Intn(6),
-			DataSensitivity:   rand.Intn(6),
-			LocalityRequired:  rand.Float64() < 0.3, // 30% require locality
+			LocalityRequired:  rand.Float64() < 0.3,
 			Status:            models.QUEUED,
 		}
 
-		// Make decision
-		decision, err := alg.MakeOffloadDecision(process, targets, systemState)
+		// Create system state
+		systemState := models.SystemState{
+			QueueDepth:        rand.Intn(30),
+			QueueThreshold:    20,
+			ComputeUsage:      models.Utilization(rand.Float64() * 0.8),
+			MemoryUsage:       models.Utilization(rand.Float64() * 0.7),
+			DiskUsage:         models.Utilization(rand.Float64() * 0.5),
+			NetworkUsage:      models.Utilization(rand.Float64() * 0.4),
+			MasterUsage:       models.Utilization(rand.Float64() * 0.3),
+			ActiveConnections: rand.Intn(100),
+			Timestamp:         time.Now(),
+			TimeSlot:          time.Now().Hour(),
+			DayOfWeek:         int(time.Now().Weekday()),
+		}
+
+		// Make decision using configurable CAPE
+		decision, err := cape.MakeDecision(process, targets, systemState)
 		if err != nil {
-			fmt.Printf("Error making decision for %s: %v\n", process.ID, err)
+			fmt.Printf("     Decision %d failed: %v\n", i+1, err)
 			continue
 		}
 
-		// Display decision
-		action := "KEEP LOCAL"
-		targetID := "local"
-		if decision.ShouldOffload && decision.Target != nil {
-			action = "OFFLOAD"
-			targetID = decision.Target.ID
-		}
-
-		fmt.Printf("Process %s: %s -> %s (score: %.3f, confidence: %.3f)\n",
-			process.ID, action, targetID, decision.Score, decision.Confidence)
-
 		// Simulate outcome
-		outcome := simulateOutcome(decision, process)
+		outcome := simulateCAPEOutcome(decision, process)
 		
-		// Process outcome for learning
-		err = alg.ProcessOutcome(outcome)
+		// Report outcome for learning
+		err = cape.ReportOutcome(decision.DecisionID, outcome)
 		if err != nil {
-			fmt.Printf("Error processing outcome: %v\n", err)
+			fmt.Printf("     Outcome reporting failed: %v\n", err)
 		}
 
-		// Update system state slightly for next iteration
-		systemState.QueueDepth = maxInt(0, systemState.QueueDepth + rand.Intn(5) - 2)
-		systemState.ComputeUsage = models.Utilization(min(1.0, maxFloat(0.0, float64(systemState.ComputeUsage) + (rand.Float64()-0.5)*0.1)))
+		if outcome.Success {
+			successfulDecisions++
+		}
+
+		// Brief output for first few decisions
+		if i < 3 {
+			fmt.Printf("     Decision %d: %s -> %s (strategy: %s, success: %v)\n",
+				i+1, process.ID, decision.SelectedTarget.ID, decision.SelectedStrategy, outcome.Success)
+		}
 	}
 
-	// Display final performance metrics
-	fmt.Println("\nFinal Performance Metrics:")
-	fmt.Println("==========================")
-	
-	metrics := alg.GetPerformanceMetrics()
-	fmt.Printf("Decision Count: %d\n", metrics.DecisionCount)
-	fmt.Printf("Performance Gain: %.2f%%\n", metrics.PerformanceGain*100)
-	fmt.Printf("Convergence Status: %v\n", metrics.IsConverged)
-	fmt.Printf("Discovered Patterns: %d\n", metrics.DiscoveredPatterns)
-	fmt.Printf("Validated Patterns: %d\n", metrics.ValidatedPatterns)
-	
-	fmt.Printf("\nCurrent Adaptive Weights:\n")
-	fmt.Printf("  Queue Depth: %.3f\n", metrics.CurrentWeights.QueueDepth)
-	fmt.Printf("  Processor Load: %.3f\n", metrics.CurrentWeights.ProcessorLoad)
-	fmt.Printf("  Network Cost: %.3f\n", metrics.CurrentWeights.NetworkCost)
-	fmt.Printf("  Latency Cost: %.3f\n", metrics.CurrentWeights.LatencyCost)
-	fmt.Printf("  Energy Cost: %.3f\n", metrics.CurrentWeights.EnergyCost)
-	fmt.Printf("  Policy Cost: %.3f\n", metrics.CurrentWeights.PolicyCost)
-	
-	fmt.Printf("\nPolicy Enforcement Stats:\n")
-	fmt.Printf("  Total Evaluations: %d\n", metrics.PolicyStats.TotalEvaluations)
-	fmt.Printf("  Hard Violations: %d\n", metrics.PolicyStats.HardViolations)
-	fmt.Printf("  Soft Violations: %d\n", metrics.PolicyStats.SoftViolations)
-	fmt.Printf("  Blocked Decisions: %d\n", metrics.PolicyStats.BlockedDecisions)
-	fmt.Printf("  Allowed Decisions: %d\n", metrics.PolicyStats.AllowedDecisions)
+	// Display results
+	successRate := float64(successfulDecisions) / float64(decisions)
+	fmt.Printf("     Success Rate: %.1f%% (%d/%d)\n", successRate*100, successfulDecisions, decisions)
 
-	fmt.Printf("\n✓ Algorithm health: %v\n", alg.IsHealthy())
-	fmt.Println("\nDemo completed successfully!")
+	// Get algorithm statistics
+	stats := cape.GetStats()
+	fmt.Printf("     Current Strategy: %s\n", stats.CurrentStrategy)
+	fmt.Printf("     Thompson Sampler: %d strategies tracked\n", len(stats.ThompsonStats))
+
+	return nil
 }
 
-func simulateOutcome(dec decision.OffloadDecision, process models.Process) decision.OffloadOutcome {
-	// Simulate realistic outcome based on decision
+func simulateCAPEOutcome(decision algorithm.CAPEDecision, process models.Process) algorithm.CAPEOutcome {
+	// Simulate realistic outcomes based on decision and target characteristics
 	success := true
-	completedOnTime := true
-	reward := 0.5
+	latencyMS := 100.0
+	costUSD := 0.50
+	throughputOps := 50.0
+	energyWh := 10.0
+	dataTransferGB := 1.0
 
-	if dec.ShouldOffload {
-		// Offload outcomes vary based on target and process characteristics
-		if process.RealTime && dec.Target != nil && dec.Target.NetworkLatency > 50*time.Millisecond {
-			// Real-time process with high latency - likely to have issues
-			success = rand.Float64() < 0.7
-			completedOnTime = rand.Float64() < 0.6
-			reward = -0.5
-		} else {
-			// Normal offload
-			success = rand.Float64() < 0.9
-			completedOnTime = rand.Float64() < 0.85
-			reward = 1.0
-		}
-	} else {
-		// Local execution is usually reliable but may be slower under high load
-		success = rand.Float64() < 0.95
-		completedOnTime = rand.Float64() < 0.8
-		reward = 0.3
+	// Target-specific simulation
+	switch decision.SelectedTarget.Type {
+	case models.LOCAL:
+		latencyMS = 10.0 + rand.Float64()*20.0  // 10-30ms
+		costUSD = 0.0                           // No monetary cost
+		throughputOps = 30.0 + rand.Float64()*20.0 // 30-50 ops/sec
+		energyWh = 5.0 + rand.Float64()*5.0     // 5-10 Wh
+		dataTransferGB = 0.0                    // No transfer
+		success = rand.Float64() < 0.95         // 95% success rate
+
+	case models.EDGE:
+		latencyMS = 20.0 + rand.Float64()*30.0  // 20-50ms
+		costUSD = 0.02 + rand.Float64()*0.08    // $0.02-0.10
+		throughputOps = 40.0 + rand.Float64()*30.0 // 40-70 ops/sec
+		energyWh = 8.0 + rand.Float64()*7.0     // 8-15 Wh
+		dataTransferGB = 0.1 + rand.Float64()*0.4 // 0.1-0.5 GB
+		success = rand.Float64() < 0.90         // 90% success rate
+
+	case models.PUBLIC_CLOUD:
+		latencyMS = 50.0 + rand.Float64()*100.0 // 50-150ms
+		costUSD = 0.05 + rand.Float64()*0.20    // $0.05-0.25
+		throughputOps = 60.0 + rand.Float64()*40.0 // 60-100 ops/sec
+		energyWh = 15.0 + rand.Float64()*15.0   // 15-30 Wh
+		dataTransferGB = 0.5 + rand.Float64()*1.5 // 0.5-2.0 GB
+		success = rand.Float64() < 0.85         // 85% success rate
+
+	case models.HPC_CLUSTER:
+		latencyMS = 30.0 + rand.Float64()*50.0  // 30-80ms
+		costUSD = 0.10 + rand.Float64()*0.40    // $0.10-0.50
+		throughputOps = 100.0 + rand.Float64()*100.0 // 100-200 ops/sec
+		energyWh = 25.0 + rand.Float64()*25.0   // 25-50 Wh
+		dataTransferGB = 1.0 + rand.Float64()*2.0 // 1.0-3.0 GB
+		success = rand.Float64() < 0.80         // 80% success rate
 	}
 
-	targetID := "local"
-	if dec.ShouldOffload && dec.Target != nil {
-		targetID = dec.Target.ID
+	// Process-specific adjustments
+	if process.RealTime && latencyMS > 100.0 {
+		success = false // Real-time processes fail with high latency
 	}
 
-	return decision.OffloadOutcome{
-		DecisionID:      fmt.Sprintf("decision-%s", process.ID),
-		ProcessID:       process.ID,
-		TargetID:        targetID,
+	if process.SafetyCritical && decision.SelectedTarget.Type != models.LOCAL {
+		success = rand.Float64() < 0.70 // Safety-critical prefers local
+	}
+
+	// SLA and budget violations
+	slaViolation := latencyMS > 1000.0 // 1 second SLA
+	budgetOverrun := costUSD > 1.00    // $1 budget
+
+	return algorithm.CAPEOutcome{
 		Success:         success,
-		CompletedOnTime: completedOnTime,
-		Reward:          reward,
-		StartTime:       time.Now(),
-		EndTime:         time.Now().Add(process.EstimatedDuration),
-		MeasurementTime: time.Now(),
-		Attribution: map[string]float64{
-			"QueueDepth":    rand.Float64() * 0.3,
-			"ProcessorLoad": rand.Float64() * 0.3,
-			"NetworkCost":   rand.Float64() * 0.2,
-			"LatencyCost":   rand.Float64() * 0.2,
-		},
+		LatencyMS:       latencyMS,
+		CostUSD:         costUSD,
+		ThroughputOps:   throughputOps,
+		EnergyWh:        energyWh,
+		DataTransferGB:  dataTransferGB,
+		SLAViolation:    slaViolation,
+		BudgetOverrun:   budgetOverrun,
+		CompletedAt:     time.Now(),
 	}
-}
-
-func min(a, b float64) float64 {
-	if a < b {
-		return a
-	}
-	return b
-}
-
-func maxInt(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
-
-func maxFloat(a, b float64) float64 {
-	if a > b {
-		return a
-	}
-	return b
 }

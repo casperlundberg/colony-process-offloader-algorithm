@@ -43,6 +43,7 @@ type OffloadTarget struct {
 	CurrentLoad       float64       `json:"current_load"`        // Current utilization (0.0-1.0)
 	EstimatedWaitTime time.Duration `json:"estimated_wait_time"` // Expected queue wait
 	LastSeen          time.Time     `json:"last_seen"`           // Last health check
+	Utilization       DetailedUtilization   `json:"utilization"`         // Detailed utilization metrics
 
 	// Learning state (updated by algorithm)
 	PolicyBonus       float64 `json:"policy_bonus"`        // Policy-derived score modifier
