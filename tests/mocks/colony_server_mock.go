@@ -2,6 +2,8 @@ package mocks
 
 import (
 	"fmt"
+	"math"
+	"math/rand"
 	"sync"
 	"time"
 )
@@ -416,6 +418,7 @@ func (m *MockColonyServer) processQueuedProcesses() {
 	
 	// Try to assign queued processes to available executors
 	for i, processID := range m.processQueue {
+		_ = processID // Mark as used to avoid compiler warning
 		process, exists := m.processes[processID]
 		if !exists || process.State != PROCESS_WAITING {
 			continue
@@ -611,7 +614,7 @@ func (m *MockColonyServer) updateExecutingProcesses() {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 	
-	for processID, context := range m.executingProcesses {
+	for _, context := range m.executingProcesses {
 		if time.Now().After(context.ExpectedEnd) {
 			// Force completion for stuck processes
 			go m.completeExecution(context)

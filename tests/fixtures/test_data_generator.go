@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"math/rand"
 	"time"
+
+	"github.com/casperlundberg/colony-process-offloader-algorithm/pkg/decision"
+	"github.com/casperlundberg/colony-process-offloader-algorithm/pkg/models"
 )
 
 // TestDataGenerator creates realistic test data for algorithm validation
@@ -24,8 +27,8 @@ func (g *TestDataGenerator) GetSeed() int64 {
 }
 
 // Generate system states for various scenarios
-func (g *TestDataGenerator) GenerateSystemStates(count int) []SystemState {
-	states := make([]SystemState, count)
+func (g *TestDataGenerator) GenerateSystemStates(count int) []models.SystemState {
+	states := make([]models.SystemState, count)
 	
 	for i := 0; i < count; i++ {
 		// Create realistic load patterns
@@ -49,16 +52,16 @@ func (g *TestDataGenerator) GenerateSystemStates(count int) []SystemState {
 		masterUsage := 0.1 + computeUsage*0.4 + g.rand.Float64()*0.2
 		masterUsage = clampFloat64(masterUsage, 0.0, 1.0)
 		
-		states[i] = SystemState{
+		states[i] = models.SystemState{
 			QueueDepth:        queueDepth,
 			QueueThreshold:    20 + g.rand.Intn(30),
 			QueueWaitTime:     time.Duration(queueDepth*2+g.rand.Intn(20)) * time.Second,
 			QueueThroughput:   5.0 + g.rand.Float64()*10.0,
-			ComputeUsage:      computeUsage,
-			MemoryUsage:       memoryUsage,
-			DiskUsage:         diskUsage,
-			NetworkUsage:      networkUsage,
-			MasterUsage:       masterUsage,
+			ComputeUsage:      models.Utilization(computeUsage),
+			MemoryUsage:       models.Utilization(memoryUsage),
+			DiskUsage:         models.Utilization(diskUsage),
+			NetworkUsage:      models.Utilization(networkUsage),
+			MasterUsage:       models.Utilization(masterUsage),
 			ActiveConnections: 10 + g.rand.Intn(200),
 			Timestamp:         time.Now().Add(-time.Duration(g.rand.Intn(3600)) * time.Second),
 			TimeSlot:          g.rand.Intn(24),
@@ -70,8 +73,8 @@ func (g *TestDataGenerator) GenerateSystemStates(count int) []SystemState {
 }
 
 // Generate diverse process workloads
-func (g *TestDataGenerator) GenerateProcesses(count int) []Process {
-	processes := make([]Process, count)
+func (g *TestDataGenerator) GenerateProcesses(count int) []models.Process {
+	processes := make([]models.Process, count)
 	
 	processTypes := []struct {
 		name              string
@@ -190,7 +193,7 @@ func (g *TestDataGenerator) GenerateProcesses(count int) []Process {
 			}
 		}
 		
-		processes[i] = Process{
+		processes[i] = models.Process{
 			ID:                fmt.Sprintf("generated-process-%d", i),
 			Type:              processType.name,
 			Priority:          priority,
@@ -207,7 +210,7 @@ func (g *TestDataGenerator) GenerateProcesses(count int) []Process {
 			SecurityLevel:     security,
 			Dependencies:      dependencies,
 			SubmissionTime:    time.Now().Add(-time.Duration(g.rand.Intn(3600)) * time.Second),
-			Status:            QUEUED,
+			Status:            models.QUEUED,
 		}
 	}
 	
@@ -215,11 +218,11 @@ func (g *TestDataGenerator) GenerateProcesses(count int) []Process {
 }
 
 // Generate diverse offload targets
-func (g *TestDataGenerator) GenerateTargets(count int) []OffloadTarget {
-	targets := make([]OffloadTarget, count)
+func (g *TestDataGenerator) GenerateTargets(count int) []models.OffloadTarget {
+	targets := make([]models.OffloadTarget, count)
 	
 	targetTypes := []struct {
-		targetType   TargetType
+		targetType   models.TargetType
 		capacityRange [2]float64
 		latencyRange [2]time.Duration
 		bandwidthRange [2]float64
@@ -231,7 +234,7 @@ func (g *TestDataGenerator) GenerateTargets(count int) []OffloadTarget {
 		capabilities [][]string
 	}{
 		{
-			targetType:   LOCAL,
+			targetType:   models.LOCAL,
 			capacityRange: [2]float64{4.0, 16.0},
 			latencyRange: [2]time.Duration{0, 5 * time.Millisecond},
 			bandwidthRange: [2]float64{1 * GB, 10 * GB}, // Very high bandwidth
@@ -245,7 +248,7 @@ func (g *TestDataGenerator) GenerateTargets(count int) []OffloadTarget {
 			},
 		},
 		{
-			targetType:   EDGE,
+			targetType:   models.EDGE,
 			capacityRange: [2]float64{8.0, 64.0},
 			latencyRange: [2]time.Duration{5 * time.Millisecond, 50 * time.Millisecond},
 			bandwidthRange: [2]float64{100 * MB, 1 * GB},
@@ -261,7 +264,7 @@ func (g *TestDataGenerator) GenerateTargets(count int) []OffloadTarget {
 			},
 		},
 		{
-			targetType:   PRIVATE_CLOUD,
+			targetType:   models.PRIVATE_CLOUD,
 			capacityRange: [2]float64{32.0, 256.0},
 			latencyRange: [2]time.Duration{20 * time.Millisecond, 100 * time.Millisecond},
 			bandwidthRange: [2]float64{50 * MB, 500 * MB},
@@ -277,7 +280,7 @@ func (g *TestDataGenerator) GenerateTargets(count int) []OffloadTarget {
 			},
 		},
 		{
-			targetType:   PUBLIC_CLOUD,
+			targetType:   models.PUBLIC_CLOUD,
 			capacityRange: [2]float64{64.0, 1024.0}, // Virtually unlimited
 			latencyRange: [2]time.Duration{50 * time.Millisecond, 300 * time.Millisecond},
 			bandwidthRange: [2]float64{10 * MB, 100 * MB},
@@ -294,7 +297,7 @@ func (g *TestDataGenerator) GenerateTargets(count int) []OffloadTarget {
 			},
 		},
 		{
-			targetType:   FOG,
+			targetType:   models.FOG,
 			capacityRange: [2]float64{2.0, 16.0},
 			latencyRange: [2]time.Duration{1 * time.Millisecond, 20 * time.Millisecond},
 			bandwidthRange: [2]float64{50 * MB, 200 * MB},
@@ -355,7 +358,7 @@ func (g *TestDataGenerator) GenerateTargets(count int) []OffloadTarget {
 		securityLevel := targetTypeInfo.securityRange[0] + 
 			g.rand.Intn(targetTypeInfo.securityRange[1]-targetTypeInfo.securityRange[0]+1)
 		
-		targets[i] = OffloadTarget{
+		targets[i] = models.OffloadTarget{
 			ID:                fmt.Sprintf("generated-target-%s-%d", targetTypeInfo.targetType, i),
 			Type:              targetTypeInfo.targetType,
 			Location:          location,
@@ -385,8 +388,8 @@ func (g *TestDataGenerator) GenerateTargets(count int) []OffloadTarget {
 }
 
 // Generate realistic outcomes for learning scenarios
-func (g *TestDataGenerator) GenerateOutcomes(decisions []DecisionScenario) []OffloadOutcome {
-	outcomes := make([]OffloadOutcome, len(decisions))
+func (g *TestDataGenerator) GenerateOutcomes(decisions []DecisionScenario) []decision.OffloadOutcome {
+	outcomes := make([]decision.OffloadOutcome, len(decisions))
 	
 	for i, decision := range decisions {
 		outcome := g.simulateOutcome(decision)
@@ -398,7 +401,7 @@ func (g *TestDataGenerator) GenerateOutcomes(decisions []DecisionScenario) []Off
 	return outcomes
 }
 
-func (g *TestDataGenerator) simulateOutcome(scenario DecisionScenario) OffloadOutcome {
+func (g *TestDataGenerator) simulateOutcome(scenario DecisionScenario) decision.OffloadOutcome {
 	// Simulate realistic outcome based on decision scenario
 	success := true
 	completedOnTime := true
@@ -477,22 +480,22 @@ func (g *TestDataGenerator) simulateOutcome(scenario DecisionScenario) OffloadOu
 	// Generate attribution map
 	attribution := g.generateAttribution(scenario, success, completedOnTime)
 	
-	outcome := OffloadOutcome{
+	outcome := decision.OffloadOutcome{
 		Success:           success,
 		CompletedOnTime:   completedOnTime,
 		QueueReduction:    queueReduction,
 		Reward:            reward,
 		Attribution:       attribution,
-		SystemContext:     scenario.SystemState,
-		ProcessContext:    scenario.Process,
+		// SystemContext and ProcessContext removed - not in decision.OffloadOutcome
 	}
 	
 	if scenario.Decision.Target != nil {
 		outcome.TargetID = scenario.Decision.Target.ID
-		outcome.TargetContext = *scenario.Decision.Target
+		// TargetContext removed - not in decision.OffloadOutcome
 		
 		// Add target-specific outcomes
 		if !success {
+			target := scenario.Decision.Target
 			if target.Reliability < 0.8 {
 				outcome.TargetOverloaded = g.rand.Float64() < 0.3
 			}
@@ -590,15 +593,14 @@ func (g *TestDataGenerator) GenerateDiverseScenarios(count int) []DecisionScenar
 	for i := 0; i < count; i++ {
 		// Select random subset of targets for this scenario
 		targetCount := 2 + g.rand.Intn(4) // 2-5 targets
-		scenarioTargets := make([]OffloadTarget, targetCount)
+		scenarioTargets := make([]models.OffloadTarget, targetCount)
 		
 		for j := 0; j < targetCount; j++ {
 			scenarioTargets[j] = targets[g.rand.Intn(len(targets))]
 		}
 		
 		// Generate decision (simplified)
-		decision := OffloadDecision{
-			DecisionID:   fmt.Sprintf("scenario-decision-%d", i),
+		decision := decision.OffloadDecision{
 			ShouldOffload: g.rand.Float64() < 0.6, // 60% offload rate
 			Score:        g.rand.Float64(),
 			Confidence:   0.5 + g.rand.Float64()*0.5,
@@ -609,7 +611,7 @@ func (g *TestDataGenerator) GenerateDiverseScenarios(count int) []DecisionScenar
 		}
 		
 		scenarios[i] = DecisionScenario{
-			DecisionID:      decision.DecisionID,
+			DecisionID:      fmt.Sprintf("scenario-decision-%d", i),
 			ProcessID:       processes[i].ID,
 			Process:         processes[i],
 			SystemState:     states[i],
@@ -645,11 +647,11 @@ func clampFloat64(value, min, max float64) float64 {
 type DecisionScenario struct {
 	DecisionID       string
 	ProcessID        string
-	Process          Process
-	SystemState      SystemState
-	AvailableTargets []OffloadTarget
-	Decision         OffloadDecision
-	ExpectedOutcome  *OffloadOutcome
+	Process          models.Process
+	SystemState      models.SystemState
+	AvailableTargets []models.OffloadTarget
+	Decision         decision.OffloadDecision
+	ExpectedOutcome  *decision.OffloadOutcome
 	OptimalAction    string
 	OptimalTarget    string
 	ExpectedReward   float64

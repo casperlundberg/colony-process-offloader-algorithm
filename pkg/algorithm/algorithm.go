@@ -127,10 +127,7 @@ func (a *Algorithm) MakeOffloadDecision(
 		}
 	}
 
-	// Step 5: Get current adaptive weights from learner
-	currentWeights := a.decisionEngine.GetWeights()
-
-	// Step 6: Make the core decision
+	// Step 5: Make the core decision (uses current adaptive weights)
 	coreDecision, err := a.decisionEngine.MakeDecision(process, viableTargets, systemState)
 	if err != nil {
 		return decision.OffloadDecision{}, fmt.Errorf("decision engine error: %w", err)

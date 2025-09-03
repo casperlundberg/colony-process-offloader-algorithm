@@ -185,8 +185,8 @@ func main() {
 		}
 
 		// Update system state slightly for next iteration
-		systemState.QueueDepth = max(0, systemState.QueueDepth + rand.Intn(5) - 2)
-		systemState.ComputeUsage = models.Utilization(min(1.0, max(0.0, float64(systemState.ComputeUsage) + (rand.Float64()-0.5)*0.1)))
+		systemState.QueueDepth = maxInt(0, systemState.QueueDepth + rand.Intn(5) - 2)
+		systemState.ComputeUsage = models.Utilization(min(1.0, maxFloat(0.0, float64(systemState.ComputeUsage) + (rand.Float64()-0.5)*0.1)))
 	}
 
 	// Display final performance metrics
@@ -276,7 +276,14 @@ func min(a, b float64) float64 {
 	return b
 }
 
-func max(a, b int) int {
+func maxInt(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func maxFloat(a, b float64) float64 {
 	if a > b {
 		return a
 	}
