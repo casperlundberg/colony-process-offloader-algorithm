@@ -36,6 +36,9 @@ Thumbs.db
 /bin/
 /dist/
 
+# Simulation results
+/results/
+
 # Claude Code configuration
 CLAUDE.md
 .claude
