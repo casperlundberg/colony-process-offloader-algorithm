@@ -60,8 +60,8 @@ func main() {
 	// Run simulation in goroutine
 	done := make(chan error, 1)
 	go func() {
-		log.Printf("\n🚀 Starting CAPE spike simulation...")
-		log.Printf("════════════════════════════════════════\n")
+		log.Printf("\nStarting CAPE spike simulation...")
+		log.Printf("========================================\n")
 		done <- runner.Run()
 	}()
 	
@@ -71,10 +71,10 @@ func main() {
 		if err != nil {
 			log.Fatalf("Simulation failed: %v", err)
 		}
-		log.Printf("\n✅ Simulation completed successfully!")
+		log.Printf("\nSimulation completed successfully!")
 		
 	case sig := <-sigChan:
-		log.Printf("\n⚠️  Received signal: %v", sig)
+		log.Printf("\nReceived signal: %v", sig)
 		log.Printf("Stopping simulation...")
 		// In a real implementation, we would have a Stop() method
 		os.Exit(0)
@@ -86,15 +86,15 @@ func main() {
 
 func printBanner() {
 	fmt.Println()
-	fmt.Println("╔════════════════════════════════════════════════════════╗")
-	fmt.Println("║       CAPE Spike Simulation & Weight Adaptation       ║")
-	fmt.Println("║                                                        ║")
-	fmt.Println("║  Demonstrating dynamic autoscaling with ML-powered    ║")
-	fmt.Println("║  prediction and weight optimization                   ║")
-	fmt.Println("╚════════════════════════════════════════════════════════╝")
+	fmt.Println("========================================================")
+	fmt.Println("       CAPE Spike Simulation & Weight Adaptation       ")
+	fmt.Println("                                                        ")
+	fmt.Println("  Demonstrating dynamic autoscaling with ML-powered    ")
+	fmt.Println("  prediction and weight optimization                   ")
+	fmt.Println("========================================================")
 	fmt.Println()
 	
-	fmt.Println("📊 This simulation will:")
+	fmt.Println("This simulation will:")
 	fmt.Println("   1. Generate configurable spike patterns")
 	fmt.Println("   2. Create priority-weighted process queues")
 	fmt.Println("   3. Make autoscaling decisions using CAPE algorithms")
@@ -124,27 +124,27 @@ func validateConfigFiles(spikeConfig, executorCatalog, autoscalerConfig string) 
 
 func printLearningSummary() {
 	fmt.Println()
-	fmt.Println("🧠 Learning & Adaptation Summary")
-	fmt.Println("════════════════════════════════")
+	fmt.Println("Learning & Adaptation Summary")
+	fmt.Println("================================")
 	
-	fmt.Println("\n📈 Key Learning Outcomes:")
+	fmt.Println("\nKey Learning Outcomes:")
 	fmt.Println("   • ARIMA prediction accuracy improved from ~65% to ~85%")
 	fmt.Println("   • CUSUM spike detection rate increased from 40% to 90%")
 	fmt.Println("   • Cost efficiency improved by 30% through better placement")
 	fmt.Println("   • SLA compliance increased from 85% to 98%")
 	fmt.Println("   • Weight convergence achieved after ~100 decisions")
 	
-	fmt.Println("\n⚡ Spike Pattern Recognition:")
+	fmt.Println("\nSpike Pattern Recognition:")
 	fmt.Println("   • Daily ML training spikes: Pre-scaling 15min before")
 	fmt.Println("   • Random IoT surges: 85% prediction accuracy achieved")
 	fmt.Println("   • Evening batch waves: Cost optimized with spot instances")
 	
-	fmt.Println("\n💡 Weight Evolution Insights:")
+	fmt.Println("\nWeight Evolution Insights:")
 	fmt.Println("   • ML executors: Learned data gravity is critical (0.6→0.9)")
 	fmt.Println("   • Edge executors: Learned latency > cost (latency: 0.5→0.8)")
 	fmt.Println("   • Cloud executors: Learned to use spot for batch (spot: false→true)")
 	
-	fmt.Println("\n✅ CAPE successfully demonstrated:")
+	fmt.Println("\nCAPE successfully demonstrated:")
 	fmt.Println("   1. Predictive autoscaling before spike occurrence")
 	fmt.Println("   2. Priority-aware resource allocation")
 	fmt.Println("   3. Multi-objective optimization balancing cost/performance")
@@ -152,8 +152,8 @@ func printLearningSummary() {
 	fmt.Println("   5. Data gravity-aware placement decisions")
 	
 	fmt.Println()
-	fmt.Println("═══════════════════════════════════════════════════════")
-	fmt.Println("📊 Full metrics saved to simulation_results_*.json")
+	fmt.Println("======================================================")
+	fmt.Println("Full metrics saved to simulation_results_*.json")
 	fmt.Println()
 }
 

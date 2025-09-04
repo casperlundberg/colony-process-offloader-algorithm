@@ -5,12 +5,17 @@
   "scenarios": [
     {
       "name": "ml_morning_training",
-      "description": "Daily ML training job spike at 9 AM - predictable high-priority GPU workload",
+      "description": "Daily ML training jobs - weekdays 8:30-9:30 AM with jitter",
       "pattern": {
-        "type": "predictable_daily",
-        "trigger_time": "09:00:00",
+        "type": "daily_with_schedule",
+        "base_time": "08:45:00",
+        "time_jitter_minutes": 15,
         "duration_minutes": 45,
+        "duration_jitter_minutes": 10,
         "process_rate_multiplier": 8.0,
+        "active_days": ["monday", "tuesday", "wednesday", "thursday", "friday"],
+        "active_hours": [8, 9, 10],
+        "probability": 0.85,
         "executor_type": "ml",
         "priority_distribution": [7, 8, 8, 9, 9],
         "data_location": "iceland",
@@ -18,13 +23,18 @@
       }
     },
     {
-      "name": "edge_iot_surge",
-      "description": "Random IoT sensor data surges - unpredictable edge processing",
+      "name": "iot_sensor_bursts",
+      "description": "IoT sensor data bursts - random but more frequent during business hours",
       "pattern": {
-        "type": "random_poisson",
-        "mean_interval_minutes": 120,
-        "duration_minutes": 15,
-        "process_rate_multiplier": 12.0,
+        "type": "poisson_with_schedule",
+        "base_interval_minutes": 90,
+        "interval_jitter_minutes": 30,
+        "duration_minutes": 12,
+        "duration_jitter_minutes": 8,
+        "process_rate_multiplier": 15.0,
+        "active_hours": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        "weekend_rate_reduction": 0.3,
+        "probability": 0.7,
         "executor_type": "edge",
         "priority_distribution": [8, 9, 9, 10],
         "data_location": "stockholm",
@@ -32,13 +42,18 @@
       }
     },
     {
-      "name": "batch_evening_processing",
-      "description": "End-of-day batch processing wave at 6 PM - cost-sensitive cloud workload",
+      "name": "evening_batch_processing",
+      "description": "End-of-day batch jobs - weekdays 17:30-19:00 with variance",
       "pattern": {
-        "type": "predictable_daily",
-        "trigger_time": "18:00:00",
-        "duration_minutes": 90,
-        "process_rate_multiplier": 5.0,
+        "type": "daily_with_schedule",
+        "base_time": "18:15:00",
+        "time_jitter_minutes": 25,
+        "duration_minutes": 75,
+        "duration_jitter_minutes": 20,
+        "process_rate_multiplier": 6.0,
+        "active_days": ["monday", "tuesday", "wednesday", "thursday", "friday"],
+        "active_hours": [17, 18, 19],
+        "probability": 0.95,
         "executor_type": "cloud",
         "priority_distribution": [4, 5, 6, 6, 7],
         "data_location": "aws_east",
@@ -46,12 +61,87 @@
       }
     },
     {
-      "name": "ml_inference_cascade",
-      "description": "ML inference that triggers downstream processing - cascade pattern",
+      "name": "massive_data_processing",
+      "description": "Large-scale data processing - irregular massive spikes generating ~100 processes",
       "pattern": {
-        "type": "cascade",
+        "type": "poisson_with_schedule",
+        "base_interval_minutes": 180,
+        "interval_jitter_minutes": 90,
         "duration_minutes": 30,
-        "process_rate_multiplier": 6.0,
+        "duration_jitter_minutes": 15,
+        "process_rate_multiplier": 25.0,
+        "active_hours": [9, 10, 11, 14, 15, 16, 17],
+        "active_days": ["monday", "tuesday", "wednesday", "thursday", "friday"],
+        "weekend_rate_reduction": 0.2,
+        "probability": 0.6,
+        "executor_type": "cloud",
+        "priority_distribution": [6, 7, 8, 8, 9],
+        "data_location": "aws_east",
+        "data_size_gb": 800.0
+      }
+    },
+    {
+      "name": "weekend_maintenance",
+      "description": "Weekend maintenance spikes - Sunday mornings with high variance",
+      "pattern": {
+        "type": "weekly_with_schedule",
+        "base_time": "03:00:00",
+        "time_jitter_minutes": 60,
+        "duration_minutes": 180,
+        "duration_jitter_minutes": 45,
+        "process_rate_multiplier": 4.0,
+        "active_days": ["sunday"],
+        "active_hours": [2, 3, 4, 5, 6],
+        "probability": 0.8,
+        "executor_type": "cloud",
+        "priority_distribution": [3, 4, 5, 6],
+        "data_location": "aws_east",
+        "data_size_gb": 200.0
+      }
+    },
+    {
+      "name": "peak_hour_traffic",
+      "description": "Peak hour traffic spikes - lunch and evening with user behavior patterns",
+      "pattern": {
+        "type": "multi_peak_daily",
+        "peaks": [
+          {
+            "base_time": "12:30:00",
+            "time_jitter_minutes": 20,
+            "duration_minutes": 30,
+            "intensity": 7.0
+          },
+          {
+            "base_time": "19:45:00",
+            "time_jitter_minutes": 25,
+            "duration_minutes": 40,
+            "intensity": 9.0
+          }
+        ],
+        "active_days": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday"],
+        "weekend_intensity_reduction": 0.6,
+        "probability": 0.75,
+        "executor_type": "edge",
+        "priority_distribution": [6, 7, 8, 8, 9],
+        "data_location": "stockholm",
+        "data_size_gb": 15.0
+      }
+    },
+    {
+      "name": "ml_inference_cascades",
+      "description": "ML inference triggering downstream processing - irregular patterns",
+      "pattern": {
+        "type": "cascade_with_schedule",
+        "base_interval_minutes": 180,
+        "interval_jitter_minutes": 90,
+        "cascade_stages": 3,
+        "stage_delay_minutes": 5,
+        "stage_jitter_minutes": 3,
+        "duration_minutes": 25,
+        "process_rate_multiplier": 8.0,
+        "active_hours": [9, 10, 11, 14, 15, 16],
+        "active_days": ["monday", "tuesday", "wednesday", "thursday", "friday"],
+        "probability": 0.6,
         "executor_type": "ml",
         "priority_distribution": [7, 8, 9],
         "data_location": "iceland",
@@ -59,17 +149,23 @@
       }
     },
     {
-      "name": "gradual_traffic_increase",
-      "description": "Gradual traffic ramp during business hours - slow build pattern",
+      "name": "high_priority_emergency",
+      "description": "Emergency high-priority processing - rare but massive spikes generating 80-120 processes",
       "pattern": {
-        "type": "gradual_ramp",
-        "duration_minutes": 120,
-        "ramp_up_minutes": 60,
-        "process_rate_multiplier": 4.0,
+        "type": "poisson_with_schedule",
+        "base_interval_minutes": 240,
+        "interval_jitter_minutes": 120,
+        "duration_minutes": 20,
+        "duration_jitter_minutes": 10,
+        "process_rate_multiplier": 35.0,
+        "active_hours": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+        "active_days": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
+        "weekend_rate_reduction": 0.8,
+        "probability": 0.4,
         "executor_type": "edge",
-        "priority_distribution": [5, 6, 7, 7, 8],
+        "priority_distribution": [9, 9, 10, 10],
         "data_location": "stockholm",
-        "data_size_gb": 20.0
+        "data_size_gb": 25.0
       }
     }
   ],

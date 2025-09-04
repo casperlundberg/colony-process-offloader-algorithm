@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"math/rand"
+	"strings"
 	"time"
 )
 
@@ -11,11 +12,19 @@ import (
 type SpikeType string
 
 const (
+	// Legacy types (kept for compatibility)
 	PredictableDaily SpikeType = "predictable_daily"
 	RandomPoisson    SpikeType = "random_poisson"
 	Seasonal         SpikeType = "seasonal"
 	Cascade          SpikeType = "cascade"
 	GradualRamp      SpikeType = "gradual_ramp"
+	
+	// Realistic scheduling types
+	DailyWithSchedule   SpikeType = "daily_with_schedule"
+	PoissonWithSchedule SpikeType = "poisson_with_schedule"
+	WeeklyWithSchedule  SpikeType = "weekly_with_schedule"
+	MultiPeakDaily      SpikeType = "multi_peak_daily"
+	CascadeWithSchedule SpikeType = "cascade_with_schedule"
 )
 
 // SpikeScenario defines a configurable spike pattern
@@ -26,18 +35,51 @@ type SpikeScenario struct {
 	Metadata    map[string]interface{} `json:"metadata,omitempty"`
 }
 
+// Peak defines a peak time with jitter for multi-peak patterns
+type Peak struct {
+	BaseTime           string  `json:"base_time"`
+	TimeJitterMinutes  int     `json:"time_jitter_minutes"`
+	DurationMinutes    int     `json:"duration_minutes"`
+	Intensity          float64 `json:"intensity"`
+}
+
 // SpikePattern defines the characteristics of a spike
 type SpikePattern struct {
+	// Core fields
 	Type                 SpikeType `json:"type"`
-	TriggerTime          string    `json:"trigger_time,omitempty"`          // For daily patterns, e.g., "09:00:00"
-	MeanIntervalMinutes  int       `json:"mean_interval_minutes,omitempty"` // For Poisson distribution
-	DurationMinutes      int       `json:"duration_minutes"`
 	ProcessRateMultiplier float64   `json:"process_rate_multiplier"`
 	ExecutorType         string    `json:"executor_type"`
 	PriorityDistribution []int     `json:"priority_distribution"`
 	DataLocation         string    `json:"data_location"`
 	DataSizeGB          float64   `json:"data_size_gb,omitempty"`
-	RampUpMinutes       int       `json:"ramp_up_minutes,omitempty"` // For gradual ramp
+	
+	// Legacy timing fields (for backward compatibility)
+	TriggerTime          string    `json:"trigger_time,omitempty"`
+	MeanIntervalMinutes  int       `json:"mean_interval_minutes,omitempty"`
+	DurationMinutes      int       `json:"duration_minutes,omitempty"`
+	RampUpMinutes       int       `json:"ramp_up_minutes,omitempty"`
+	
+	// Realistic scheduling fields
+	BaseTime             string    `json:"base_time,omitempty"`              // Base time like "08:45:00"
+	TimeJitterMinutes    int       `json:"time_jitter_minutes,omitempty"`    // ±random variance in minutes
+	DurationJitterMinutes int      `json:"duration_jitter_minutes,omitempty"` // Duration variance
+	BaseIntervalMinutes  int       `json:"base_interval_minutes,omitempty"`  // Base interval for Poisson
+	IntervalJitterMinutes int      `json:"interval_jitter_minutes,omitempty"` // Interval variance
+	
+	// Scheduling constraints
+	ActiveDays           []string  `json:"active_days,omitempty"`            // ["monday", "tuesday", ...]
+	ActiveHours          []int     `json:"active_hours,omitempty"`           // [8, 9, 10, 17, 18, 19]
+	Probability          float64   `json:"probability,omitempty"`            // 0.0-1.0 chance of occurring
+	WeekendRateReduction float64   `json:"weekend_rate_reduction,omitempty"` // Multiplier for weekends
+	WeekendIntensityReduction float64 `json:"weekend_intensity_reduction,omitempty"` // Intensity reduction on weekends
+	
+	// Multi-peak specific
+	Peaks                []Peak    `json:"peaks,omitempty"`                  // For multi_peak_daily
+	
+	// Cascade specific
+	CascadeStages        int       `json:"cascade_stages,omitempty"`         // Number of cascade stages
+	StageDelayMinutes    int       `json:"stage_delay_minutes,omitempty"`    // Delay between stages
+	StageJitterMinutes   int       `json:"stage_jitter_minutes,omitempty"`   // Jitter in stage delays
 }
 
 // SpikeEvent represents an actual spike occurrence during simulation
@@ -97,6 +139,7 @@ func (sg *SpikeGenerator) generateScenarioEvents(scenario SpikeScenario, startTi
 	var events []SpikeEvent
 	
 	switch scenario.Pattern.Type {
+	// Legacy patterns (kept for compatibility)
 	case PredictableDaily:
 		events = sg.generateDailySpikes(scenario, startTime, endTime)
 	case RandomPoisson:
@@ -107,6 +150,19 @@ func (sg *SpikeGenerator) generateScenarioEvents(scenario SpikeScenario, startTi
 		events = sg.generateCascadeSpikes(scenario, startTime, endTime)
 	case GradualRamp:
 		events = sg.generateGradualRampSpikes(scenario, startTime, endTime)
+	
+	// Realistic patterns with scheduling
+	case DailyWithSchedule:
+		events = sg.generateScheduledDailySpikes(scenario, startTime, endTime)
+	case PoissonWithSchedule:
+		events = sg.generateScheduledPoissonSpikes(scenario, startTime, endTime)
+	case WeeklyWithSchedule:
+		events = sg.generateScheduledWeeklySpikes(scenario, startTime, endTime)
+	case MultiPeakDaily:
+		events = sg.generateMultiPeakDailySpikes(scenario, startTime, endTime)
+	case CascadeWithSchedule:
+		events = sg.generateScheduledCascadeSpikes(scenario, startTime, endTime)
+	
 	default:
 		return nil, fmt.Errorf("unknown spike type: %s", scenario.Pattern.Type)
 	}
@@ -461,4 +517,262 @@ func (sg *SpikeGenerator) sortEventsByTime(events []SpikeEvent) {
 			}
 		}
 	}
+}
+
+// generateScheduledDailySpikes creates realistic daily spikes with jitter and scheduling constraints
+func (sg *SpikeGenerator) generateScheduledDailySpikes(scenario SpikeScenario, startTime, endTime time.Time) []SpikeEvent {
+	var events []SpikeEvent
+	pattern := scenario.Pattern
+	
+	// Parse base time
+	baseHour, baseMin := sg.parseTriggerTime(pattern.BaseTime)
+	if baseHour == -1 {
+		baseHour, baseMin = sg.parseTriggerTime(pattern.TriggerTime) // fallback to legacy
+	}
+	
+	currentDay := startTime
+	eventID := 1
+	
+	for currentDay.Before(endTime) {
+		// Check if this day is active
+		if !sg.isDayActive(currentDay, pattern.ActiveDays) {
+			currentDay = currentDay.Add(24 * time.Hour)
+			continue
+		}
+		
+		// Check probability
+		if pattern.Probability > 0 && sg.random.Float64() > pattern.Probability {
+			currentDay = currentDay.Add(24 * time.Hour)
+			continue
+		}
+		
+		// Calculate actual trigger time with jitter
+		jitter := 0
+		if pattern.TimeJitterMinutes > 0 {
+			jitter = sg.random.Intn(2*pattern.TimeJitterMinutes) - pattern.TimeJitterMinutes
+		}
+		
+		spikeTime := time.Date(
+			currentDay.Year(), currentDay.Month(), currentDay.Day(),
+			baseHour, baseMin, 0, 0, currentDay.Location(),
+		).Add(time.Duration(jitter) * time.Minute)
+		
+		// Check if spike time is in active hours
+		if !sg.isHourActive(spikeTime.Hour(), pattern.ActiveHours) {
+			currentDay = currentDay.Add(24 * time.Hour)
+			continue
+		}
+		
+		// Calculate duration with jitter
+		duration := pattern.DurationMinutes
+		if duration == 0 {
+			duration = 45 // default
+		}
+		if pattern.DurationJitterMinutes > 0 {
+			durationJitter := sg.random.Intn(2*pattern.DurationJitterMinutes) - pattern.DurationJitterMinutes
+			duration += durationJitter
+			if duration < 5 {
+				duration = 5 // minimum duration
+			}
+		}
+		
+		// Adjust intensity for weekends
+		intensity := pattern.ProcessRateMultiplier
+		if sg.isWeekend(spikeTime) && pattern.WeekendIntensityReduction > 0 {
+			intensity *= (1.0 - pattern.WeekendIntensityReduction)
+		}
+		
+		if spikeTime.After(startTime) && spikeTime.Before(endTime) {
+			event := SpikeEvent{
+				ID:                    fmt.Sprintf("%s-%d", scenario.Name, eventID),
+				Name:                  scenario.Name,
+				StartTime:             spikeTime,
+				EndTime:               spikeTime.Add(time.Duration(duration) * time.Minute),
+				PeakTime:              spikeTime.Add(time.Duration(duration/2) * time.Minute),
+				ExecutorType:          pattern.ExecutorType,
+				PriorityDistribution:  pattern.PriorityDistribution,
+				DataLocation:          pattern.DataLocation,
+				DataSizeGB:           pattern.DataSizeGB,
+				IntensityProfile:      sg.createIntensityProfile(duration, intensity),
+			}
+			events = append(events, event)
+			eventID++
+		}
+		
+		currentDay = currentDay.Add(24 * time.Hour)
+	}
+	
+	return events
+}
+
+// generateScheduledPoissonSpikes creates Poisson-distributed spikes with scheduling constraints
+func (sg *SpikeGenerator) generateScheduledPoissonSpikes(scenario SpikeScenario, startTime, endTime time.Time) []SpikeEvent {
+	var events []SpikeEvent
+	pattern := scenario.Pattern
+	
+	// Use base interval with jitter
+	baseInterval := pattern.BaseIntervalMinutes
+	if baseInterval == 0 {
+		baseInterval = pattern.MeanIntervalMinutes // fallback to legacy
+	}
+	if baseInterval == 0 {
+		baseInterval = 90 // default
+	}
+	
+	currentTime := startTime
+	eventID := 1
+	
+	for currentTime.Before(endTime) {
+		// Calculate next spike time with jitter
+		interval := baseInterval
+		if pattern.IntervalJitterMinutes > 0 {
+			jitter := sg.random.Intn(2*pattern.IntervalJitterMinutes) - pattern.IntervalJitterMinutes
+			interval += jitter
+			if interval < 15 {
+				interval = 15 // minimum interval
+			}
+		}
+		
+		// Add Poisson randomness
+		poissonInterval := sg.poissonInterval(float64(interval))
+		currentTime = currentTime.Add(time.Duration(poissonInterval) * time.Minute)
+		
+		if currentTime.After(endTime) {
+			break
+		}
+		
+		// Check scheduling constraints
+		if !sg.isDayActive(currentTime, pattern.ActiveDays) {
+			continue
+		}
+		
+		if !sg.isHourActive(currentTime.Hour(), pattern.ActiveHours) {
+			continue
+		}
+		
+		if pattern.Probability > 0 && sg.random.Float64() > pattern.Probability {
+			continue
+		}
+		
+		// Calculate duration with jitter
+		duration := pattern.DurationMinutes
+		if duration == 0 {
+			duration = 15 // default
+		}
+		if pattern.DurationJitterMinutes > 0 {
+			durationJitter := sg.random.Intn(2*pattern.DurationJitterMinutes) - pattern.DurationJitterMinutes
+			duration += durationJitter
+			if duration < 5 {
+				duration = 5
+			}
+		}
+		
+		// Adjust intensity for weekends
+		intensity := pattern.ProcessRateMultiplier
+		if sg.isWeekend(currentTime) && pattern.WeekendRateReduction > 0 {
+			intensity *= pattern.WeekendRateReduction
+		}
+		
+		event := SpikeEvent{
+			ID:                    fmt.Sprintf("%s-%d", scenario.Name, eventID),
+			Name:                  scenario.Name,
+			StartTime:             currentTime,
+			EndTime:               currentTime.Add(time.Duration(duration) * time.Minute),
+			PeakTime:              currentTime.Add(time.Duration(duration/2) * time.Minute),
+			ExecutorType:          pattern.ExecutorType,
+			PriorityDistribution:  pattern.PriorityDistribution,
+			DataLocation:          pattern.DataLocation,
+			DataSizeGB:           pattern.DataSizeGB,
+			IntensityProfile:      sg.createIntensityProfile(duration, intensity),
+		}
+		events = append(events, event)
+		eventID++
+	}
+	
+	return events
+}
+
+// Helper functions for scheduling
+func (sg *SpikeGenerator) isDayActive(t time.Time, activeDays []string) bool {
+	if len(activeDays) == 0 {
+		return true // no restriction
+	}
+	
+	dayName := strings.ToLower(t.Weekday().String())
+	for _, activeDay := range activeDays {
+		if strings.ToLower(activeDay) == dayName {
+			return true
+		}
+	}
+	return false
+}
+
+func (sg *SpikeGenerator) isHourActive(hour int, activeHours []int) bool {
+	if len(activeHours) == 0 {
+		return true // no restriction
+	}
+	
+	for _, activeHour := range activeHours {
+		if hour == activeHour {
+			return true
+		}
+	}
+	return false
+}
+
+func (sg *SpikeGenerator) isWeekend(t time.Time) bool {
+	return t.Weekday() == time.Saturday || t.Weekday() == time.Sunday
+}
+
+// Stub implementations for other realistic spike types (can be implemented later)
+func (sg *SpikeGenerator) generateScheduledWeeklySpikes(scenario SpikeScenario, startTime, endTime time.Time) []SpikeEvent {
+	// For now, delegate to scheduled daily spikes
+	return sg.generateScheduledDailySpikes(scenario, startTime, endTime)
+}
+
+func (sg *SpikeGenerator) generateMultiPeakDailySpikes(scenario SpikeScenario, startTime, endTime time.Time) []SpikeEvent {
+	var events []SpikeEvent
+	pattern := scenario.Pattern
+	
+	// Generate events for each peak
+	for _, peak := range pattern.Peaks {
+		// Create temporary scenario for this peak
+		tempScenario := scenario
+		tempScenario.Pattern.BaseTime = peak.BaseTime
+		tempScenario.Pattern.TimeJitterMinutes = peak.TimeJitterMinutes
+		tempScenario.Pattern.DurationMinutes = peak.DurationMinutes
+		tempScenario.Pattern.ProcessRateMultiplier = peak.Intensity
+		
+		peakEvents := sg.generateScheduledDailySpikes(tempScenario, startTime, endTime)
+		events = append(events, peakEvents...)
+	}
+	
+	return events
+}
+
+func (sg *SpikeGenerator) generateScheduledCascadeSpikes(scenario SpikeScenario, startTime, endTime time.Time) []SpikeEvent {
+	// For now, delegate to scheduled Poisson spikes
+	return sg.generateScheduledPoissonSpikes(scenario, startTime, endTime)
+}
+
+// poissonInterval calculates Poisson-distributed interval
+func (sg *SpikeGenerator) poissonInterval(lambda float64) int {
+	// Simple exponential distribution approximation
+	u := sg.random.Float64()
+	return int(-lambda * math.Log(1-u))
+}
+
+// createIntensityProfile creates a simple bell-curve intensity profile for a spike
+func (sg *SpikeGenerator) createIntensityProfile(durationMinutes int, intensity float64) []float64 {
+	profile := make([]float64, durationMinutes)
+	
+	for i := 0; i < durationMinutes; i++ {
+		t := float64(i) / float64(durationMinutes)
+		
+		// Bell curve intensity (normal distribution shape)
+		bellCurve := math.Exp(-math.Pow((t-0.5)*4, 2) / 2)
+		profile[i] = intensity * bellCurve
+	}
+	
+	return profile
 }

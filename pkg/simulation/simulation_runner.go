@@ -233,7 +233,7 @@ func (sr *SimulationRunner) checkForNewSpikes() {
 				Event:         spike,
 				CurrentMinute: 0,
 			}
-			log.Printf("⚡ Spike started: %s (executor: %s, priority: %v)", 
+			log.Printf("Spike started: %s (executor: %s, priority: %v)", 
 				spike.Name, spike.ExecutorType, spike.PriorityDistribution)
 		}
 	}
@@ -284,13 +284,13 @@ func (sr *SimulationRunner) makeScalingDecisions() {
 	// Get current executors (simplified for simulation)
 	currentExecutors := sr.getCurrentExecutors()
 	
-	log.Printf("🔍 Making scaling decision: queue=%d processes, current executors=%d", 
+	log.Printf("Making scaling decision: queue=%d processes, current executors=%d", 
 		len(queueState), len(currentExecutors))
 	
 	// Make scaling decisions
 	decisions := sr.CAPEAutoscaler.MakeScalingDecision(queueState, currentExecutors)
 	
-	log.Printf("📊 CAPE returned %d scaling decisions", len(decisions))
+	log.Printf("CAPE returned %d scaling decisions", len(decisions))
 	
 	// Execute decisions
 	for _, decision := range decisions {
@@ -302,7 +302,7 @@ func (sr *SimulationRunner) makeScalingDecisions() {
 
 // executeScalingDecision implements a scaling decision
 func (sr *SimulationRunner) executeScalingDecision(decision autoscaler.ScalingDecision) {
-	log.Printf("📊 Scaling Decision: %s %d x %s - %s", 
+	log.Printf("Scaling Decision: %s %d x %s - %s", 
 		decision.Action, decision.Count, decision.ExecutorID, decision.Reason)
 	
 	switch decision.Action {
@@ -339,7 +339,7 @@ func (sr *SimulationRunner) updateDeployedExecutors() {
 		// Check if executor is ready
 		if !executor.IsReady && sr.CurrentTime.After(executor.ReadyTime) {
 			executor.IsReady = true
-			log.Printf("✅ Executor ready: %s", executor.ExecutorID)
+			log.Printf("Executor ready: %s", executor.ExecutorID)
 		}
 		
 		// Calculate cost (simplified)
@@ -467,8 +467,8 @@ func (sr *SimulationRunner) shouldReport() bool {
 func (sr *SimulationRunner) generateReport() {
 	runtime := sr.CurrentTime.Sub(sr.SimulationStart)
 	
-	log.Printf("\n📊 Simulation Status (T+%v)", runtime)
-	log.Printf("════════════════════════════════════")
+	log.Printf("\nSimulation Status (T+%v)", runtime)
+	log.Printf("========================================")
 	log.Printf("Queue: depth=%d, max=%d", 
 		sr.QueueSimulator.GetQueueState().QueueDepth,
 		sr.Metrics.MaxQueueDepth)
@@ -489,21 +489,21 @@ func (sr *SimulationRunner) generateReport() {
 	log.Printf("Cost: total=$%.2f, per process=$%.4f",
 		sr.Metrics.TotalInfrastructureCost,
 		sr.Metrics.TotalInfrastructureCost/float64(sr.Metrics.TotalProcessesCompleted+1))
-	log.Printf("════════════════════════════════════\n")
+	log.Printf("========================================\n")
 	
 	sr.LastReportTime = sr.CurrentTime
 }
 
 // generateFinalReport generates the final simulation report
 func (sr *SimulationRunner) generateFinalReport() {
-	log.Printf("\n🎯 CAPE Simulation Final Report")
-	log.Printf("═══════════════════════════════════════════════")
+	log.Printf("\nCAPE Simulation Final Report")
+	log.Printf("==============================================")
 	
 	runtime := sr.CurrentTime.Sub(sr.SimulationStart)
 	log.Printf("Simulation Duration: %v", runtime)
 	log.Printf("Total Spike Events: %d", len(sr.SpikeEvents))
 	
-	log.Printf("\n📈 Process Metrics:")
+	log.Printf("\nProcess Metrics:")
 	log.Printf("   Generated: %d", sr.Metrics.TotalProcessesGenerated)
 	log.Printf("   Completed: %d (%.1f%%)", 
 		sr.Metrics.TotalProcessesCompleted,
@@ -512,31 +512,31 @@ func (sr *SimulationRunner) generateFinalReport() {
 	log.Printf("   Avg Wait Time: %v", sr.Metrics.TotalWaitTime/time.Duration(sr.Metrics.TotalProcessesCompleted+1))
 	log.Printf("   Max Wait Time: %v", sr.Metrics.MaxWaitTime)
 	
-	log.Printf("\n⚡ Scaling Performance:")
+	log.Printf("\nScaling Performance:")
 	log.Printf("   Total Decisions: %d", sr.Metrics.TotalScalingDecisions)
 	log.Printf("   Scale Up: %d", sr.Metrics.ScaleUpDecisions)
 	log.Printf("   Scale Down: %d", sr.Metrics.ScaleDownDecisions)
 	log.Printf("   Total Executors Deployed: %d", sr.Metrics.TotalDeployedExecutors)
 	
-	log.Printf("\n✅ SLA Compliance:")
+	log.Printf("\nSLA Compliance:")
 	log.Printf("   Compliance Rate: %.2f%%", sr.Metrics.SLAComplianceRate*100)
 	log.Printf("   Violations: %d", sr.Metrics.SLAViolations)
 	
-	log.Printf("\n💰 Cost Analysis:")
+	log.Printf("\nCost Analysis:")
 	log.Printf("   Total Infrastructure Cost: $%.2f", sr.Metrics.TotalInfrastructureCost)
 	log.Printf("   Cost per Process: $%.4f", 
 		sr.Metrics.TotalInfrastructureCost/float64(sr.Metrics.TotalProcessesCompleted+1))
 	log.Printf("   Cost per Hour: $%.2f", 
 		sr.Metrics.TotalInfrastructureCost/runtime.Hours())
 	
-	log.Printf("\n🧠 Learning & Adaptation:")
+	log.Printf("\nLearning & Adaptation:")
 	if sr.Config.SimulationParameters.EnableLearning {
 		log.Printf("   CAPE successfully adapted to spike patterns")
 		log.Printf("   Exploration rate reduced over time")
 		log.Printf("   Weight convergence achieved")
 	}
 	
-	log.Printf("\n═══════════════════════════════════════════════")
+	log.Printf("\n==============================================")
 	
 	// Save detailed metrics to file
 	sr.saveMetricsToFile()
