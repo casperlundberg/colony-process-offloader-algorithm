@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/casperlundberg/colony-process-offloader-algorithm/pkg/autoscaler"
+	"github.com/casperlundberg/colony-process-offloader-algorithm/internal/autoscaler"
 )
 
 // SimulationRunner orchestrates the entire spike simulation

@@ -23,24 +23,31 @@ The system consists of several key components:
 
 ## Project Structure
 
+Following the [eislab-cps/go-template](https://github.com/eislab-cps/go-template) structure:
+
 ```
 .
-├── bin/                    # Compiled binaries (gitignored)
-├── cmd/                    # Main applications (future use)
-├── config/                 # Configuration files
+├── cmd/                   # Application entry point
+│   └── main.go           # Main executable
+├── internal/             # Private application code
+│   ├── autoscaler/      # CAPE autoscaler implementation
+│   ├── simulation/      # Simulation components
+│   └── cli/             # CLI utilities
+├── pkg/                  # Public libraries
+│   ├── learning/        # ML algorithms (ARIMA, CUSUM, Q-Learning, etc.)
+│   │   ├── arima.go     # ARIMA implementation
+│   │   ├── arima_test.go # ARIMA tests
+│   │   └── ...          # Other algorithms with *_test.go files
+│   └── models/          # Shared data models and types
+├── config/               # Configuration files
 │   ├── autoscaler_config.json
 │   ├── executor_catalog_v3.json
 │   └── spike_scenarios.json
-├── examples/               
-│   └── spike-simulation/   # Spike simulation demo
-├── pkg/                    
-│   ├── autoscaler/        # CAPE autoscaler implementation
-│   ├── learning/          # ML algorithms (ARIMA, CUSUM, etc.)
-│   ├── models/            # Data models and types
-│   └── simulation/        # Simulation components
-├── results/               # Simulation outputs (gitignored)
-├── test/                  # Test files
-└── Makefile              # Build automation
+├── bin/                  # Compiled binaries (gitignored)
+├── results/             # Simulation outputs (gitignored)
+├── Makefile            # Build automation
+├── go.mod              # Go modules
+└── go.sum              # Go dependencies
 ```
 
 ## Getting Started
@@ -64,7 +71,7 @@ cd colony-process-offloader-algorithm
 make build
 
 # Or build directly with go
-go build -o bin/spike-simulation ./examples/spike-simulation
+go build -o bin/cape-simulator ./cmd
 ```
 
 ### Running Simulations
@@ -80,7 +87,7 @@ make run
 make spike-sim ARGS='-hours 24'
 
 # Run with custom configuration files
-./bin/spike-simulation \
+./bin/cape-simulator \
   -hours 48 \
   -spikes ./config/spike_scenarios.json \
   -catalog ./config/executor_catalog_v3.json \
@@ -167,11 +174,27 @@ Cost: total=$86.80, per process=$0.1117
 
 ## Development
 
-### Running Tests
+### Testing
+
+Tests follow Go conventions and are placed alongside the code they test:
+- Test files are named `*_test.go`
+- Tests are in the same package as the code being tested
+- Example: `pkg/learning/arima.go` → `pkg/learning/arima_test.go`
+
+#### Running Tests
 ```bash
 make test
 # or
 go test ./...
+
+# Run tests with race detection
+go test -race ./...
+
+# Run tests with coverage
+go test -cover ./...
+
+# Run tests for a specific package
+go test ./pkg/learning/...
 ```
 
 ### Code Formatting

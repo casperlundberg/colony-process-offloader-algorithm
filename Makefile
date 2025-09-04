@@ -7,35 +7,34 @@
 BINARY_DIR=bin
 CMD_DIR=cmd
 PKG_DIR=pkg
-SPIKE_SIM_BINARY=$(BINARY_DIR)/spike-simulation
+INTERNAL_DIR=internal
+BINARY_NAME=cape-simulator
+BINARY_PATH=$(BINARY_DIR)/$(BINARY_NAME)
 
 # Default target
 all: build
 
 # Build all binaries
-build: build-spike-sim
-
-# Build spike simulation
-build-spike-sim:
-	@echo "Building spike simulation..."
+build:
+	@echo "Building cape-simulator..."
 	@mkdir -p $(BINARY_DIR)
-	@go build -o $(SPIKE_SIM_BINARY) ./examples/spike-simulation
+	@go build -o $(BINARY_PATH) ./$(CMD_DIR)
 
 # Run spike simulation with default parameters
-run: build-spike-sim
+run: build
 	@echo "Running spike simulation (1 hour)..."
-	@$(SPIKE_SIM_BINARY) -hours 1
+	@$(BINARY_PATH) -hours 1
 
 # Run full spike simulation (168 hours)
-run-full: build-spike-sim
+run-full: build
 	@echo "Running full spike simulation (168 hours)..."
-	@$(SPIKE_SIM_BINARY) -hours 168 | tee results/simulation_$(shell date +%s).log
+	@$(BINARY_PATH) -hours 168 | tee results/simulation_$(shell date +%s).log
 
 # Run spike simulation with custom parameters
-spike-sim: build-spike-sim
+spike-sim: build
 	@echo "Running spike simulation with custom parameters..."
 	@echo "Usage: make spike-sim ARGS='-hours 24'"
-	@$(SPIKE_SIM_BINARY) $(ARGS)
+	@$(BINARY_PATH) $(ARGS)
 
 # Run tests
 test:
