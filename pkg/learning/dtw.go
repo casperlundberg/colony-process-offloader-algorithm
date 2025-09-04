@@ -311,7 +311,12 @@ func (dtw *DTW) DiscoverPatterns(timeSeries []float64, minPatternLen, maxPattern
 	
 	for _, candidate := range patternCandidates {
 		if candidate.Count >= minOccurrences {
-			patternID := fmt.Sprintf("discovered_%s_%d", candidate.Signature[:8], len(discoveredPatterns))
+			// Ensure signature is long enough for substring
+			signaturePart := candidate.Signature
+			if len(signaturePart) > 8 {
+				signaturePart = signaturePart[:8]
+			}
+			patternID := fmt.Sprintf("discovered_%s_%d", signaturePart, len(discoveredPatterns))
 			
 			pattern := Pattern{
 				ID:         patternID,
