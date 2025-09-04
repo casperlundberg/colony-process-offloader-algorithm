@@ -1,0 +1,65 @@
+{
+  "description": "CAPE Autoscaler configuration for spike simulation",
+  
+  "decision_interval_minutes": 5,
+  "lookahead_minutes": 30,
+  "max_cost_per_hour": 100.0,
+  "target_sla_percentile": 95.0,
+  "exploration_rate": 0.2,
+  "learning_rate": 0.01,
+  
+  "min_executors": {
+    "exec-ml-iceland-01": 0,
+    "exec-ml-aws-east-01": 0,
+    "exec-edge-stockholm-01": 1,
+    "exec-edge-nyc-01": 0,
+    "exec-cloud-aws-east-01": 0,
+    "exec-cloud-aws-west-01": 0
+  },
+  
+  "max_executors": {
+    "exec-ml-iceland-01": 3,
+    "exec-ml-aws-east-01": 5,
+    "exec-edge-stockholm-01": 10,
+    "exec-edge-nyc-01": 10,
+    "exec-cloud-aws-east-01": 20,
+    "exec-cloud-aws-west-01": 15
+  },
+  
+  "sla_thresholds": {
+    "max_wait_time_priority_9": 60,
+    "max_wait_time_priority_8": 120,
+    "max_wait_time_priority_7": 180,
+    "max_wait_time_priority_6": 300,
+    "max_wait_time_default": 600
+  },
+  
+  "cost_constraints": {
+    "max_data_transfer_cost_per_gb": 0.20,
+    "max_executor_cost_per_hour": 10.0,
+    "prefer_spot_instances": true,
+    "cost_optimization_weight": 0.3
+  },
+  
+  "learning_parameters": {
+    "arima_p": 3,
+    "arima_d": 1,
+    "arima_q": 2,
+    "ewma_alpha": 0.167,
+    "cusum_threshold_sigma": 5.0,
+    "cusum_drift_sigma": 0.5,
+    "qlearning_alpha": 0.1,
+    "qlearning_gamma": 0.9,
+    "qlearning_epsilon": 0.3,
+    "thompson_sampling_initial_alpha": 1.0,
+    "thompson_sampling_initial_beta": 1.0
+  },
+  
+  "adaptation_rules": {
+    "increase_urgency_on_sla_miss": true,
+    "decrease_cost_weight_on_budget_exceed": true,
+    "increase_exploration_on_prediction_miss": true,
+    "convergence_threshold": 0.95,
+    "min_samples_for_learning": 10
+  }
+}

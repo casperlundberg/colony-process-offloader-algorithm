@@ -1,0 +1,86 @@
+{
+  "base_process_rate": 2.0,
+  "description": "CAPE spike simulation scenarios for testing weight adaptation",
+  
+  "scenarios": [
+    {
+      "name": "ml_morning_training",
+      "description": "Daily ML training job spike at 9 AM - predictable high-priority GPU workload",
+      "pattern": {
+        "type": "predictable_daily",
+        "trigger_time": "09:00:00",
+        "duration_minutes": 45,
+        "process_rate_multiplier": 8.0,
+        "executor_type": "ml",
+        "priority_distribution": [7, 8, 8, 9, 9],
+        "data_location": "iceland",
+        "data_size_gb": 500.0
+      }
+    },
+    {
+      "name": "edge_iot_surge",
+      "description": "Random IoT sensor data surges - unpredictable edge processing",
+      "pattern": {
+        "type": "random_poisson",
+        "mean_interval_minutes": 120,
+        "duration_minutes": 15,
+        "process_rate_multiplier": 12.0,
+        "executor_type": "edge",
+        "priority_distribution": [8, 9, 9, 10],
+        "data_location": "stockholm",
+        "data_size_gb": 5.0
+      }
+    },
+    {
+      "name": "batch_evening_processing",
+      "description": "End-of-day batch processing wave at 6 PM - cost-sensitive cloud workload",
+      "pattern": {
+        "type": "predictable_daily",
+        "trigger_time": "18:00:00",
+        "duration_minutes": 90,
+        "process_rate_multiplier": 5.0,
+        "executor_type": "cloud",
+        "priority_distribution": [4, 5, 6, 6, 7],
+        "data_location": "aws_east",
+        "data_size_gb": 100.0
+      }
+    },
+    {
+      "name": "ml_inference_cascade",
+      "description": "ML inference that triggers downstream processing - cascade pattern",
+      "pattern": {
+        "type": "cascade",
+        "duration_minutes": 30,
+        "process_rate_multiplier": 6.0,
+        "executor_type": "ml",
+        "priority_distribution": [7, 8, 9],
+        "data_location": "iceland",
+        "data_size_gb": 50.0
+      }
+    },
+    {
+      "name": "gradual_traffic_increase",
+      "description": "Gradual traffic ramp during business hours - slow build pattern",
+      "pattern": {
+        "type": "gradual_ramp",
+        "duration_minutes": 120,
+        "ramp_up_minutes": 60,
+        "process_rate_multiplier": 4.0,
+        "executor_type": "edge",
+        "priority_distribution": [5, 6, 7, 7, 8],
+        "data_location": "stockholm",
+        "data_size_gb": 20.0
+      }
+    }
+  ],
+  
+  "simulation_parameters": {
+    "duration_hours": 168,
+    "warmup_hours": 24,
+    "measurement_interval_minutes": 15,
+    "enable_learning": true,
+    "initial_exploration_rate": 0.3,
+    "target_sla_percentile": 95,
+    "max_cost_per_hour": 100.0
+  }
+}

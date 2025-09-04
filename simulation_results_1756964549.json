@@ -1,0 +1,1112 @@
+{
+  "TotalProcessesGenerated": 1290,
+  "TotalProcessesCompleted": 0,
+  "TotalProcessesFailed": 0,
+  "MaxQueueDepth": 1290,
+  "AverageQueueDepth": 0,
+  "TotalWaitTime": 0,
+  "MaxWaitTime": 0,
+  "TotalScalingDecisions": 0,
+  "ScaleUpDecisions": 0,
+  "ScaleDownDecisions": 0,
+  "TotalDeployedExecutors": 0,
+  "TotalInfrastructureCost": 0,
+  "TotalDataTransferCost": 0,
+  "CostPerProcess": 0,
+  "SLAViolations": 0,
+  "SLAComplianceRate": 0,
+  "PredictionAccuracy": 0,
+  "WeightEvolution": {},
+  "StrategySelection": {},
+  "TimeSeriesData": [
+    {
+      "Timestamp": "2025-09-04T07:42:29.375572408+02:00",
+      "QueueDepth": 3,
+      "ActiveExecutors": 0,
+      "ProcessRate": -1800000000,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T07:43:29.375572408+02:00",
+      "QueueDepth": 3,
+      "ActiveExecutors": 0,
+      "ProcessRate": 3.000000005,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T07:44:29.375572408+02:00",
+      "QueueDepth": 4,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.000000001666667,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T07:45:29.375572408+02:00",
+      "QueueDepth": 9,
+      "ActiveExecutors": 0,
+      "ProcessRate": 3.000000001666667,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T07:46:29.375572408+02:00",
+      "QueueDepth": 14,
+      "ActiveExecutors": 0,
+      "ProcessRate": 3.5000000014583335,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T07:47:29.375572408+02:00",
+      "QueueDepth": 18,
+      "ActiveExecutors": 0,
+      "ProcessRate": 3.6000000012,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T07:48:29.375572408+02:00",
+      "QueueDepth": 19,
+      "ActiveExecutors": 0,
+      "ProcessRate": 3.166666667546296,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T07:49:29.375572408+02:00",
+      "QueueDepth": 20,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.8571428578231295,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T07:50:29.375572408+02:00",
+      "QueueDepth": 23,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.875000000598958,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T07:51:29.375572408+02:00",
+      "QueueDepth": 24,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.6666666671604937,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T07:52:29.375572408+02:00",
+      "QueueDepth": 25,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.5000000004166667,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T07:53:29.375572408+02:00",
+      "QueueDepth": 27,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.4545454549173553,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T07:54:29.375572408+02:00",
+      "QueueDepth": 30,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.5000000003472223,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T07:55:29.375572408+02:00",
+      "QueueDepth": 32,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.4615384618540435,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T07:56:29.375572408+02:00",
+      "QueueDepth": 34,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.4285714288605442,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T07:57:29.375572408+02:00",
+      "QueueDepth": 35,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.3333333335925928,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T07:58:29.375572408+02:00",
+      "QueueDepth": 35,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.1875000002278644,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T07:59:29.375572408+02:00",
+      "QueueDepth": 40,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.3529411767012687,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:00:29.375572408+02:00",
+      "QueueDepth": 45,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.5000000002314815,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:01:29.375572408+02:00",
+      "QueueDepth": 45,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.3684210528393352,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:02:29.375572408+02:00",
+      "QueueDepth": 46,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.3000000001916665,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:03:29.375572408+02:00",
+      "QueueDepth": 47,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.2380952382728645,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:04:29.375572408+02:00",
+      "QueueDepth": 54,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.454545454731405,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:05:29.375572408+02:00",
+      "QueueDepth": 56,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.434782608872086,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:06:29.375572408+02:00",
+      "QueueDepth": 58,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.416666666834491,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:07:29.375572408+02:00",
+      "QueueDepth": 60,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.40000000016,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:08:29.375572408+02:00",
+      "QueueDepth": 61,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.3461538463042406,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:09:29.375572408+02:00",
+      "QueueDepth": 63,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.3333333334773663,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:10:29.375572408+02:00",
+      "QueueDepth": 63,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.2500000001339284,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:11:29.375572408+02:00",
+      "QueueDepth": 63,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.1724137932282996,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:12:29.375572408+02:00",
+      "QueueDepth": 64,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.133333333451852,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:13:29.375572408+02:00",
+      "QueueDepth": 64,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.0645161291432537,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:14:29.375572408+02:00",
+      "QueueDepth": 65,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.0312500001057945,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:15:29.375572408+02:00",
+      "QueueDepth": 69,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.090909091014692,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:16:29.375572408+02:00",
+      "QueueDepth": 69,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.029411764805363,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:17:29.375572408+02:00",
+      "QueueDepth": 71,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.028571428668027,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:18:29.375572408+02:00",
+      "QueueDepth": 74,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.05555555565072,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:19:29.375572408+02:00",
+      "QueueDepth": 76,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.0540540541465786,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:20:29.375572408+02:00",
+      "QueueDepth": 76,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.000000000087719,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:21:29.375572408+02:00",
+      "QueueDepth": 78,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.00000000008547,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:22:29.375572408+02:00",
+      "QueueDepth": 81,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.0250000000843746,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:23:29.375572408+02:00",
+      "QueueDepth": 84,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.0487804878881617,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:24:29.375572408+02:00",
+      "QueueDepth": 86,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.047619047700302,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:25:29.375572408+02:00",
+      "QueueDepth": 87,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.023255814031909,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:26:29.375572408+02:00",
+      "QueueDepth": 89,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.022727272803891,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:27:29.375572408+02:00",
+      "QueueDepth": 89,
+      "ActiveExecutors": 0,
+      "ProcessRate": 1.9777777778510286,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:28:29.375572408+02:00",
+      "QueueDepth": 90,
+      "ActiveExecutors": 0,
+      "ProcessRate": 1.956521739201323,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:29:29.375572408+02:00",
+      "QueueDepth": 93,
+      "ActiveExecutors": 0,
+      "ProcessRate": 1.9787234043254864,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:30:29.375572408+02:00",
+      "QueueDepth": 96,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.0000000000694445,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:31:29.375572408+02:00",
+      "QueueDepth": 100,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.0408163266000274,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:32:29.375572408+02:00",
+      "QueueDepth": 103,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.0600000000686665,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:33:29.375572408+02:00",
+      "QueueDepth": 105,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.0588235294790462,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:34:29.375572408+02:00",
+      "QueueDepth": 106,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.0384615385268736,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:35:29.375572408+02:00",
+      "QueueDepth": 107,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.018867924591788,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:36:29.375572408+02:00",
+      "QueueDepth": 109,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.0185185185808185,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:37:29.375572408+02:00",
+      "QueueDepth": 109,
+      "ActiveExecutors": 0,
+      "ProcessRate": 1.9818181818782368,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:38:29.375572408+02:00",
+      "QueueDepth": 112,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.0000000000595235,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:39:29.375572408+02:00",
+      "QueueDepth": 114,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.0000000000584794,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:40:29.375572408+02:00",
+      "QueueDepth": 116,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.0000000000574714,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:41:29.375572408+02:00",
+      "QueueDepth": 119,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.0169491525993486,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:42:29.375572408+02:00",
+      "QueueDepth": 123,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.0500000000569445,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:43:29.375572408+02:00",
+      "QueueDepth": 126,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.0655737705482395,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:44:29.375572408+02:00",
+      "QueueDepth": 131,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.11290322586325,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:45:29.375572408+02:00",
+      "QueueDepth": 135,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.142857142913832,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:46:29.375572408+02:00",
+      "QueueDepth": 139,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.171875000056559,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:47:29.375572408+02:00",
+      "QueueDepth": 141,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.1692307692863904,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:48:29.375572408+02:00",
+      "QueueDepth": 144,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.181818181873278,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:49:29.375572408+02:00",
+      "QueueDepth": 147,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.1940298508008462,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:50:29.375572408+02:00",
+      "QueueDepth": 152,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.2352941177018453,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:51:29.375572408+02:00",
+      "QueueDepth": 159,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.304347826142617,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:52:29.375572408+02:00",
+      "QueueDepth": 164,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.342857142912925,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:53:29.375572408+02:00",
+      "QueueDepth": 167,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.3521126761115516,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:54:29.375572408+02:00",
+      "QueueDepth": 171,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.375000000054977,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:55:29.375572408+02:00",
+      "QueueDepth": 180,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.4657534247138297,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:56:29.375572408+02:00",
+      "QueueDepth": 185,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.500000000056306,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:57:29.375572408+02:00",
+      "QueueDepth": 190,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.5333333333896295,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:58:29.375572408+02:00",
+      "QueueDepth": 194,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.552631579003347,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T08:59:29.375572408+02:00",
+      "QueueDepth": 203,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.6363636364207004,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:00:29.375572408+02:00",
+      "QueueDepth": 213,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.7307692308275806,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:01:29.375572408+02:00",
+      "QueueDepth": 225,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.848101265882871,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:02:29.375572408+02:00",
+      "QueueDepth": 233,
+      "ActiveExecutors": 0,
+      "ProcessRate": 2.912500000060677,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:03:29.375572408+02:00",
+      "QueueDepth": 244,
+      "ActiveExecutors": 0,
+      "ProcessRate": 3.012345679074328,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:04:29.375572408+02:00",
+      "QueueDepth": 260,
+      "ActiveExecutors": 0,
+      "ProcessRate": 3.1707317073815187,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:05:29.375572408+02:00",
+      "QueueDepth": 287,
+      "ActiveExecutors": 0,
+      "ProcessRate": 3.457831325370639,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:06:29.375572408+02:00",
+      "QueueDepth": 306,
+      "ActiveExecutors": 0,
+      "ProcessRate": 3.6428571429294214,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:07:29.375572408+02:00",
+      "QueueDepth": 344,
+      "ActiveExecutors": 0,
+      "ProcessRate": 4.047058823608766,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:08:29.375572408+02:00",
+      "QueueDepth": 378,
+      "ActiveExecutors": 0,
+      "ProcessRate": 4.395348837294483,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:09:29.375572408+02:00",
+      "QueueDepth": 417,
+      "ActiveExecutors": 0,
+      "ProcessRate": 4.793103448367684,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:10:29.375572408+02:00",
+      "QueueDepth": 458,
+      "ActiveExecutors": 0,
+      "ProcessRate": 5.204545454644025,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:11:29.375572408+02:00",
+      "QueueDepth": 494,
+      "ActiveExecutors": 0,
+      "ProcessRate": 5.550561797856752,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:12:29.375572408+02:00",
+      "QueueDepth": 555,
+      "ActiveExecutors": 0,
+      "ProcessRate": 6.166666666780864,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:13:29.375572408+02:00",
+      "QueueDepth": 588,
+      "ActiveExecutors": 0,
+      "ProcessRate": 6.461538461656804,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:14:29.375572408+02:00",
+      "QueueDepth": 635,
+      "ActiveExecutors": 0,
+      "ProcessRate": 6.902173913168517,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:15:29.375572408+02:00",
+      "QueueDepth": 679,
+      "ActiveExecutors": 0,
+      "ProcessRate": 7.301075268948048,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:16:29.375572408+02:00",
+      "QueueDepth": 716,
+      "ActiveExecutors": 0,
+      "ProcessRate": 7.617021276730798,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:17:29.375572408+02:00",
+      "QueueDepth": 753,
+      "ActiveExecutors": 0,
+      "ProcessRate": 7.926315789612742,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:18:29.375572408+02:00",
+      "QueueDepth": 783,
+      "ActiveExecutors": 0,
+      "ProcessRate": 8.1562500001416,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:19:29.375572408+02:00",
+      "QueueDepth": 819,
+      "ActiveExecutors": 0,
+      "ProcessRate": 8.443298969217238,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:20:29.375572408+02:00",
+      "QueueDepth": 853,
+      "ActiveExecutors": 0,
+      "ProcessRate": 8.70408163280109,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:21:29.375572408+02:00",
+      "QueueDepth": 880,
+      "ActiveExecutors": 0,
+      "ProcessRate": 8.888888889038533,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:22:29.375572408+02:00",
+      "QueueDepth": 899,
+      "ActiveExecutors": 0,
+      "ProcessRate": 8.990000000149832,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:23:29.375572408+02:00",
+      "QueueDepth": 916,
+      "ActiveExecutors": 0,
+      "ProcessRate": 9.069306930842728,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:24:29.375572408+02:00",
+      "QueueDepth": 936,
+      "ActiveExecutors": 0,
+      "ProcessRate": 9.176470588385236,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:25:29.375572408+02:00",
+      "QueueDepth": 960,
+      "ActiveExecutors": 0,
+      "ProcessRate": 9.320388349665379,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:26:29.375572408+02:00",
+      "QueueDepth": 979,
+      "ActiveExecutors": 0,
+      "ProcessRate": 9.413461538612395,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:27:29.375572408+02:00",
+      "QueueDepth": 997,
+      "ActiveExecutors": 0,
+      "ProcessRate": 9.495238095388814,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:28:29.375572408+02:00",
+      "QueueDepth": 1020,
+      "ActiveExecutors": 0,
+      "ProcessRate": 9.62264150958526,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:29:29.375572408+02:00",
+      "QueueDepth": 1039,
+      "ActiveExecutors": 0,
+      "ProcessRate": 9.710280373983025,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:30:29.375572408+02:00",
+      "QueueDepth": 1062,
+      "ActiveExecutors": 0,
+      "ProcessRate": 9.833333333485083,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:31:29.375572408+02:00",
+      "QueueDepth": 1080,
+      "ActiveExecutors": 0,
+      "ProcessRate": 9.908256880885448,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:32:29.375572408+02:00",
+      "QueueDepth": 1099,
+      "ActiveExecutors": 0,
+      "ProcessRate": 9.990909091060468,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:33:29.375572408+02:00",
+      "QueueDepth": 1122,
+      "ActiveExecutors": 0,
+      "ProcessRate": 10.10810810825988,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:34:29.375572408+02:00",
+      "QueueDepth": 1147,
+      "ActiveExecutors": 0,
+      "ProcessRate": 10.241071428723826,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:35:29.375572408+02:00",
+      "QueueDepth": 1169,
+      "ActiveExecutors": 0,
+      "ProcessRate": 10.345132743515414,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:36:29.375572408+02:00",
+      "QueueDepth": 1189,
+      "ActiveExecutors": 0,
+      "ProcessRate": 10.429824561555991,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:37:29.375572408+02:00",
+      "QueueDepth": 1205,
+      "ActiveExecutors": 0,
+      "ProcessRate": 10.478260869717076,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:38:29.375572408+02:00",
+      "QueueDepth": 1220,
+      "ActiveExecutors": 0,
+      "ProcessRate": 10.517241379461455,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:39:29.375572408+02:00",
+      "QueueDepth": 1235,
+      "ActiveExecutors": 0,
+      "ProcessRate": 10.555555555705919,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:40:29.375572408+02:00",
+      "QueueDepth": 1253,
+      "ActiveExecutors": 0,
+      "ProcessRate": 10.61864406794659,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:41:29.375572408+02:00",
+      "QueueDepth": 1265,
+      "ActiveExecutors": 0,
+      "ProcessRate": 10.63025210098922,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-04T09:42:29.375572408+02:00",
+      "QueueDepth": 1290,
+      "ActiveExecutors": 0,
+      "ProcessRate": 10.750000000149305,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    }
+  ]
+}
