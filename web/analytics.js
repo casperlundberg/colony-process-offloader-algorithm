@@ -105,8 +105,12 @@ async function loadSimulation() {
         // Show analytics
         showAnalytics();
         
+        // Enable management buttons
+        enableManagementButtons();
+        
     } catch (error) {
         showError(`Failed to load simulation: ${error.message}`);
+        disableManagementButtons();
     }
 }
 
@@ -584,4 +588,157 @@ function resetTimeRange() {
     
     // Reload all metrics
     loadSimulation();
+}
+
+// CRUD Operations for Simulation Management
+
+function enableManagementButtons() {
+    document.getElementById('editBtn').disabled = false;
+    document.getElementById('cloneBtn').disabled = false;
+    document.getElementById('deleteBtn').disabled = false;
+}
+
+function disableManagementButtons() {
+    document.getElementById('editBtn').disabled = true;
+    document.getElementById('cloneBtn').disabled = true;
+    document.getElementById('deleteBtn').disabled = true;
+}
+
+// Edit simulation
+function showEditDialog() {
+    if (!currentSimulation) return;
+    
+    document.getElementById('editName').value = currentSimulation.name;
+    document.getElementById('editDescription').value = currentSimulation.description;
+    document.getElementById('editModal').style.display = 'block';
+}
+
+function hideEditDialog() {
+    document.getElementById('editModal').style.display = 'none';
+}
+
+document.getElementById('editForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('editName').value;
+    const description = document.getElementById('editDescription').value;
+    
+    try {
+        const response = await fetch(`${API_BASE}/simulations/${currentSimulation.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, description })
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        hideEditDialog();
+        await refreshSimulations();
+        showSuccess('Simulation updated successfully');
+        
+        // Update current simulation object
+        currentSimulation.name = name;
+        currentSimulation.description = description;
+        
+    } catch (error) {
+        showError(`Failed to update simulation: ${error.message}`);
+    }
+});
+
+// Clone simulation
+function showCloneDialog() {
+    if (!currentSimulation) return;
+    
+    document.getElementById('cloneName').value = currentSimulation.name + ' (Copy)';
+    document.getElementById('cloneDescription').value = currentSimulation.description + ' - Cloned from original';
+    document.getElementById('cloneModal').style.display = 'block';
+}
+
+function hideCloneDialog() {
+    document.getElementById('cloneModal').style.display = 'none';
+}
+
+document.getElementById('cloneForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('cloneName').value;
+    const description = document.getElementById('cloneDescription').value;
+    
+    try {
+        const response = await fetch(`${API_BASE}/simulations/${currentSimulation.id}/clone`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, description })
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const result = await response.json();
+        hideCloneDialog();
+        await refreshSimulations();
+        showSuccess(`Simulation cloned successfully! New ID: ${result.simulation_id}`);
+        
+    } catch (error) {
+        showError(`Failed to clone simulation: ${error.message}`);
+    }
+});
+
+// Delete simulation
+function deleteSimulation() {
+    if (!currentSimulation) return;
+    
+    if (!confirm(`Are you sure you want to delete simulation "${currentSimulation.name}"? This action cannot be undone and will delete all associated data.`)) {
+        return;
+    }
+    
+    deleteSimulationConfirmed();
+}
+
+async function deleteSimulationConfirmed() {
+    try {
+        const response = await fetch(`${API_BASE}/simulations/${currentSimulation.id}`, {
+            method: 'DELETE'
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        showSuccess('Simulation deleted successfully');
+        
+        // Reset UI
+        currentSimulation = null;
+        currentMetrics = [];
+        disableManagementButtons();
+        document.getElementById('analyticsContainer').style.display = 'none';
+        document.getElementById('loadingMessage').style.display = 'block';
+        document.getElementById('loadingMessage').textContent = 'Select a simulation to view analytics data';
+        
+        await refreshSimulations();
+        
+    } catch (error) {
+        showError(`Failed to delete simulation: ${error.message}`);
+    }
+}
+
+// Success message helper
+function showSuccess(message) {
+    // Create a temporary success message element
+    const successDiv = document.createElement('div');
+    successDiv.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #d4edda; color: #155724; padding: 10px 15px; border-radius: 4px; z-index: 1001; border: 1px solid #c3e6cb;';
+    successDiv.textContent = message;
+    
+    document.body.appendChild(successDiv);
+    
+    setTimeout(() => {
+        document.body.removeChild(successDiv);
+    }, 3000);
 }

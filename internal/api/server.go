@@ -312,7 +312,7 @@ func (s *Server) updateSimulation(c *gin.Context) {
 		return
 	}
 	
-	err := s.repo.UpdateSimulation(simulationID, updateReq.Name, updateReq.Description)
+	err := s.repo.UpdateSimulationMetadata(simulationID, updateReq.Name, updateReq.Description)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

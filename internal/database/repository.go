@@ -239,3 +239,39 @@ func (r *Repository) GetLatestMetricSnapshot(simulationID string) (*MetricSnapsh
 	
 	return &snapshot, nil
 }
+
+// CRUD Operations for Simulation Management
+
+// UpdateSimulationMetadata updates simulation name and description
+func (r *Repository) UpdateSimulationMetadata(simulationID, name, description string) error {
+	return r.db.Model(&Simulation{}).
+		Where("id = ?", simulationID).
+		Updates(map[string]interface{}{
+			"name":        name,
+			"description": description,
+		}).Error
+}
+
+// CloneSimulation creates a copy of a simulation with new metadata
+func (r *Repository) CloneSimulation(originalID, newName, newDescription string) (string, error) {
+	// Create new simulation with different metadata (simple clone without copying data)
+	newSim := &Simulation{
+		ID:          generateSimulationID(),
+		Name:        newName,
+		Description: newDescription,
+		Status:      "cloned",
+		StartTime:   time.Now(),
+		CreatedAt:   time.Now(),
+	}
+	
+	if err := r.CreateSimulation(newSim); err != nil {
+		return "", fmt.Errorf("failed to create cloned simulation: %w", err)
+	}
+	
+	return newSim.ID, nil
+}
+
+// Helper function to generate simulation ID
+func generateSimulationID() string {
+	return fmt.Sprintf("%d", time.Now().UnixNano())
+}

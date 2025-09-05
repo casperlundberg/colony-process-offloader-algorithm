@@ -186,6 +186,9 @@
                 </select>
                 <button onclick="loadSimulation()">Load Simulation</button>
                 <button onclick="refreshSimulations()">Refresh</button>
+                <button onclick="showEditDialog()" id="editBtn" disabled>Edit</button>
+                <button onclick="showCloneDialog()" id="cloneBtn" disabled>Clone</button>
+                <button onclick="deleteSimulation()" id="deleteBtn" disabled style="background-color: #dc3545;">Delete</button>
                 <span id="simulationStatus" class="status"></span>
             </div>
         </div>
@@ -256,6 +259,48 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    
+    <!-- Edit Simulation Modal -->
+    <div id="editModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 8px; min-width: 400px;">
+            <h3>Edit Simulation</h3>
+            <form id="editForm">
+                <div style="margin: 10px 0;">
+                    <label>Name:</label>
+                    <input type="text" id="editName" style="width: 100%; padding: 8px; margin-top: 5px;" required>
+                </div>
+                <div style="margin: 10px 0;">
+                    <label>Description:</label>
+                    <textarea id="editDescription" style="width: 100%; padding: 8px; margin-top: 5px; height: 100px;" required></textarea>
+                </div>
+                <div style="margin: 20px 0; text-align: right;">
+                    <button type="button" onclick="hideEditDialog()" style="margin-right: 10px;">Cancel</button>
+                    <button type="submit" style="background: #007bff; color: white;">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Clone Simulation Modal -->
+    <div id="cloneModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 8px; min-width: 400px;">
+            <h3>Clone Simulation</h3>
+            <form id="cloneForm">
+                <div style="margin: 10px 0;">
+                    <label>New Name:</label>
+                    <input type="text" id="cloneName" style="width: 100%; padding: 8px; margin-top: 5px;" required>
+                </div>
+                <div style="margin: 10px 0;">
+                    <label>New Description:</label>
+                    <textarea id="cloneDescription" style="width: 100%; padding: 8px; margin-top: 5px; height: 100px;" required></textarea>
+                </div>
+                <div style="margin: 20px 0; text-align: right;">
+                    <button type="button" onclick="hideCloneDialog()" style="margin-right: 10px;">Cancel</button>
+                    <button type="submit" style="background: #28a745; color: white;">Create Clone</button>
+                </div>
+            </form>
         </div>
     </div>
     
