@@ -1,72 +1,150 @@
 {
-  "base_process_rate": 5.0,
+  "base_process_rate": 2.0,
   "scenarios": [
     {
-      "name": "Morning ML Training Spike",
-      "description": "Daily ML model training and optimization spike at 8 AM",
+      "name": "Massive ML Research Burst",
+      "description": "Unpredictable AI research spikes with hundreds of processes spawning within minutes",
       "pattern": {
-        "type": "daily_with_schedule",
-        "process_rate_multiplier": 4.0,
+        "type": "chaos_burst",
+        "process_rate_multiplier": 25.0,
         "executor_type": "ml",
-        "priority_distribution": [3, 2, 1],
+        "priority_distribution": [1, 1, 2, 3, 3],
         "data_location": "iceland",
-        "data_size_gb": 100.0,
-        "base_time": "08:00:00",
-        "time_jitter_minutes": 15,
-        "duration_minutes": 45,
-        "duration_jitter_minutes": 10,
-        "probability": 0.9,
-        "active_days": ["monday", "tuesday", "wednesday", "thursday", "friday"],
-        "weekend_rate_reduction": 0.3,
-        "weekend_intensity_reduction": 0.5
+        "data_size_gb": 500.0,
+        "burst_intensity": 200,
+        "burst_duration_minutes": 8,
+        "min_quiet_period_hours": 2,
+        "max_quiet_period_hours": 8,
+        "probability": 0.15,
+        "active_days": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
+        "random_timing": true
       }
     },
     {
-      "name": "Lunchtime IoT Data Surge",
-      "description": "IoT sensor data processing surge during lunch hours",
+      "name": "IoT Sensor Storm",
+      "description": "Sudden IoT sensor data avalanche from distributed edge devices",
       "pattern": {
-        "type": "poisson_with_schedule",
-        "process_rate_multiplier": 2.5,
+        "type": "chaos_burst",
+        "process_rate_multiplier": 40.0,
         "executor_type": "edge",
-        "priority_distribution": [2, 3, 2],
+        "priority_distribution": [3, 3, 2, 1, 1],
         "data_location": "stockholm",
-        "data_size_gb": 25.0,
-        "base_interval_minutes": 30,
-        "interval_jitter_minutes": 15,
-        "duration_minutes": 30,
-        "duration_jitter_minutes": 10,
-        "active_hours": [11, 12, 13, 14],
-        "probability": 0.7,
-        "weekend_rate_reduction": 0.6
+        "data_size_gb": 15.0,
+        "burst_intensity": 350,
+        "burst_duration_minutes": 5,
+        "min_quiet_period_hours": 1,
+        "max_quiet_period_hours": 6,
+        "probability": 0.25,
+        "active_days": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
+        "random_timing": true
       }
     },
     {
-      "name": "Evening Batch Processing",
-      "description": "Large batch processing jobs in the evening",
+      "name": "Batch Processing Avalanche",
+      "description": "Enormous batch job submissions creating processing chaos",
       "pattern": {
-        "type": "daily_with_schedule",
-        "process_rate_multiplier": 3.0,
+        "type": "chaos_burst",
+        "process_rate_multiplier": 15.0,
         "executor_type": "cloud",
-        "priority_distribution": [1, 2, 4],
-        "data_location": "aws_eu_north",
-        "data_size_gb": 200.0,
-        "base_time": "18:00:00",
-        "time_jitter_minutes": 30,
-        "duration_minutes": 90,
-        "duration_jitter_minutes": 20,
-        "probability": 0.95,
+        "priority_distribution": [1, 2, 2, 3, 4],
+        "data_location": "frankfurt",
+        "data_size_gb": 750.0,
+        "burst_intensity": 120,
+        "burst_duration_minutes": 15,
+        "min_quiet_period_hours": 3,
+        "max_quiet_period_hours": 12,
+        "probability": 0.08,
         "active_days": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday"],
-        "weekend_intensity_reduction": 0.7
+        "random_timing": true
+      }
+    },
+    {
+      "name": "Random ML Experiments",
+      "description": "Sporadic ML experimentation with unpredictable timing",
+      "pattern": {
+        "type": "random_scatter",
+        "process_rate_multiplier": 8.0,
+        "executor_type": "ml",
+        "priority_distribution": [2, 2, 2, 1],
+        "data_location": "frankfurt",
+        "data_size_gb": 200.0,
+        "scatter_frequency_hours": 3,
+        "scatter_jitter_hours": 2,
+        "burst_size": 25,
+        "burst_size_jitter": 15,
+        "probability": 0.6,
+        "active_days": ["monday", "tuesday", "wednesday", "thursday", "friday"],
+        "weekend_rate_reduction": 0.2
+      }
+    },
+    {
+      "name": "Edge Processing Waves",
+      "description": "Irregular waves of edge computing tasks with quiet valleys",
+      "pattern": {
+        "type": "random_scatter",
+        "process_rate_multiplier": 12.0,
+        "executor_type": "edge",
+        "priority_distribution": [3, 2, 2, 1, 1],
+        "data_location": "oslo",
+        "data_size_gb": 30.0,
+        "scatter_frequency_hours": 2,
+        "scatter_jitter_hours": 1,
+        "burst_size": 45,
+        "burst_size_jitter": 25,
+        "probability": 0.7,
+        "active_days": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
+        "weekend_rate_reduction": 0.4
+      }
+    },
+    {
+      "name": "Midnight Batch Chaos",
+      "description": "Unpredictable midnight batch processing storms",
+      "pattern": {
+        "type": "chaos_burst",
+        "process_rate_multiplier": 20.0,
+        "executor_type": "cloud",
+        "priority_distribution": [1, 1, 2, 3],
+        "data_location": "amsterdam",
+        "data_size_gb": 400.0,
+        "burst_intensity": 80,
+        "burst_duration_minutes": 12,
+        "min_quiet_period_hours": 4,
+        "max_quiet_period_hours": 10,
+        "probability": 0.12,
+        "active_days": ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday"],
+        "random_timing": true,
+        "preferred_hours": [0, 1, 2, 23]
+      }
+    },
+    {
+      "name": "Scattered Background Tasks",
+      "description": "Low-intensity background processing with occasional mini-spikes",
+      "pattern": {
+        "type": "background_scatter",
+        "process_rate_multiplier": 1.5,
+        "executor_type": "edge",
+        "priority_distribution": [2, 2, 1],
+        "data_location": "copenhagen",
+        "data_size_gb": 5.0,
+        "background_rate": 3,
+        "mini_spike_probability": 0.15,
+        "mini_spike_multiplier": 4.0,
+        "mini_spike_duration_minutes": 3,
+        "probability": 0.85,
+        "active_days": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
       }
     }
   ],
   "simulation_parameters": {
-    "duration_hours": 168,
-    "warmup_hours": 0,
-    "measurement_interval_minutes": 5,
+    "duration_hours": 72,
+    "warmup_hours": 2,
+    "measurement_interval_minutes": 2,
     "enable_learning": true,
-    "initial_exploration_rate": 0.3,
-    "target_sla_percentile": 95.0,
-    "max_cost_per_hour": 100.0
+    "initial_exploration_rate": 0.4,
+    "target_sla_percentile": 90.0,
+    "max_cost_per_hour": 200.0,
+    "chaos_mode": true,
+    "data_gravity_weight": 0.3,
+    "geographic_cost_weight": 0.2
   }
 }

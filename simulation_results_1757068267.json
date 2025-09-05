@@ -1,0 +1,1652 @@
+{
+  "TotalProcessesGenerated": 830,
+  "TotalProcessesCompleted": 830,
+  "TotalProcessesFailed": 0,
+  "MaxQueueDepth": 11,
+  "AverageQueueDepth": 0,
+  "TotalWaitTime": 2520590872850,
+  "MaxWaitTime": 300000711895,
+  "TotalScalingDecisions": 35,
+  "ScaleUpDecisions": 1059,
+  "ScaleDownDecisions": 1022,
+  "TotalDeployedExecutors": 1059,
+  "TotalInfrastructureCost": 5521.4000000025935,
+  "TotalDataTransferCost": 0,
+  "CostPerProcess": 0,
+  "SLAViolations": 0,
+  "SLAComplianceRate": 1,
+  "PredictionAccuracy": 0,
+  "WeightEvolution": {},
+  "StrategySelection": {},
+  "TimeSeriesData": [
+    {
+      "Timestamp": "2025-09-05T12:31:07.659961877+02:00",
+      "QueueDepth": 6,
+      "ActiveExecutors": 0,
+      "ProcessRate": -3600000000,
+      "Cost": 0,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:32:07.659961877+02:00",
+      "QueueDepth": 11,
+      "ActiveExecutors": 64,
+      "ProcessRate": 11.000000018333333,
+      "Cost": 15.4,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:33:07.659961877+02:00",
+      "QueueDepth": 11,
+      "ActiveExecutors": 128,
+      "ProcessRate": 5.500000004583334,
+      "Cost": 30.8,
+      "SLACompliance": 0,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:34:07.659961877+02:00",
+      "QueueDepth": 9,
+      "ActiveExecutors": 200,
+      "ProcessRate": 4.333333335740741,
+      "Cost": 49.50000000000002,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:35:07.659961877+02:00",
+      "QueueDepth": 5,
+      "ActiveExecutors": 263,
+      "ProcessRate": 3.7500000015625004,
+      "Cost": 74.49999999999963,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:36:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 3.6000000012,
+      "Cost": 88.39999999999884,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:37:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 3.3333333342592595,
+      "Cost": 107.19999999999777,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:38:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 3.000000000714286,
+      "Cost": 131.99999999999636,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:39:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.625000000546875,
+      "Cost": 158.29999999999487,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:40:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.6666666671604937,
+      "Cost": 184.59999999999337,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:41:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.6000000004333335,
+      "Cost": 210.89999999999188,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:42:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.7272727276859503,
+      "Cost": 237.19999999999038,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:43:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.666666667037037,
+      "Cost": 263.499999999991,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:44:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.5384615387869824,
+      "Cost": 289.799999999997,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:45:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.5000000002976193,
+      "Cost": 316.100000000003,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:46:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.3333333335925928,
+      "Cost": 342.40000000000896,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:47:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.1875000002278644,
+      "Cost": 368.70000000001494,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:48:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.2352941178662054,
+      "Cost": 395.0000000000209,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:49:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.2222222224279835,
+      "Cost": 421.3000000000269,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:50:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.31578947388735,
+      "Cost": 447.6000000000329,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:51:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.4000000002,
+      "Cost": 473.90000000003886,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:52:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.3809523811413453,
+      "Cost": 500.20000000004484,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:53:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.318181818357438,
+      "Cost": 526.5000000000508,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:54:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.2608695653812223,
+      "Cost": 552.8000000000568,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:55:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.25000000015625,
+      "Cost": 579.1000000000628,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:56:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.240000000149333,
+      "Cost": 605.4000000000688,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:57:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.192307692448225,
+      "Cost": 631.7000000000747,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:58:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.185185185320073,
+      "Cost": 658.0000000000807,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T12:59:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.142857142984694,
+      "Cost": 684.3000000000867,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:00:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.137931034605628,
+      "Cost": 710.6000000000927,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:01:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.133333333451852,
+      "Cost": 736.9000000000987,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:02:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.096774193661117,
+      "Cost": 763.2000000001046,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:03:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.0937500001090497,
+      "Cost": 789.5000000001106,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:04:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 263,
+      "ProcessRate": 2.090909091014692,
+      "Cost": 815.8000000001166,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:05:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 3,
+      "ProcessRate": 2.029411764805363,
+      "Cost": 816.1000000001167,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:06:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 3,
+      "ProcessRate": 2.000000000095238,
+      "Cost": 816.4000000001167,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:07:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 3,
+      "ProcessRate": 2.0277777778716564,
+      "Cost": 816.7000000001168,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:08:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 3,
+      "ProcessRate": 2.0000000000900897,
+      "Cost": 817.0000000001169,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:09:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 3,
+      "ProcessRate": 2.0263157895625574,
+      "Cost": 817.3000000001169,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:10:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 3,
+      "ProcessRate": 1.9743589744433485,
+      "Cost": 817.600000000117,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:11:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 3,
+      "ProcessRate": 1.9750000000822916,
+      "Cost": 817.9000000001171,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:12:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 3,
+      "ProcessRate": 1.9512195122744396,
+      "Cost": 818.2000000001171,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:13:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 3,
+      "ProcessRate": 1.9523809524584277,
+      "Cost": 818.5000000001172,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:14:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 3,
+      "ProcessRate": 1.9767441861231294,
+      "Cost": 818.8000000001173,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:15:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 18,
+      "ProcessRate": 1.9772727273476238,
+      "Cost": 822.8500000001173,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:16:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 18,
+      "ProcessRate": 1.933333333404938,
+      "Cost": 823.1500000001174,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:17:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 18,
+      "ProcessRate": 1.956521739201323,
+      "Cost": 823.4500000001175,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:18:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 18,
+      "ProcessRate": 2.000000000070922,
+      "Cost": 825.2500000001179,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:19:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 18,
+      "ProcessRate": 2.083333333405671,
+      "Cost": 827.0500000001183,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:20:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 18,
+      "ProcessRate": 2.0816326531320284,
+      "Cost": 828.8500000001187,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:21:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 18,
+      "ProcessRate": 2.080000000069333,
+      "Cost": 830.6500000001191,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:22:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 18,
+      "ProcessRate": 2.0980392157548375,
+      "Cost": 832.4500000001195,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:23:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 18,
+      "ProcessRate": 2.0961538462210303,
+      "Cost": 834.2500000001199,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:24:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 18,
+      "ProcessRate": 2.075471698178474,
+      "Cost": 836.0500000001203,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:25:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 32,
+      "ProcessRate": 2.111111111176269,
+      "Cost": 840.9300000001208,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:26:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 32,
+      "ProcessRate": 2.163636363701928,
+      "Cost": 842.7300000001212,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:27:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 32,
+      "ProcessRate": 2.125000000063244,
+      "Cost": 845.4300000001218,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:28:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 32,
+      "ProcessRate": 2.105263157956294,
+      "Cost": 848.1300000001224,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:29:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 32,
+      "ProcessRate": 2.1379310345441933,
+      "Cost": 851.3300000001232,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:30:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 37,
+      "ProcessRate": 2.1864406780278656,
+      "Cost": 855.1300000001239,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:31:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 37,
+      "ProcessRate": 2.200000000061111,
+      "Cost": 858.3300000001246,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:32:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 85,
+      "ProcessRate": 2.3770491803928153,
+      "Cost": 867.7900000001255,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:33:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 123,
+      "ProcessRate": 2.5322580645842003,
+      "Cost": 876.0500000001263,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:34:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 123,
+      "ProcessRate": 2.5555555556231626,
+      "Cost": 884.5500000001282,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:35:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.6093750000679523,
+      "Cost": 898.850000000131,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:36:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.6153846154516764,
+      "Cost": 911.1500000001338,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:37:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.57575757582262,
+      "Cost": 923.4500000001366,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:38:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.5671641791683375,
+      "Cost": 936.5500000001396,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:39:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.588235294181084,
+      "Cost": 949.6500000001425,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:40:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.579710144989848,
+      "Cost": 962.7500000001455,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:41:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.5571428572037416,
+      "Cost": 975.8500000001485,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:42:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.5352112676651455,
+      "Cost": 988.9500000001515,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:43:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.50000000005787,
+      "Cost": 1002.0500000001545,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:44:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.4794520548511287,
+      "Cost": 1015.1500000001574,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:45:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.4864864865424883,
+      "Cost": 1028.2500000001555,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:46:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.5066666667223703,
+      "Cost": 1041.3500000001436,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:47:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.526315789529086,
+      "Cost": 1054.4500000001317,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:48:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.5194805195350534,
+      "Cost": 1067.5500000001198,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:49:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.5000000000534186,
+      "Cost": 1080.6500000001079,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:50:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.5316455696736635,
+      "Cost": 1093.750000000096,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:51:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.5125000000523436,
+      "Cost": 1106.850000000084,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:52:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.4938271605451403,
+      "Cost": 1119.9500000000721,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:53:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.475609756147878,
+      "Cost": 1133.0500000000602,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:54:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.4578313253505586,
+      "Cost": 1146.1500000000483,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:55:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.4642857143346086,
+      "Cost": 1159.2500000000364,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:56:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.458823529459977,
+      "Cost": 1172.3500000000245,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:57:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.430232558186632,
+      "Cost": 1185.4500000000126,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:58:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.4252873563683006,
+      "Cost": 1198.5500000000006,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T13:59:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.431818181864239,
+      "Cost": 1211.6499999999887,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:00:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.41573033712389,
+      "Cost": 1224.7499999999768,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:01:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.422222222267078,
+      "Cost": 1237.849999999965,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:02:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.43956043960512,
+      "Cost": 1250.949999999953,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:03:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.413043478304584,
+      "Cost": 1264.049999999941,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:04:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.3978494624085633,
+      "Cost": 1277.1499999999292,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:05:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.478723404299268,
+      "Cost": 1290.2499999999172,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:06:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.6105263158352723,
+      "Cost": 1303.3499999999053,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:07:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 131,
+      "ProcessRate": 2.7395833333808954,
+      "Cost": 1316.4499999998934,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:08:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 154,
+      "ProcessRate": 2.9690721649994685,
+      "Cost": 1332.3099999998815,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:09:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 272,
+      "ProcessRate": 3.3265306123014713,
+      "Cost": 1359.5699999998697,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:10:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 484,
+      "ProcessRate": 3.828282828347277,
+      "Cost": 1400.9699999998556,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:11:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 652,
+      "ProcessRate": 4.260000000071,
+      "Cost": 1448.329999999831,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:12:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 4.792079207999869,
+      "Cost": 1509.9699999997872,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:13:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 5.303921568714117,
+      "Cost": 1574.969999999728,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:14:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 5.689320388441574,
+      "Cost": 1651.3699999996586,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:15:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 5.961538461633999,
+      "Cost": 1727.7699999995891,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:16:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 6.161904762002569,
+      "Cost": 1804.1699999995196,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:17:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 6.26415094349472,
+      "Cost": 1880.5699999994501,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:18:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 6.233644859910181,
+      "Cost": 1956.9699999993807,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:19:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 6.185185185280635,
+      "Cost": 2033.3699999993112,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:20:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 6.155963302846422,
+      "Cost": 2109.769999999242,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:21:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 6.127272727365565,
+      "Cost": 2186.1699999991724,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:22:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 6.0900900901815325,
+      "Cost": 2262.569999999103,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:23:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 6.053571428661511,
+      "Cost": 2338.9699999990335,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:24:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 6.026548672655259,
+      "Cost": 2415.369999998964,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:25:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 5.98245614043834,
+      "Cost": 2491.7699999988945,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:26:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 5.9478260870427215,
+      "Cost": 2568.169999998825,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:27:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 5.92241379318854,
+      "Cost": 2644.5699999987555,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:28:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 5.880341880425646,
+      "Cost": 2720.969999998686,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:29:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 5.8389830509299285,
+      "Cost": 2797.3699999986165,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:30:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 5.798319327812301,
+      "Cost": 2873.769999998547,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:31:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 5.775000000080208,
+      "Cost": 2950.1699999984776,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:32:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 5.752066115781709,
+      "Cost": 3026.569999998408,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:33:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 5.721311475487996,
+      "Cost": 3102.9699999983386,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:34:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 764,
+      "ProcessRate": 5.69105691064622,
+      "Cost": 3179.369999998269,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:35:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.677419354915019,
+      "Cost": 3256.1699999981997,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:36:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.6400000000752,
+      "Cost": 3332.5699999981302,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:37:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.611111111185332,
+      "Cost": 3408.9699999980608,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:38:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.566929133931325,
+      "Cost": 3485.3699999979913,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:39:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.5312500000720215,
+      "Cost": 3561.8699999979217,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:40:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.511627907047954,
+      "Cost": 3638.369999997852,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:41:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.500000000070513,
+      "Cost": 3714.8699999977825,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:42:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.496183206176797,
+      "Cost": 3791.369999997713,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:43:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.469696969766032,
+      "Cost": 3867.8699999976434,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:44:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.436090225632031,
+      "Cost": 3944.369999997574,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:45:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.410447761261325,
+      "Cost": 4020.8699999975042,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:46:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.414814814881665,
+      "Cost": 4097.369999997441,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:47:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.389705882418992,
+      "Cost": 4173.869999997719,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:48:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.357664233641821,
+      "Cost": 4250.369999997997,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:49:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.34782608702111,
+      "Cost": 4326.8699999982755,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:50:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.330935251862481,
+      "Cost": 4403.369999998554,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:51:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.31428571434898,
+      "Cost": 4479.869999998832,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:52:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.276595744743223,
+      "Cost": 4556.36999999911,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:53:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.253521126822225,
+      "Cost": 4632.869999999389,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:54:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.230769230830195,
+      "Cost": 4709.369999999667,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:55:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.2083333333936155,
+      "Cost": 4785.869999999945,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:56:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.193103448335553,
+      "Cost": 4862.370000000224,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:57:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.171232876771361,
+      "Cost": 4938.870000000502,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:58:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.142857142915452,
+      "Cost": 5015.37000000078,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T14:59:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.121621621679298,
+      "Cost": 5091.8700000010585,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:00:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.100671140996652,
+      "Cost": 5168.370000001337,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:01:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.073333333389704,
+      "Cost": 5244.870000001615,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:02:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.052980132506104,
+      "Cost": 5321.3700000018935,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:03:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.0328947368972905,
+      "Cost": 5397.870000002172,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:04:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 765,
+      "ProcessRate": 5.019607843191935,
+      "Cost": 5474.37000000245,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:05:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 3,
+      "ProcessRate": 4.98701298706696,
+      "Cost": 5474.670000002451,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:06:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 3,
+      "ProcessRate": 4.954838709730698,
+      "Cost": 5474.970000002452,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:07:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 3,
+      "ProcessRate": 4.955128205181145,
+      "Cost": 5475.270000002453,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:08:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 3,
+      "ProcessRate": 4.929936305784819,
+      "Cost": 5475.570000002454,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:09:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 3,
+      "ProcessRate": 4.911392405115099,
+      "Cost": 5475.8700000024555,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:10:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 12,
+      "ProcessRate": 4.89308176105758,
+      "Cost": 5478.720000002457,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:11:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 12,
+      "ProcessRate": 4.875000000050782,
+      "Cost": 5479.020000002458,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:12:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 12,
+      "ProcessRate": 4.850931677068851,
+      "Cost": 5479.320000002459,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:13:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 12,
+      "ProcessRate": 4.839506172889296,
+      "Cost": 5480.320000002463,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:14:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 12,
+      "ProcessRate": 4.815950920294642,
+      "Cost": 5481.520000002467,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:15:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 12,
+      "ProcessRate": 4.7926829268779745,
+      "Cost": 5482.720000002471,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:16:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 12,
+      "ProcessRate": 4.769696969745149,
+      "Cost": 5483.920000002476,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:17:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 12,
+      "ProcessRate": 4.759036144626095,
+      "Cost": 5485.12000000248,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:18:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 12,
+      "ProcessRate": 4.742514970107211,
+      "Cost": 5486.320000002484,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:19:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 12,
+      "ProcessRate": 4.726190476237363,
+      "Cost": 5487.520000002489,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:20:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 28,
+      "ProcessRate": 4.721893491170827,
+      "Cost": 5492.720000002493,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:21:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 28,
+      "ProcessRate": 4.717647058869781,
+      "Cost": 5493.9200000024975,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:22:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 28,
+      "ProcessRate": 4.7076023392271695,
+      "Cost": 5495.120000002502,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:23:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 28,
+      "ProcessRate": 4.6976744186501715,
+      "Cost": 5497.920000002512,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:24:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 28,
+      "ProcessRate": 4.682080924900599,
+      "Cost": 5500.720000002522,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:25:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 28,
+      "ProcessRate": 4.66091954027453,
+      "Cost": 5503.5200000025325,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:26:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 28,
+      "ProcessRate": 4.657142857187211,
+      "Cost": 5506.320000002543,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:27:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 28,
+      "ProcessRate": 4.647727272771285,
+      "Cost": 5509.120000002553,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:28:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 28,
+      "ProcessRate": 4.632768361625544,
+      "Cost": 5511.920000002563,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:29:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 28,
+      "ProcessRate": 4.634831460717555,
+      "Cost": 5514.720000002573,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:30:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 37,
+      "ProcessRate": 4.6312849162442395,
+      "Cost": 5518.600000002583,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    },
+    {
+      "Timestamp": "2025-09-05T15:31:07.659961877+02:00",
+      "QueueDepth": 0,
+      "ActiveExecutors": 37,
+      "ProcessRate": 4.611111111153807,
+      "Cost": 5521.4000000025935,
+      "SLACompliance": 1,
+      "PredictionAccuracy": 0
+    }
+  ]
+}

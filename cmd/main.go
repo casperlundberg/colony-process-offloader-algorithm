@@ -7,17 +7,23 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"path/filepath"
 
+	"github.com/casperlundberg/colony-process-offloader-algorithm/internal/database"
 	"github.com/casperlundberg/colony-process-offloader-algorithm/internal/simulation"
 )
 
 func main() {
 	// Parse command line flags
 	var (
-		spikeConfig      = flag.String("spikes", "./config/spike_scenarios.json", "Path to spike scenarios config")
-		executorCatalog  = flag.String("catalog", "./config/executor_catalog_v3.json", "Path to executor catalog")
-		autoscalerConfig = flag.String("autoscaler", "./config/autoscaler_config.json", "Path to autoscaler config")
+		spikeConfig      = flag.String("spikes", "configs/simulation_config.json", "Path to spike scenarios config")
+		executorCatalog  = flag.String("catalog", "configs/executor_catalog.json", "Path to executor catalog")
+		autoscalerConfig = flag.String("autoscaler", "configs/autoscaler_config.json", "Path to autoscaler config")
+		databasePath     = flag.String("db", "analytics.db", "Path to SQLite database file")
+		simulationName   = flag.String("name", "CAPE Simulation", "Simulation name")
+		simulationDesc   = flag.String("description", "CAPE autoscaler simulation with chaotic spikes", "Simulation description")
 		durationHours    = flag.Int("hours", 24, "Simulation duration in hours")
+		useDatabase      = flag.Bool("analytics", true, "Enable database analytics collection")
 		_                = flag.Bool("verbose", false, "Enable verbose logging")
 	)
 	flag.Parse()
@@ -34,9 +40,41 @@ func main() {
 	log.Printf("  Spike scenarios: %s", *spikeConfig)
 	log.Printf("  Executor catalog: %s", *executorCatalog)
 	log.Printf("  Autoscaler config: %s", *autoscalerConfig)
+	if *useDatabase {
+		log.Printf("  Database: %s", *databasePath)
+		log.Printf("  Simulation: %s", *simulationName)
+	}
 
-	// Create simulation runner (without database collection)
-	runner, err := simulation.NewSimulationRunner(*spikeConfig, *executorCatalog, *autoscalerConfig, nil)
+	// Initialize database if analytics enabled
+	var dbCollector *simulation.DBMetricsCollector
+	if *useDatabase {
+		// Ensure database directory exists
+		dbDir := filepath.Dir(*databasePath)
+		if err := os.MkdirAll(dbDir, 0755); err != nil {
+			log.Fatalf("Failed to create database directory: %v", err)
+		}
+		
+		// Initialize database
+		log.Printf("Connecting to database at %s", *databasePath)
+		db, err := database.NewDatabase(*databasePath)
+		if err != nil {
+			log.Fatalf("Failed to initialize database: %v", err)
+		}
+		// Note: Database will be closed when simulation completes
+		
+		// Create repository and metrics collector
+		repo := database.NewRepository(db)
+		
+		// Create database collector for this simulation run
+		dbCollector, err = simulation.NewDBMetricsCollector(repo, *simulationName, *simulationDesc)
+		if err != nil {
+			log.Fatalf("Failed to create database collector: %v", err)
+		}
+		
+		log.Printf("Created simulation with ID: %s", dbCollector.GetSimulationID())
+	}
+
+	runner, err := simulation.NewSimulationRunner(*spikeConfig, *executorCatalog, *autoscalerConfig, dbCollector)
 	if err != nil {
 		log.Fatalf("Failed to create simulation runner: %v", err)
 	}

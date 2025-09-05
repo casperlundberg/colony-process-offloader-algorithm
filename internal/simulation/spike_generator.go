@@ -25,6 +25,11 @@ const (
 	WeeklyWithSchedule  SpikeType = "weekly_with_schedule"
 	MultiPeakDaily      SpikeType = "multi_peak_daily"
 	CascadeWithSchedule SpikeType = "cascade_with_schedule"
+	
+	// Chaotic patterns
+	ChaosBurst        SpikeType = "chaos_burst"
+	RandomScatter     SpikeType = "random_scatter"
+	BackgroundScatter SpikeType = "background_scatter"
 )
 
 // SpikeScenario defines a configurable spike pattern
@@ -80,6 +85,25 @@ type SpikePattern struct {
 	CascadeStages        int       `json:"cascade_stages,omitempty"`         // Number of cascade stages
 	StageDelayMinutes    int       `json:"stage_delay_minutes,omitempty"`    // Delay between stages
 	StageJitterMinutes   int       `json:"stage_jitter_minutes,omitempty"`   // Jitter in stage delays
+	
+	// Chaos burst specific
+	BurstIntensity       int       `json:"burst_intensity,omitempty"`        // Number of processes in burst
+	MinQuietPeriodHours  int       `json:"min_quiet_period_hours,omitempty"` // Min hours between bursts
+	MaxQuietPeriodHours  int       `json:"max_quiet_period_hours,omitempty"` // Max hours between bursts
+	RandomTiming         bool      `json:"random_timing,omitempty"`          // Ignore schedule, use random timing
+	PreferredHours       []int     `json:"preferred_hours,omitempty"`        // Preferred hours for random timing
+	
+	// Random scatter specific
+	ScatterFrequencyHours int       `json:"scatter_frequency_hours,omitempty"` // Base hours between scatters
+	ScatterJitterHours   int       `json:"scatter_jitter_hours,omitempty"`   // Jitter in scatter timing
+	BurstSize            int       `json:"burst_size,omitempty"`             // Processes per scatter
+	BurstSizeJitter      int       `json:"burst_size_jitter,omitempty"`      // Jitter in burst size
+	
+	// Background scatter specific
+	BackgroundRate        int       `json:"background_rate,omitempty"`         // Constant background processes/hour
+	MiniSpikeprobability float64   `json:"mini_spike_probability,omitempty"`  // Chance of mini spike per interval
+	MiniSpikeMultiplier  float64   `json:"mini_spike_multiplier,omitempty"`  // Multiplier for mini spikes
+	MiniSpikeDurationMinutes int   `json:"mini_spike_duration_minutes,omitempty"` // Duration of mini spikes
 }
 
 // SpikeEvent represents an actual spike occurrence during simulation
@@ -162,6 +186,14 @@ func (sg *SpikeGenerator) generateScenarioEvents(scenario SpikeScenario, startTi
 		events = sg.generateMultiPeakDailySpikes(scenario, startTime, endTime)
 	case CascadeWithSchedule:
 		events = sg.generateScheduledCascadeSpikes(scenario, startTime, endTime)
+	
+	// Chaotic patterns
+	case ChaosBurst:
+		events = sg.generateChaosBurstSpikes(scenario, startTime, endTime)
+	case RandomScatter:
+		events = sg.generateRandomScatterSpikes(scenario, startTime, endTime)
+	case BackgroundScatter:
+		events = sg.generateBackgroundScatterSpikes(scenario, startTime, endTime)
 	
 	default:
 		return nil, fmt.Errorf("unknown spike type: %s", scenario.Pattern.Type)
@@ -772,6 +804,299 @@ func (sg *SpikeGenerator) createIntensityProfile(durationMinutes int, intensity 
 		// Bell curve intensity (normal distribution shape)
 		bellCurve := math.Exp(-math.Pow((t-0.5)*4, 2) / 2)
 		profile[i] = intensity * bellCurve
+	}
+	
+	return profile
+}
+
+// generateChaosBurstSpikes creates unpredictable burst events with long quiet periods
+func (sg *SpikeGenerator) generateChaosBurstSpikes(scenario SpikeScenario, startTime, endTime time.Time) []SpikeEvent {
+	var events []SpikeEvent
+	
+	current := startTime
+	eventCounter := 0
+	
+	for current.Before(endTime) {
+		// Check if this day is active
+		if !sg.isDayActive(current, scenario.Pattern.ActiveDays) {
+			current = current.Add(24 * time.Hour)
+			continue
+		}
+		
+		// Check probability
+		if scenario.Pattern.Probability > 0 && sg.random.Float64() > scenario.Pattern.Probability {
+			current = current.Add(24 * time.Hour)
+			continue
+		}
+		
+		// Generate burst timing
+		var burstTime time.Time
+		if scenario.Pattern.RandomTiming {
+			// Random timing within preferred hours or full day
+			if len(scenario.Pattern.PreferredHours) > 0 {
+				hour := scenario.Pattern.PreferredHours[sg.random.Intn(len(scenario.Pattern.PreferredHours))]
+				minute := sg.random.Intn(60)
+				burstTime = time.Date(current.Year(), current.Month(), current.Day(), hour, minute, 0, 0, current.Location())
+			} else {
+				hour := sg.random.Intn(24)
+				minute := sg.random.Intn(60)
+				burstTime = time.Date(current.Year(), current.Month(), current.Day(), hour, minute, 0, 0, current.Location())
+			}
+		} else {
+			// Use schedule-based timing if base_time is provided
+			if scenario.Pattern.BaseTime != "" {
+				hour, minute := sg.parseTriggerTime(scenario.Pattern.BaseTime)
+				burstTime = time.Date(current.Year(), current.Month(), current.Day(), hour, minute, 0, 0, current.Location())
+				if scenario.Pattern.TimeJitterMinutes > 0 {
+					jitter := sg.random.Intn(scenario.Pattern.TimeJitterMinutes*2) - scenario.Pattern.TimeJitterMinutes
+					burstTime = burstTime.Add(time.Duration(jitter) * time.Minute)
+				}
+			} else {
+				burstTime = current.Add(time.Duration(sg.random.Intn(24*60)) * time.Minute)
+			}
+		}
+		
+		// Skip if burst time is outside simulation window
+		if burstTime.Before(startTime) || burstTime.After(endTime) {
+			current = current.Add(24 * time.Hour)
+			continue
+		}
+		
+		// Create burst event
+		duration := time.Duration(scenario.Pattern.DurationMinutes) * time.Minute
+		if scenario.Pattern.DurationJitterMinutes > 0 {
+			jitter := sg.random.Intn(scenario.Pattern.DurationJitterMinutes*2) - scenario.Pattern.DurationJitterMinutes
+			duration += time.Duration(jitter) * time.Minute
+		}
+		
+		eventCounter++
+		event := SpikeEvent{
+			ID:                  fmt.Sprintf("%s-burst-%d", scenario.Name, eventCounter),
+			Name:                scenario.Name,
+			StartTime:           burstTime,
+			EndTime:             burstTime.Add(duration),
+			PeakTime:            burstTime.Add(duration / 3), // Peak early in burst
+			ProcessesGenerated:  scenario.Pattern.BurstIntensity,
+			ExecutorType:        scenario.Pattern.ExecutorType,
+			PriorityDistribution: scenario.Pattern.PriorityDistribution,
+			DataLocation:        scenario.Pattern.DataLocation,
+			DataSizeGB:          scenario.Pattern.DataSizeGB,
+			IntensityProfile:    sg.createChaosIntensityProfile(int(duration.Minutes()), scenario.Pattern.BurstIntensity),
+		}
+		
+		events = append(events, event)
+		
+		// Jump to next possible burst time (quiet period)
+		quietHours := scenario.Pattern.MinQuietPeriodHours
+		if scenario.Pattern.MaxQuietPeriodHours > scenario.Pattern.MinQuietPeriodHours {
+			quietHours += sg.random.Intn(scenario.Pattern.MaxQuietPeriodHours - scenario.Pattern.MinQuietPeriodHours)
+		}
+		current = burstTime.Add(time.Duration(quietHours) * time.Hour)
+	}
+	
+	return events
+}
+
+// generateRandomScatterSpikes creates irregular scattered spike events
+func (sg *SpikeGenerator) generateRandomScatterSpikes(scenario SpikeScenario, startTime, endTime time.Time) []SpikeEvent {
+	var events []SpikeEvent
+	
+	current := startTime
+	eventCounter := 0
+	
+	for current.Before(endTime) {
+		// Check if this day is active
+		if !sg.isDayActive(current, scenario.Pattern.ActiveDays) {
+			current = current.Add(24 * time.Hour)
+			continue
+		}
+		
+		// Check probability
+		if scenario.Pattern.Probability > 0 && sg.random.Float64() > scenario.Pattern.Probability {
+			current = current.Add(24 * time.Hour)
+			continue
+		}
+		
+		// Apply weekend rate reduction
+		multiplier := 1.0
+		if sg.isWeekend(current) && scenario.Pattern.WeekendRateReduction > 0 {
+			multiplier = scenario.Pattern.WeekendRateReduction
+		}
+		
+		// Generate scatter events throughout the day
+		dayStart := time.Date(current.Year(), current.Month(), current.Day(), 0, 0, 0, 0, current.Location())
+		dayEnd := dayStart.Add(24 * time.Hour)
+		
+		// Calculate number of scatters for this day
+		baseScatters := int(24 / scenario.Pattern.ScatterFrequencyHours)
+		if baseScatters < 1 {
+			baseScatters = 1
+		}
+		
+		for scatter := 0; scatter < int(float64(baseScatters)*multiplier)+1; scatter++ {
+			// Random scatter time with jitter
+			baseInterval := time.Duration(scenario.Pattern.ScatterFrequencyHours) * time.Hour
+			jitter := time.Duration(sg.random.Intn(scenario.Pattern.ScatterJitterHours*120)-scenario.Pattern.ScatterJitterHours*60) * time.Minute
+			scatterTime := dayStart.Add(time.Duration(scatter)*baseInterval + jitter)
+			
+			// Skip if outside day bounds or simulation window
+			if scatterTime.Before(dayStart) || scatterTime.After(dayEnd) || scatterTime.Before(startTime) || scatterTime.After(endTime) {
+				continue
+			}
+			
+			// Calculate burst size with jitter
+			burstSize := scenario.Pattern.BurstSize
+			if scenario.Pattern.BurstSizeJitter > 0 {
+				jitter := sg.random.Intn(scenario.Pattern.BurstSizeJitter*2) - scenario.Pattern.BurstSizeJitter
+				burstSize += jitter
+				if burstSize < 1 {
+					burstSize = 1
+				}
+			}
+			
+			// Create scatter event
+			duration := time.Duration(5+sg.random.Intn(10)) * time.Minute // Short bursts
+			
+			eventCounter++
+			event := SpikeEvent{
+				ID:                  fmt.Sprintf("%s-scatter-%d", scenario.Name, eventCounter),
+				Name:                scenario.Name,
+				StartTime:           scatterTime,
+				EndTime:             scatterTime.Add(duration),
+				PeakTime:            scatterTime.Add(duration / 2),
+				ProcessesGenerated:  burstSize,
+				ExecutorType:        scenario.Pattern.ExecutorType,
+				PriorityDistribution: scenario.Pattern.PriorityDistribution,
+				DataLocation:        scenario.Pattern.DataLocation,
+				DataSizeGB:          scenario.Pattern.DataSizeGB,
+				IntensityProfile:    sg.createIntensityProfile(int(duration.Minutes()), float64(burstSize)),
+			}
+			
+			events = append(events, event)
+		}
+		
+		current = current.Add(24 * time.Hour)
+	}
+	
+	return events
+}
+
+// generateBackgroundScatterSpikes creates low-intensity background processing with mini-spikes
+func (sg *SpikeGenerator) generateBackgroundScatterSpikes(scenario SpikeScenario, startTime, endTime time.Time) []SpikeEvent {
+	var events []SpikeEvent
+	
+	current := startTime
+	eventCounter := 0
+	
+	// Generate background events every hour
+	for current.Before(endTime) {
+		// Check if this day is active
+		if !sg.isDayActive(current, scenario.Pattern.ActiveDays) {
+			current = current.Add(time.Hour)
+			continue
+		}
+		
+		// Check probability
+		if scenario.Pattern.Probability > 0 && sg.random.Float64() > scenario.Pattern.Probability {
+			current = current.Add(time.Hour)
+			continue
+		}
+		
+		// Background processing
+		if scenario.Pattern.BackgroundRate > 0 {
+			processCount := scenario.Pattern.BackgroundRate
+			
+			// Check for mini-spike
+			if sg.random.Float64() < scenario.Pattern.MiniSpikeprobability {
+				processCount = int(float64(processCount) * scenario.Pattern.MiniSpikeMultiplier)
+				
+				// Create mini-spike event
+				duration := time.Duration(scenario.Pattern.MiniSpikeDurationMinutes) * time.Minute
+				
+				eventCounter++
+				event := SpikeEvent{
+					ID:                  fmt.Sprintf("%s-minispike-%d", scenario.Name, eventCounter),
+					Name:                scenario.Name + " Mini-Spike",
+					StartTime:           current,
+					EndTime:             current.Add(duration),
+					PeakTime:            current.Add(duration / 2),
+					ProcessesGenerated:  processCount,
+					ExecutorType:        scenario.Pattern.ExecutorType,
+					PriorityDistribution: scenario.Pattern.PriorityDistribution,
+					DataLocation:        scenario.Pattern.DataLocation,
+					DataSizeGB:          scenario.Pattern.DataSizeGB,
+					IntensityProfile:    sg.createIntensityProfile(int(duration.Minutes()), float64(processCount)),
+				}
+				
+				events = append(events, event)
+			} else if processCount > 0 {
+				// Create regular background event
+				duration := 60 * time.Minute // 1 hour background processing
+				
+				eventCounter++
+				event := SpikeEvent{
+					ID:                  fmt.Sprintf("%s-background-%d", scenario.Name, eventCounter),
+					Name:                scenario.Name + " Background",
+					StartTime:           current,
+					EndTime:             current.Add(duration),
+					PeakTime:            current.Add(duration / 2),
+					ProcessesGenerated:  processCount,
+					ExecutorType:        scenario.Pattern.ExecutorType,
+					PriorityDistribution: scenario.Pattern.PriorityDistribution,
+					DataLocation:        scenario.Pattern.DataLocation,
+					DataSizeGB:          scenario.Pattern.DataSizeGB,
+					IntensityProfile:    sg.createFlatIntensityProfile(60, float64(processCount)),
+				}
+				
+				events = append(events, event)
+			}
+		}
+		
+		current = current.Add(time.Hour)
+	}
+	
+	return events
+}
+
+// createChaosIntensityProfile creates an intense burst profile with rapid spike
+func (sg *SpikeGenerator) createChaosIntensityProfile(durationMinutes int, totalProcesses int) []float64 {
+	profile := make([]float64, durationMinutes)
+	
+	if durationMinutes == 0 {
+		return profile
+	}
+	
+	// Chaos burst: very high intensity in first 1/3, then rapid decline
+	peakDuration := durationMinutes / 3
+	if peakDuration < 1 {
+		peakDuration = 1
+	}
+	
+	for i := 0; i < durationMinutes; i++ {
+		if i < peakDuration {
+			// High intensity peak
+			profile[i] = float64(totalProcesses) * 0.7 / float64(peakDuration)
+		} else {
+			// Rapid decline
+			falloff := float64(i-peakDuration) / float64(durationMinutes-peakDuration)
+			profile[i] = float64(totalProcesses) * 0.3 * (1 - falloff) / float64(durationMinutes-peakDuration)
+		}
+	}
+	
+	return profile
+}
+
+// createFlatIntensityProfile creates a flat, steady processing profile
+func (sg *SpikeGenerator) createFlatIntensityProfile(durationMinutes int, totalProcesses float64) []float64 {
+	profile := make([]float64, durationMinutes)
+	
+	if durationMinutes == 0 {
+		return profile
+	}
+	
+	processesPerMinute := totalProcesses / float64(durationMinutes)
+	for i := 0; i < durationMinutes; i++ {
+		profile[i] = processesPerMinute
 	}
 	
 	return profile
