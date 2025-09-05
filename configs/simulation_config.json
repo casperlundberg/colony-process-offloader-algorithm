@@ -1,0 +1,72 @@
+{
+  "base_process_rate": 5.0,
+  "scenarios": [
+    {
+      "name": "Morning ML Training Spike",
+      "description": "Daily ML model training and optimization spike at 8 AM",
+      "pattern": {
+        "type": "daily_with_schedule",
+        "process_rate_multiplier": 4.0,
+        "executor_type": "ml",
+        "priority_distribution": [3, 2, 1],
+        "data_location": "iceland",
+        "data_size_gb": 100.0,
+        "base_time": "08:00:00",
+        "time_jitter_minutes": 15,
+        "duration_minutes": 45,
+        "duration_jitter_minutes": 10,
+        "probability": 0.9,
+        "active_days": ["monday", "tuesday", "wednesday", "thursday", "friday"],
+        "weekend_rate_reduction": 0.3,
+        "weekend_intensity_reduction": 0.5
+      }
+    },
+    {
+      "name": "Lunchtime IoT Data Surge",
+      "description": "IoT sensor data processing surge during lunch hours",
+      "pattern": {
+        "type": "poisson_with_schedule",
+        "process_rate_multiplier": 2.5,
+        "executor_type": "edge",
+        "priority_distribution": [2, 3, 2],
+        "data_location": "stockholm",
+        "data_size_gb": 25.0,
+        "base_interval_minutes": 30,
+        "interval_jitter_minutes": 15,
+        "duration_minutes": 30,
+        "duration_jitter_minutes": 10,
+        "active_hours": [11, 12, 13, 14],
+        "probability": 0.7,
+        "weekend_rate_reduction": 0.6
+      }
+    },
+    {
+      "name": "Evening Batch Processing",
+      "description": "Large batch processing jobs in the evening",
+      "pattern": {
+        "type": "daily_with_schedule",
+        "process_rate_multiplier": 3.0,
+        "executor_type": "cloud",
+        "priority_distribution": [1, 2, 4],
+        "data_location": "aws_eu_north",
+        "data_size_gb": 200.0,
+        "base_time": "18:00:00",
+        "time_jitter_minutes": 30,
+        "duration_minutes": 90,
+        "duration_jitter_minutes": 20,
+        "probability": 0.95,
+        "active_days": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday"],
+        "weekend_intensity_reduction": 0.7
+      }
+    }
+  ],
+  "simulation_parameters": {
+    "duration_hours": 168,
+    "warmup_hours": 0,
+    "measurement_interval_minutes": 5,
+    "enable_learning": true,
+    "initial_exploration_rate": 0.3,
+    "target_sla_percentile": 95.0,
+    "max_cost_per_hour": 100.0
+  }
+}

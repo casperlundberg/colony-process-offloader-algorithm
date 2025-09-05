@@ -4,15 +4,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"time"
+	
+	"github.com/casperlundberg/colony-process-offloader-algorithm/pkg/queue"
 )
 
 // SystemState represents the complete observable state at decision time
 type SystemState struct {
 	// Queue metrics
-	QueueDepth      int           `json:"queue_depth"`
-	QueueThreshold  int           `json:"queue_threshold"`
-	QueueWaitTime   time.Duration `json:"queue_wait_time"`
-	QueueThroughput float64       `json:"queue_throughput"` // Processes per second
+	Queue *queue.Queue `json:"queue"` // Complete queue model with dynamics
 
 	// Resource utilization (0.0-1.0 scale)
 	ComputeUsage Utilization `json:"compute_usage"`
@@ -60,11 +59,11 @@ func (ssc *SystemStateCollector) CaptureState() (SystemState, error) {
 	
 	// In a real implementation, this would collect actual metrics
 	// For now, we'll simulate realistic values
+	queueModel := queue.NewQueue(20) // Default threshold of 20
+	queueModel.UpdateMetrics(0, 0, 10.0) // depth=0, waitTime=0, throughput=10.0
+	
 	state := SystemState{
-		QueueDepth:        0,  // Would be read from actual queue
-		QueueThreshold:    20,
-		QueueWaitTime:     0,
-		QueueThroughput:   10.0,
+		Queue:             queueModel,
 		ComputeUsage:      0.3,
 		MemoryUsage:       0.4,
 		DiskUsage:         0.2,
@@ -117,11 +116,12 @@ func CreateSystemStateFromInput(input SystemStateInput) SystemState {
 	// Queue wait time correlates with queue depth
 	waitTime := time.Duration(input.QueueLength*2) * time.Second
 	
+	// Create queue model
+	queueModel := queue.NewQueue(20) // Default threshold
+	queueModel.UpdateMetrics(input.QueueLength, waitTime, throughput)
+	
 	return SystemState{
-		QueueDepth:        input.QueueLength,
-		QueueThreshold:    20, // Default threshold
-		QueueWaitTime:     waitTime,
-		QueueThroughput:   throughput,
+		Queue:             queueModel,
 		ComputeUsage:      computeUsage,
 		MemoryUsage:       memoryUsage,
 		DiskUsage:         diskUsage,
@@ -151,12 +151,14 @@ func (ss SystemState) Validate() error {
 		"MasterUsage must be in range [0.0, 1.0]")
 
 	// Validate queue metrics
-	errors.AddIf(ss.QueueDepth < 0, "QueueDepth", ss.QueueDepth, 
-		"QueueDepth must be non-negative")
-	errors.AddIf(ss.QueueThreshold < 0, "QueueThreshold", ss.QueueThreshold, 
-		"QueueThreshold must be non-negative")
-	errors.AddIf(ss.QueueThroughput < 0, "QueueThroughput", ss.QueueThroughput, 
-		"QueueThroughput must be non-negative")
+	if ss.Queue != nil {
+		errors.AddIf(ss.Queue.Depth < 0, "Queue.Depth", ss.Queue.Depth, 
+			"Queue depth must be non-negative")
+		errors.AddIf(ss.Queue.Threshold < 0, "Queue.Threshold", ss.Queue.Threshold, 
+			"Queue threshold must be non-negative")
+		errors.AddIf(ss.Queue.Throughput < 0, "Queue.Throughput", ss.Queue.Throughput, 
+			"Queue throughput must be non-negative")
+	}
 
 	// Validate connection count
 	errors.AddIf(ss.ActiveConnections < 0, "ActiveConnections", ss.ActiveConnections, 
@@ -219,32 +221,37 @@ func DeserializeSystemState(data string) (SystemState, error) {
 
 // IsHighLoad returns true if the system is under high load
 func (ss SystemState) IsHighLoad() bool {
-	return ss.ComputeUsage > 0.8 || ss.MemoryUsage > 0.85 || 
-		   ss.QueueDepth > ss.QueueThreshold
+	queueOverloaded := ss.Queue != nil && ss.Queue.Depth > ss.Queue.Threshold
+	return ss.ComputeUsage > 0.8 || ss.MemoryUsage > 0.85 || queueOverloaded
 }
 
 // IsLowLoad returns true if the system is under low load
 func (ss SystemState) IsLowLoad() bool {
-	return ss.ComputeUsage < 0.3 && ss.MemoryUsage < 0.4 && 
-		   ss.QueueDepth < ss.QueueThreshold/2
+	queueLight := ss.Queue == nil || ss.Queue.Depth < ss.Queue.Threshold/2
+	return ss.ComputeUsage < 0.3 && ss.MemoryUsage < 0.4 && queueLight
 }
 
 // GetLoadScore returns an overall load score (0.0-1.0)
 func (ss SystemState) GetLoadScore() float64 {
+	queueLoad := 0.0
+	if ss.Queue != nil && ss.Queue.Threshold > 0 {
+		queueLoad = min(float64(ss.Queue.Depth)/float64(ss.Queue.Threshold), 1.0)
+	}
+	
 	// Weighted average of different load metrics
 	return (float64(ss.ComputeUsage)*0.4 + 
 			float64(ss.MemoryUsage)*0.3 + 
 			float64(ss.NetworkUsage)*0.1 + 
 			float64(ss.MasterUsage)*0.1 + 
-			min(float64(ss.QueueDepth)/float64(max(ss.QueueThreshold, 1)), 1.0)*0.1)
+			queueLoad*0.1)
 }
 
 // GetQueuePressure returns the queue pressure level (0.0-1.0+)
 func (ss SystemState) GetQueuePressure() float64 {
-	if ss.QueueThreshold <= 0 {
+	if ss.Queue == nil {
 		return 0.0
 	}
-	return float64(ss.QueueDepth) / float64(ss.QueueThreshold)
+	return ss.Queue.GetPressure()
 }
 
 // Helper functions

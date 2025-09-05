@@ -8,6 +8,8 @@ import (
 	"time"
 
 	"github.com/casperlundberg/colony-process-offloader-algorithm/internal/autoscaler"
+	"github.com/casperlundberg/colony-process-offloader-algorithm/pkg/models"
+	"github.com/casperlundberg/colony-process-offloader-algorithm/pkg/queue"
 )
 
 // SimulationRunner orchestrates the entire spike simulation
@@ -30,6 +32,7 @@ type SimulationRunner struct {
 	
 	// Metrics collection
 	Metrics         *SimulationMetrics
+	DBCollector     *DBMetricsCollector  // Database collector for storing metrics
 	
 	// Reporting
 	ReportInterval  time.Duration
@@ -120,7 +123,7 @@ type TimeSeriesPoint struct {
 }
 
 // NewSimulationRunner creates a new simulation runner
-func NewSimulationRunner(configPath, catalogPath, autoscalerConfigPath string) (*SimulationRunner, error) {
+func NewSimulationRunner(configPath, catalogPath, autoscalerConfigPath string, dbCollector *DBMetricsCollector) (*SimulationRunner, error) {
 	// Load simulation config
 	config, err := loadSimulationConfig(configPath)
 	if err != nil {
@@ -148,6 +151,7 @@ func NewSimulationRunner(configPath, catalogPath, autoscalerConfigPath string) (
 		ActiveSpikes:     make(map[string]*ActiveSpike),
 		DeployedExecutors: make(map[string]*DeployedExecutor),
 		Metrics:          NewSimulationMetrics(),
+		DBCollector:      dbCollector,
 		ReportInterval:   time.Duration(config.SimulationParameters.MeasurementIntervalMin) * time.Minute,
 	}, nil
 }
@@ -217,6 +221,13 @@ func (sr *SimulationRunner) Run() error {
 	
 	// Generate final report
 	sr.generateFinalReport()
+	
+	// Close database collector
+	if sr.DBCollector != nil {
+		if err := sr.DBCollector.Close(); err != nil {
+			log.Printf("Warning: Failed to close database collector: %v", err)
+		}
+	}
 	
 	return nil
 }
@@ -304,6 +315,52 @@ func (sr *SimulationRunner) makeScalingDecisions() {
 func (sr *SimulationRunner) executeScalingDecision(decision autoscaler.ScalingDecision) {
 	log.Printf("Scaling Decision: %s %d x %s - %s", 
 		decision.Action, decision.Count, decision.ExecutorID, decision.Reason)
+	
+	currentExecutors := len(sr.DeployedExecutors)
+	
+	// Store scaling decision in database
+	if sr.DBCollector != nil {
+		// Create simple system state
+		queueState := sr.QueueSimulator.GetQueueState()
+		systemState := models.SystemState{
+			Queue:             sr.createQueueModel(queueState),
+			ComputeUsage:      models.Utilization(0.3 + float64(len(sr.DeployedExecutors))*0.1),
+			MemoryUsage:       models.Utilization(0.4 + float64(queueState.QueueDepth)*0.01),
+			NetworkUsage:      models.Utilization(0.1),
+			DiskUsage:         models.Utilization(0.2),
+			MasterUsage:       models.Utilization(0.15),
+			ActiveConnections: len(sr.DeployedExecutors),
+			Timestamp:         sr.CurrentTime,
+			TimeSlot:          sr.CurrentTime.Hour(),
+			DayOfWeek:         int(sr.CurrentTime.Weekday()),
+		}
+		
+		decisionType := "no_action"
+		targetCount := currentExecutors
+		confidence := 0.8 // Default confidence
+		
+		if decision.Action == "deploy" {
+			decisionType = "scale_up"
+			targetCount = currentExecutors + decision.Count
+		} else if decision.Action == "remove" {
+			decisionType = "scale_down"
+			targetCount = currentExecutors - decision.Count
+		}
+		
+		err := sr.DBCollector.CollectScalingDecision(
+			sr.CurrentTime,
+			decisionType,
+			currentExecutors,
+			targetCount,
+			systemState,
+			decision.Reason,
+			"cape_autoscaler",
+			confidence,
+		)
+		if err != nil {
+			log.Printf("Warning: Failed to save scaling decision to database: %v", err)
+		}
+	}
 	
 	switch decision.Action {
 	case "deploy":
@@ -456,6 +513,75 @@ func (sr *SimulationRunner) collectMetrics() {
 	}
 	
 	sr.Metrics.TimeSeriesData = append(sr.Metrics.TimeSeriesData, point)
+	
+	// Store metrics in database if collector is available
+	if sr.DBCollector != nil {
+		// Create a simple system state for database storage
+		systemState := models.SystemState{
+			Queue:             sr.createQueueModel(queueState),
+			ComputeUsage:      models.Utilization(0.3 + float64(len(sr.DeployedExecutors))*0.1),
+			MemoryUsage:       models.Utilization(0.4 + float64(queueState.QueueDepth)*0.01),
+			NetworkUsage:      models.Utilization(0.1),
+			DiskUsage:         models.Utilization(0.2),
+			MasterUsage:       models.Utilization(0.15),
+			ActiveConnections: len(sr.DeployedExecutors),
+			Timestamp:         sr.CurrentTime,
+			TimeSlot:          sr.CurrentTime.Hour(),
+			DayOfWeek:         int(sr.CurrentTime.Weekday()),
+		}
+		
+		executorState := ExecutorState{
+			TotalExecutors:   len(sr.DeployedExecutors),
+			PlannedExecutors: sr.countPlannedExecutors(),
+			PendingExecutors: sr.countPendingExecutors(),
+			FailedExecutors:  sr.Metrics.TotalProcessesFailed,
+		}
+		
+		queueMetrics := SimulationQueueMetrics{
+			QueueDepth:      queueState.QueueDepth,
+			Urgency:         0.5, // Default urgency
+			ProcessingRate:  sr.Config.BaseProcessRate, // Use base processing rate
+		}
+		
+		// Save to database
+		err := sr.DBCollector.CollectMetrics(
+			sr.CurrentTime,
+			systemState,
+			executorState,
+			queueMetrics,
+		)
+		if err != nil {
+			log.Printf("Warning: Failed to save metrics to database: %v", err)
+		}
+	}
+}
+
+// Helper methods for counting executors
+func (sr *SimulationRunner) countPlannedExecutors() int {
+	count := 0
+	for _, exec := range sr.DeployedExecutors {
+		if !exec.IsReady {
+			count++
+		}
+	}
+	return count
+}
+
+func (sr *SimulationRunner) countPendingExecutors() int {
+	count := 0
+	for _, exec := range sr.DeployedExecutors {
+		if !exec.IsReady && sr.CurrentTime.Sub(exec.DeploymentTime) < 5*time.Minute {
+			count++
+		}
+	}
+	return count
+}
+
+// createQueueModel creates a queue model from queue snapshot
+func (sr *SimulationRunner) createQueueModel(queueState QueueSnapshot) *queue.Queue {
+	queueModel := queue.NewQueue(20) // Default threshold
+	queueModel.UpdateMetrics(queueState.QueueDepth, time.Duration(queueState.QueueDepth*2)*time.Second, sr.Config.BaseProcessRate)
+	return queueModel
 }
 
 // shouldReport checks if it's time to generate a report

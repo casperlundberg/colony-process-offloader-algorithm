@@ -153,17 +153,50 @@ func (qs *QueueSimulator) generateProcess(spike SpikeEvent, index int) models.Co
 	switch spike.ExecutorType {
 	case "ml":
 		funcName = qs.selectMLFunction()
-		estimatedDuration = time.Duration(300+qs.random.Intn(600)) * time.Second
+		// ML tasks: 10 minutes to 10 hours (highly variable)
+		if qs.random.Float64() < 0.1 {
+			// 10% chance of very long training jobs (4-10 hours)
+			estimatedDuration = time.Duration(4*3600+qs.random.Intn(6*3600)) * time.Second
+		} else if qs.random.Float64() < 0.3 {
+			// 20% chance of medium jobs (1-4 hours)
+			estimatedDuration = time.Duration(3600+qs.random.Intn(3*3600)) * time.Second
+		} else {
+			// 70% chance of shorter jobs (10 minutes to 2 hours)
+			estimatedDuration = time.Duration(600+qs.random.Intn(6600)) * time.Second
+		}
 		estimatedMemoryGB = 8.0 + qs.random.Float64()*56.0
 		requiresGPU = true
 	case "edge":
 		funcName = qs.selectEdgeFunction()
-		estimatedDuration = time.Duration(10+qs.random.Intn(120)) * time.Second
+		// Edge tasks: 10 seconds to 30 minutes (real-time processing)
+		if qs.random.Float64() < 0.6 {
+			// 60% chance of very fast tasks (10 seconds to 2 minutes)
+			estimatedDuration = time.Duration(10+qs.random.Intn(110)) * time.Second
+		} else if qs.random.Float64() < 0.9 {
+			// 30% chance of medium tasks (2-10 minutes)
+			estimatedDuration = time.Duration(120+qs.random.Intn(480)) * time.Second
+		} else {
+			// 10% chance of longer edge processing (10-30 minutes)
+			estimatedDuration = time.Duration(600+qs.random.Intn(1200)) * time.Second
+		}
 		estimatedMemoryGB = 1.0 + qs.random.Float64()*8.0
 		requiresGPU = false
 	case "cloud":
 		funcName = qs.selectCloudFunction()
-		estimatedDuration = time.Duration(60+qs.random.Intn(300)) * time.Second
+		// Cloud batch tasks: 30 seconds to 8 hours (batch processing)
+		if qs.random.Float64() < 0.05 {
+			// 5% chance of massive batch jobs (6-8 hours)
+			estimatedDuration = time.Duration(6*3600+qs.random.Intn(2*3600)) * time.Second
+		} else if qs.random.Float64() < 0.15 {
+			// 10% chance of large batch jobs (2-6 hours)
+			estimatedDuration = time.Duration(2*3600+qs.random.Intn(4*3600)) * time.Second
+		} else if qs.random.Float64() < 0.4 {
+			// 25% chance of medium batch jobs (30 minutes to 2 hours)
+			estimatedDuration = time.Duration(1800+qs.random.Intn(5400)) * time.Second
+		} else {
+			// 60% chance of smaller batch tasks (30 seconds to 30 minutes)
+			estimatedDuration = time.Duration(30+qs.random.Intn(1770)) * time.Second
+		}
 		estimatedMemoryGB = 2.0 + qs.random.Float64()*16.0
 		requiresGPU = false
 	default:

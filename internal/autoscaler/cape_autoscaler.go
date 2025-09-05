@@ -10,6 +10,7 @@ import (
 
 	"github.com/casperlundberg/colony-process-offloader-algorithm/pkg/learning"
 	"github.com/casperlundberg/colony-process-offloader-algorithm/pkg/models"
+	"github.com/casperlundberg/colony-process-offloader-algorithm/pkg/queue"
 )
 
 // CAPEAutoscaler makes intelligent scaling decisions based on queue state and predictions
@@ -24,6 +25,9 @@ type CAPEAutoscaler struct {
 	CUSUM    *learning.CUSUM
 	Thompson *learning.ThompsonSampler
 	QLearning *learning.QLearning
+	
+	// Queue dynamics tracking
+	QueueAccelTracker *queue.AccelerationTracker
 	
 	// Configuration
 	Config           AutoscalerConfig
@@ -167,23 +171,27 @@ func NewCAPEAutoscaler(configPath, catalogPath string) (*CAPEAutoscaler, error) 
 	qlearning := learning.NewQLearning(0.1, 0.9, 0.3, 100)
 	
 	return &CAPEAutoscaler{
-		ExecutorCatalog:  catalog,
-		PriorityAnalyzer: NewPriorityAnalyzer(),
-		ARIMA:           arima,
-		EWMA:            ewma,
-		CUSUM:           cusum,
-		Thompson:        thompson,
-		QLearning:       qlearning,
-		Config:          config,
-		ExecutorConfigs: catalog.Config,
-		ActiveExecutors: make(map[string]int),
-		DecisionHistory: make([]ScalingDecision, 0),
+		ExecutorCatalog:   catalog,
+		PriorityAnalyzer:  NewPriorityAnalyzer(),
+		ARIMA:            arima,
+		EWMA:             ewma,
+		CUSUM:            cusum,
+		Thompson:         thompson,
+		QLearning:        qlearning,
+		QueueAccelTracker: queue.NewAccelerationTracker(),
+		Config:           config,
+		ExecutorConfigs:  catalog.Config,
+		ActiveExecutors:  make(map[string]int),
+		DecisionHistory:  make([]ScalingDecision, 0),
 	}, nil
 }
 
 // MakeScalingDecision analyzes the queue and makes scaling recommendations
 func (ca *CAPEAutoscaler) MakeScalingDecision(queueState []models.ColonyOSProcess, currentExecutors []ExecutorSpec) []ScalingDecision {
 	decisions := make([]ScalingDecision, 0)
+	
+	// Update queue acceleration tracking
+	queueMetrics := ca.QueueAccelTracker.Update(len(queueState), time.Now())
 	
 	// For simulation: Scale aggressively when there are queued processes
 	if len(queueState) == 0 {
@@ -210,10 +218,22 @@ func (ca *CAPEAutoscaler) MakeScalingDecision(queueState []models.ColonyOSProces
 			executorCapacity = 10 // default capacity
 		}
 		
-		// Calculate needed executors (aim to clear queue in 1 minute)
-		targetProcessingRate := float64(len(processes)) // per minute
-		neededExecutors := int(math.Ceil(targetProcessingRate / executorCapacity))
+		// Calculate base needed executors (aim to clear queue in 1 minute)
+		baseProcessingRate := float64(len(processes)) // per minute
+		baseExecutors := int(math.Ceil(baseProcessingRate / executorCapacity))
 		
+		// Apply acceleration-based urgency adjustment
+		queueThreshold := 20 // Default queue threshold
+		urgencyScore := queueMetrics.GetUrgencyScore(queueThreshold)
+		
+		// Scale up executor count based on urgency (conservative approach)
+		urgencyMultiplier := 1.0
+		if urgencyScore > 1.0 {
+			// Only apply multiplier when urgency is high
+			urgencyMultiplier = math.Min(1.0 + (urgencyScore-1.0)*0.3, 1.5) // Max 50% increase
+		}
+		
+		neededExecutors := int(math.Ceil(float64(baseExecutors) * urgencyMultiplier))
 		
 		if neededExecutors > currentCount {
 			deployCount := neededExecutors - currentCount
@@ -224,7 +244,7 @@ func (ca *CAPEAutoscaler) MakeScalingDecision(queueState []models.ColonyOSProces
 				Action:          "deploy",
 				ExecutorID:      ca.selectExecutorForType(executorType),
 				Count:           deployCount,
-				Reason:          fmt.Sprintf("Queue buildup: %d processes for %s executors", len(processes), executorType),
+				Reason:          ca.buildScalingReason(len(processes), executorType, queueMetrics, urgencyScore),
 				PredictedDemand: float64(len(processes)),
 				ConfidenceScore: 0.9,
 				EstimatedCost:   ca.calculateDeploymentCost(executorType, deployCount),
@@ -751,6 +771,40 @@ func (ca *CAPEAutoscaler) considerScaleDownAll(currentExecutors []ExecutorSpec) 
 	}
 	
 	return decisions
+}
+
+// buildScalingReason creates a detailed reason string for scaling decisions
+func (ca *CAPEAutoscaler) buildScalingReason(processCount int, executorType string, queueMetrics queue.Metrics, urgencyScore float64) string {
+	reason := fmt.Sprintf("Queue: %d processes for %s executors", processCount, executorType)
+	
+	// Add velocity information
+	if math.Abs(queueMetrics.Velocity) > 0.1 {
+		velocityDesc := "growing"
+		if queueMetrics.Velocity < 0 {
+			velocityDesc = "shrinking"
+		}
+		reason += fmt.Sprintf(", velocity: %.2f/s (%s)", queueMetrics.Velocity, velocityDesc)
+	}
+	
+	// Add acceleration information
+	if math.Abs(queueMetrics.Acceleration) > 0.1 {
+		accelDesc := "accelerating"
+		if queueMetrics.Acceleration < 0 {
+			accelDesc = "decelerating"
+		}
+		reason += fmt.Sprintf(", acceleration: %.2f/s² (%s)", queueMetrics.Acceleration, accelDesc)
+		
+		if queueMetrics.SustainedAcceleration {
+			reason += " [sustained]"
+		}
+	}
+	
+	// Add urgency score
+	if urgencyScore > 1.0 {
+		reason += fmt.Sprintf(", urgency: %.2f", urgencyScore)
+	}
+	
+	return reason
 }
 
 func min(a, b int) int {

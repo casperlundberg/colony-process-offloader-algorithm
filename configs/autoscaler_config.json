@@ -1,0 +1,65 @@
+{
+  "algorithm_weights": {
+    "arima": 0.3,
+    "cusum": 0.2,
+    "q_learning": 0.25,
+    "thompson_sampling": 0.25
+  },
+  "queue_thresholds": {
+    "scale_up_threshold": 15,
+    "scale_down_threshold": 5,
+    "critical_threshold": 30,
+    "emergency_threshold": 50
+  },
+  "scaling_parameters": {
+    "max_scale_up_per_decision": 5,
+    "max_scale_down_per_decision": 3,
+    "scale_up_cooldown_minutes": 5,
+    "scale_down_cooldown_minutes": 10,
+    "min_instances_per_type": 0,
+    "max_instances_per_type": 20
+  },
+  "cost_optimization": {
+    "cost_weight": 0.3,
+    "performance_weight": 0.4,
+    "data_locality_weight": 0.3,
+    "max_acceptable_cost_increase": 1.5
+  },
+  "learning_parameters": {
+    "q_learning": {
+      "learning_rate": 0.1,
+      "discount_factor": 0.95,
+      "exploration_rate": 0.2,
+      "exploration_decay": 0.995,
+      "min_exploration_rate": 0.01
+    },
+    "thompson_sampling": {
+      "alpha_prior": 1.0,
+      "beta_prior": 1.0,
+      "reward_smoothing": 0.9
+    },
+    "arima": {
+      "order_p": 2,
+      "order_d": 1,
+      "order_q": 2,
+      "forecast_horizon_minutes": 15,
+      "confidence_interval": 0.95
+    },
+    "cusum": {
+      "threshold": 3.0,
+      "drift": 0.5,
+      "reset_on_detection": true,
+      "sensitivity": 0.8
+    }
+  },
+  "prediction_horizon": {
+    "short_term_minutes": 5,
+    "medium_term_minutes": 15,
+    "long_term_minutes": 30
+  },
+  "sla_requirements": {
+    "max_queue_wait_time_seconds": 300,
+    "target_success_rate": 0.95,
+    "target_response_time_p95_ms": 5000
+  }
+}

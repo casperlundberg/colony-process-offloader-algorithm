@@ -1,0 +1,525 @@
+{
+  "executors": [
+    {
+      "id": "exec-ml-iceland-01",
+      "executorname": "ml-iceland-01",
+      "executortype": "ml",
+      "location": {
+        "long": -21.9426,
+        "lat": 64.1466,
+        "desc": "Iceland Data Center"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "ML-GPU-Server",
+          "cpu": "16 cores",
+          "mem": "64GB",
+          "storage": "500GB NVMe",
+          "gpu": {
+            "name": "NVIDIA A100",
+            "count": 2
+          }
+        },
+        "software": {
+          "name": "ML Runtime",
+          "type": "machine-learning",
+          "version": "2.1.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2024-01-01T00:00:00Z",
+      "last_heard_from": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "exec-ml-iceland-02",
+      "executorname": "ml-iceland-02",
+      "executortype": "ml",
+      "location": {
+        "long": -21.9426,
+        "lat": 64.1466,
+        "desc": "Iceland Data Center"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "ML-GPU-Server",
+          "cpu": "16 cores",
+          "mem": "64GB",
+          "storage": "500GB NVMe",
+          "gpu": {
+            "name": "NVIDIA A100",
+            "count": 2
+          }
+        },
+        "software": {
+          "name": "ML Runtime",
+          "type": "machine-learning",
+          "version": "2.1.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2024-01-01T00:00:00Z",
+      "last_heard_from": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "exec-ml-frankfurt-01",
+      "executorname": "ml-frankfurt-01",
+      "executortype": "ml",
+      "location": {
+        "long": 8.6821,
+        "lat": 50.1109,
+        "desc": "Frankfurt ML Center"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "ML-GPU-Server",
+          "cpu": "16 cores",
+          "mem": "64GB",
+          "storage": "500GB NVMe",
+          "gpu": {
+            "name": "NVIDIA A100",
+            "count": 2
+          }
+        },
+        "software": {
+          "name": "ML Runtime",
+          "type": "machine-learning",
+          "version": "2.1.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2024-01-01T00:00:00Z",
+      "last_heard_from": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "exec-edge-stockholm-01",
+      "executorname": "edge-stockholm-01",
+      "executortype": "edge",
+      "location": {
+        "long": 18.0686,
+        "lat": 59.3293,
+        "desc": "Stockholm Edge Node"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "Edge-Server",
+          "cpu": "8 cores",
+          "mem": "32GB",
+          "storage": "200GB SSD"
+        },
+        "software": {
+          "name": "Edge Runtime",
+          "type": "edge-computing",
+          "version": "1.8.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2024-01-01T00:00:00Z",
+      "last_heard_from": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "exec-edge-stockholm-02",
+      "executorname": "edge-stockholm-02",
+      "executortype": "edge",
+      "location": {
+        "long": 18.0686,
+        "lat": 59.3293,
+        "desc": "Stockholm Edge Node"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "Edge-Server",
+          "cpu": "8 cores",
+          "mem": "32GB",
+          "storage": "200GB SSD"
+        },
+        "software": {
+          "name": "Edge Runtime",
+          "type": "edge-computing",
+          "version": "1.8.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2024-01-01T00:00:00Z",
+      "last_heard_from": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "exec-edge-oslo-01",
+      "executorname": "edge-oslo-01",
+      "executortype": "edge",
+      "location": {
+        "long": 10.7522,
+        "lat": 59.9139,
+        "desc": "Oslo Edge Node"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "Edge-Server",
+          "cpu": "8 cores",
+          "mem": "32GB",
+          "storage": "200GB SSD"
+        },
+        "software": {
+          "name": "Edge Runtime",
+          "type": "edge-computing",
+          "version": "1.8.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2024-01-01T00:00:00Z",
+      "last_heard_from": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "exec-edge-copenhagen-01",
+      "executorname": "edge-copenhagen-01",
+      "executortype": "edge",
+      "location": {
+        "long": 12.5683,
+        "lat": 55.6761,
+        "desc": "Copenhagen Edge Node"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "Edge-Server",
+          "cpu": "8 cores",
+          "mem": "32GB",
+          "storage": "200GB SSD"
+        },
+        "software": {
+          "name": "Edge Runtime",
+          "type": "edge-computing",
+          "version": "1.8.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2024-01-01T00:00:00Z",
+      "last_heard_from": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "exec-cloud-aws-eu-north-01",
+      "executorname": "cloud-aws-eu-north-01", 
+      "executortype": "cloud",
+      "location": {
+        "long": 24.9384,
+        "lat": 60.1699,
+        "desc": "AWS EU North (Helsinki)"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "Cloud-Server",
+          "cpu": "32 cores",
+          "mem": "128GB",
+          "storage": "1TB NVMe",
+          "gpu": {
+            "name": "NVIDIA T4",
+            "count": 1
+          }
+        },
+        "software": {
+          "name": "Cloud Runtime",
+          "type": "batch-processing",
+          "version": "3.2.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2024-01-01T00:00:00Z",
+      "last_heard_from": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "exec-cloud-aws-eu-central-01",
+      "executorname": "cloud-aws-eu-central-01", 
+      "executortype": "cloud",
+      "location": {
+        "long": 8.6821,
+        "lat": 50.1109,
+        "desc": "AWS EU Central (Frankfurt)"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "Cloud-Server",
+          "cpu": "32 cores",
+          "mem": "128GB",
+          "storage": "1TB NVMe",
+          "gpu": {
+            "name": "NVIDIA T4",
+            "count": 1
+          }
+        },
+        "software": {
+          "name": "Cloud Runtime",
+          "type": "batch-processing",
+          "version": "3.2.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2024-01-01T00:00:00Z",
+      "last_heard_from": "2024-01-01T00:00:00Z"
+    },
+    {
+      "id": "exec-cloud-gcp-eu-west-01",
+      "executorname": "cloud-gcp-eu-west-01", 
+      "executortype": "cloud",
+      "location": {
+        "long": 4.9041,
+        "lat": 52.3676,
+        "desc": "GCP Europe West (Amsterdam)"
+      },
+      "capabilities": {
+        "hardware": {
+          "model": "Cloud-Server",
+          "cpu": "32 cores",
+          "mem": "128GB",
+          "storage": "1TB NVMe",
+          "gpu": {
+            "name": "NVIDIA T4",
+            "count": 1
+          }
+        },
+        "software": {
+          "name": "Cloud Runtime",
+          "type": "batch-processing",
+          "version": "3.2.0"
+        }
+      },
+      "state": 1,
+      "commission_time": "2024-01-01T00:00:00Z",
+      "last_heard_from": "2024-01-01T00:00:00Z"
+    }
+  ],
+  "config": {
+    "exec-ml-iceland-01": {
+      "type": "ml",
+      "location_type": "datacenter",
+      "startup_time_sec": 120,
+      "tasks_per_sec": 0.25,
+      "power_consumption_w": 800,
+      "cost_per_hour": 2.50,
+      "cost_per_gb_egress": 0.02,
+      "max_instances": 10,
+      "min_lease_time_min": 60,
+      "supports_spot": false
+    },
+    "exec-ml-iceland-02": {
+      "type": "ml",
+      "location_type": "datacenter",
+      "startup_time_sec": 120,
+      "tasks_per_sec": 0.25,
+      "power_consumption_w": 800,
+      "cost_per_hour": 2.50,
+      "cost_per_gb_egress": 0.02,
+      "max_instances": 10,
+      "min_lease_time_min": 60,
+      "supports_spot": false
+    },
+    "exec-ml-frankfurt-01": {
+      "type": "ml",
+      "location_type": "datacenter",
+      "startup_time_sec": 110,
+      "tasks_per_sec": 0.28,
+      "power_consumption_w": 850,
+      "cost_per_hour": 2.80,
+      "cost_per_gb_egress": 0.03,
+      "max_instances": 8,
+      "min_lease_time_min": 60,
+      "supports_spot": false
+    },
+    "exec-edge-stockholm-01": {
+      "type": "edge",
+      "location_type": "edge",
+      "startup_time_sec": 60,
+      "tasks_per_sec": 0.42,
+      "power_consumption_w": 300,
+      "cost_per_hour": 1.20,
+      "cost_per_gb_egress": 0.01,
+      "max_instances": 20,
+      "min_lease_time_min": 30,
+      "supports_spot": true
+    },
+    "exec-edge-stockholm-02": {
+      "type": "edge",
+      "location_type": "edge",
+      "startup_time_sec": 60,
+      "tasks_per_sec": 0.42,
+      "power_consumption_w": 300,
+      "cost_per_hour": 1.20,
+      "cost_per_gb_egress": 0.01,
+      "max_instances": 20,
+      "min_lease_time_min": 30,
+      "supports_spot": true
+    },
+    "exec-edge-oslo-01": {
+      "type": "edge",
+      "location_type": "edge",
+      "startup_time_sec": 65,
+      "tasks_per_sec": 0.38,
+      "power_consumption_w": 320,
+      "cost_per_hour": 1.35,
+      "cost_per_gb_egress": 0.012,
+      "max_instances": 15,
+      "min_lease_time_min": 30,
+      "supports_spot": true
+    },
+    "exec-edge-copenhagen-01": {
+      "type": "edge",
+      "location_type": "edge",
+      "startup_time_sec": 55,
+      "tasks_per_sec": 0.45,
+      "power_consumption_w": 290,
+      "cost_per_hour": 1.15,
+      "cost_per_gb_egress": 0.009,
+      "max_instances": 25,
+      "min_lease_time_min": 25,
+      "supports_spot": true
+    },
+    "exec-cloud-aws-eu-north-01": {
+      "type": "cloud",
+      "location_type": "cloud",
+      "startup_time_sec": 180,
+      "tasks_per_sec": 0.67,
+      "power_consumption_w": 1200,
+      "cost_per_hour": 4.00,
+      "cost_per_gb_egress": 0.05,
+      "max_instances": 50,
+      "min_lease_time_min": 60,
+      "supports_spot": true
+    },
+    "exec-cloud-aws-eu-central-01": {
+      "type": "cloud",
+      "location_type": "cloud",
+      "startup_time_sec": 170,
+      "tasks_per_sec": 0.72,
+      "power_consumption_w": 1150,
+      "cost_per_hour": 3.80,
+      "cost_per_gb_egress": 0.04,
+      "max_instances": 60,
+      "min_lease_time_min": 60,
+      "supports_spot": true
+    },
+    "exec-cloud-gcp-eu-west-01": {
+      "type": "cloud",
+      "location_type": "cloud",
+      "startup_time_sec": 160,
+      "tasks_per_sec": 0.75,
+      "power_consumption_w": 1100,
+      "cost_per_hour": 3.90,
+      "cost_per_gb_egress": 0.045,
+      "max_instances": 55,
+      "min_lease_time_min": 55,
+      "supports_spot": true
+    }
+  },
+  "data_transfer_costs": {
+    "iceland-stockholm": {
+      "cost_per_gb": 0.015,
+      "transfer_time_sec_per_gb": 8
+    },
+    "iceland-frankfurt": {
+      "cost_per_gb": 0.018,
+      "transfer_time_sec_per_gb": 10
+    },
+    "iceland-oslo": {
+      "cost_per_gb": 0.012,
+      "transfer_time_sec_per_gb": 7
+    },
+    "iceland-copenhagen": {
+      "cost_per_gb": 0.014,
+      "transfer_time_sec_per_gb": 9
+    },
+    "iceland-aws-north": {
+      "cost_per_gb": 0.025,
+      "transfer_time_sec_per_gb": 12
+    },
+    "iceland-aws-central": {
+      "cost_per_gb": 0.028,
+      "transfer_time_sec_per_gb": 15
+    },
+    "iceland-gcp-west": {
+      "cost_per_gb": 0.030,
+      "transfer_time_sec_per_gb": 16
+    },
+    "stockholm-frankfurt": {
+      "cost_per_gb": 0.010,
+      "transfer_time_sec_per_gb": 5
+    },
+    "stockholm-oslo": {
+      "cost_per_gb": 0.008,
+      "transfer_time_sec_per_gb": 4
+    },
+    "stockholm-copenhagen": {
+      "cost_per_gb": 0.007,
+      "transfer_time_sec_per_gb": 3
+    },
+    "stockholm-aws-north": {
+      "cost_per_gb": 0.020,
+      "transfer_time_sec_per_gb": 6
+    },
+    "stockholm-aws-central": {
+      "cost_per_gb": 0.022,
+      "transfer_time_sec_per_gb": 8
+    },
+    "stockholm-gcp-west": {
+      "cost_per_gb": 0.024,
+      "transfer_time_sec_per_gb": 9
+    },
+    "frankfurt-oslo": {
+      "cost_per_gb": 0.011,
+      "transfer_time_sec_per_gb": 6
+    },
+    "frankfurt-copenhagen": {
+      "cost_per_gb": 0.009,
+      "transfer_time_sec_per_gb": 4
+    },
+    "frankfurt-aws-north": {
+      "cost_per_gb": 0.025,
+      "transfer_time_sec_per_gb": 10
+    },
+    "frankfurt-aws-central": {
+      "cost_per_gb": 0.015,
+      "transfer_time_sec_per_gb": 3
+    },
+    "frankfurt-gcp-west": {
+      "cost_per_gb": 0.018,
+      "transfer_time_sec_per_gb": 5
+    },
+    "oslo-copenhagen": {
+      "cost_per_gb": 0.006,
+      "transfer_time_sec_per_gb": 2
+    },
+    "oslo-aws-north": {
+      "cost_per_gb": 0.018,
+      "transfer_time_sec_per_gb": 7
+    },
+    "oslo-aws-central": {
+      "cost_per_gb": 0.020,
+      "transfer_time_sec_per_gb": 9
+    },
+    "oslo-gcp-west": {
+      "cost_per_gb": 0.022,
+      "transfer_time_sec_per_gb": 8
+    },
+    "copenhagen-aws-north": {
+      "cost_per_gb": 0.019,
+      "transfer_time_sec_per_gb": 8
+    },
+    "copenhagen-aws-central": {
+      "cost_per_gb": 0.021,
+      "transfer_time_sec_per_gb": 7
+    },
+    "copenhagen-gcp-west": {
+      "cost_per_gb": 0.017,
+      "transfer_time_sec_per_gb": 4
+    },
+    "aws-north-aws-central": {
+      "cost_per_gb": 0.005,
+      "transfer_time_sec_per_gb": 2
+    },
+    "aws-north-gcp-west": {
+      "cost_per_gb": 0.035,
+      "transfer_time_sec_per_gb": 12
+    },
+    "aws-central-gcp-west": {
+      "cost_per_gb": 0.032,
+      "transfer_time_sec_per_gb": 8
+    }
+  },
+  "version": "1.0.0"
+}
