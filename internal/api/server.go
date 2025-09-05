@@ -73,6 +73,11 @@ func (s *Server) setupRoutes() {
 	// Summary endpoint
 	api.GET("/simulations/:id/summary", s.getSimulationSummary)
 	
+	// CRUD operations for simulation management
+	api.PUT("/simulations/:id", s.updateSimulation)
+	api.DELETE("/simulations/:id", s.deleteSimulation)
+	api.POST("/simulations/:id/clone", s.cloneSimulation)
+	
 	// Health check
 	api.GET("/health", s.healthCheck)
 }
@@ -288,4 +293,70 @@ func (s *Server) getSimulationSummary(c *gin.Context) {
 	}
 	
 	c.JSON(http.StatusOK, summary)
+}
+
+// CRUD Operations
+
+// updateSimulation updates simulation metadata
+func (s *Server) updateSimulation(c *gin.Context) {
+	simulationID := c.Param("id")
+	
+	// Parse request body
+	var updateReq struct {
+		Name        string `json:"name"`
+		Description string `json:"description"`
+	}
+	
+	if err := c.ShouldBindJSON(&updateReq); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
+		return
+	}
+	
+	err := s.repo.UpdateSimulation(simulationID, updateReq.Name, updateReq.Description)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	
+	c.JSON(http.StatusOK, gin.H{"message": "Simulation updated successfully"})
+}
+
+// deleteSimulation deletes a simulation and all its data
+func (s *Server) deleteSimulation(c *gin.Context) {
+	simulationID := c.Param("id")
+	
+	err := s.repo.DeleteSimulation(simulationID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	
+	c.JSON(http.StatusOK, gin.H{"message": "Simulation deleted successfully"})
+}
+
+// cloneSimulation creates a copy of a simulation with new name
+func (s *Server) cloneSimulation(c *gin.Context) {
+	simulationID := c.Param("id")
+	
+	// Parse request body
+	var cloneReq struct {
+		Name        string `json:"name"`
+		Description string `json:"description"`
+	}
+	
+	if err := c.ShouldBindJSON(&cloneReq); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
+		return
+	}
+	
+	newSimID, err := s.repo.CloneSimulation(simulationID, cloneReq.Name, cloneReq.Description)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	
+	c.JSON(http.StatusCreated, gin.H{
+		"message": "Simulation cloned successfully",
+		"simulation_id": newSimID,
+	})
 }

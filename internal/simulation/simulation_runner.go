@@ -664,8 +664,12 @@ func (sr *SimulationRunner) generateFinalReport() {
 	
 	log.Printf("\n==============================================")
 	
-	// Save detailed metrics to file
-	sr.saveMetricsToFile()
+	// Save detailed metrics to file only if not using database analytics
+	if sr.DBCollector == nil {
+		sr.saveMetricsToFile()
+	} else {
+		log.Printf("Metrics stored in database (simulation ID: %s)", sr.DBCollector.GetSimulationID())
+	}
 }
 
 // saveMetricsToFile saves detailed metrics to a JSON file

@@ -191,7 +191,7 @@ func printLearningSummary() {
 
 	fmt.Println()
 	fmt.Println("======================================================")
-	fmt.Println("Full metrics saved to simulation_results_*.json")
+	fmt.Println("Detailed simulation metrics available via analytics dashboard")
 	fmt.Println()
 }
 
